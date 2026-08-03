@@ -4,6 +4,8 @@ Portable, cross-agent AI skills for evidence-led product discovery,
 validation, and execution. This is an MIT-licensed collection built to grow:
 Product Challenger is the first Skill, not the name or limit of the project.
 
+[![skills.sh](https://skills.sh/b/bolablg/skills)](https://www.skills.sh/bolablg/skills)
+
 Each Skill follows the open Agent Skills format, so it can work across Codex,
 Claude Code, OpenCode, Gemini CLI, and compatible hosts.
 
@@ -16,6 +18,25 @@ Claude Code, OpenCode, Gemini CLI, and compatible hosts.
 Future Skills belong in `skills/<skill-name>/`. The npm installer discovers
 every valid `SKILL.md` folder dynamically, so adding a new Skill does not
 require changing installer code or creating a separate package.
+
+## Install with Skills.sh
+
+Skills.sh installs public GitHub Skill collections directly. To install Product
+Challenger for Codex across all projects:
+
+```sh
+npx skills add bolablg/skills --skill product-challenger --global --agent codex --yes
+```
+
+To choose the target agent interactively or install it only in the current
+project, omit `--global`, `--agent`, and `--yes`:
+
+```sh
+npx skills add bolablg/skills --skill product-challenger
+```
+
+Browse the public listing at
+[skills.sh/bolablg/skills/product-challenger](https://www.skills.sh/bolablg/skills/product-challenger).
 
 ## Install a Skill with npx
 

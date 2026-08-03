@@ -48,6 +48,7 @@ Also test the package behaviour relevant to the change. For example:
 
 ```sh
 npx --yes --package=github:bolablg/skills bolablg-skills list
+npx skills add bolablg/skills --list
 ```
 
 ## Release
