@@ -2,19 +2,21 @@
 
 ## Working branches
 
-Start from `dev-bola` for all new work. Use a focused branch when a change
-needs its own review history:
+Each contributor works in a personal `dev-<name>` branch. For example,
+`dev-bola` is Bola's branch. Create a new contributor branch from the current
+integration branch:
 
 ```sh
-git switch dev-bola
+git fetch origin
+git switch staging
 git pull --ff-only
-git switch -c codex/<short-description>
+git switch -c dev-<your-name>
 ```
 
-Open a pull request into `dev-bola`, validate the integrated result there, and
-then open a release pull request from `dev-bola` to `main`. Keep `main` for
-stable releases only. GitHub Actions runs the installer and package checks on
-pushes and pull requests for both branches.
+Open a pull request from `dev-<name>` into `staging`. Validate the integrated
+result in `staging`, then open the release pull request from `staging` to
+`main`. Keep `main` for stable releases only. GitHub Actions runs the installer
+and package checks on contributor branches, staging, and main.
 
 ## Adding a Skill
 
@@ -33,7 +35,7 @@ changing the installer.
 
 ## Validate
 
-Run these checks before merging to `dev-bola`:
+Run these checks before merging to `staging`:
 
 ```sh
 npm test

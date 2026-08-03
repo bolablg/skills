@@ -125,17 +125,17 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for the validation and release flow.
 | Branch | Role |
 | --- | --- |
 | `main` | Stable, published source and release tags. |
-| `dev-bola` | Shared development and integration branch; test here before release. |
-| `codex/<feature>` | Optional short-lived branch for one focused change, based on `dev-bola`. |
+| `staging` | Shared integration and testing branch; the release candidate for `main`. |
+| `dev-<name>` | A contributor's personal development branch, such as `dev-bola`. |
 
 ```text
-codex/<feature>  →  dev-bola  →  main  →  GitHub Skill release / npm release
+dev-<name>  →  staging  →  main  →  GitHub Skill release / npm release
 ```
 
-Run the relevant checks on `dev-bola` before opening the release pull request
-to `main`. GitHub Actions runs the installer and package checks on pushes and
-pull requests targeting either branch. Only tag and publish after the `main`
-merge is confirmed.
+Open contributor pull requests from `dev-<name>` into `staging`, then validate
+the integrated result there. Open the release pull request only from `staging`
+into `main`. GitHub Actions runs the installer and package checks across this
+flow. Only tag and publish after the `main` merge is confirmed.
 
 ## Repository layout
 
@@ -145,7 +145,7 @@ skills/                            # Canonical, independently usable Skills
 bin/bolablg-skills.mjs             # Dependency-free npx installer
 lib/installer.mjs                  # Auto-discovers bundled Skills
 CONTRIBUTING.md                    # Add, validate, and release Skills
-.github/workflows/validate.yml     # Automated checks for dev-bola and main
+.github/workflows/validate.yml     # Automated checks for dev-*, staging, main
 ```
 
 The local `.agents/skills` symlink is intentionally ignored by Git: it keeps a

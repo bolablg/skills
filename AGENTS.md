@@ -9,10 +9,11 @@
   guide inside a skill directory.
 - Keep credentials, private customer data, and provider-specific secrets out of
   this repository.
-- Treat `dev-bola` as the shared development and integration branch. Create
-  focused `codex/<description>` branches from it when independent work needs a
-  reviewable change set.
-- Keep `main` stable and release-ready. Validate changes on `dev-bola` before
-  merging them into `main`; create public release tags only from `main`.
+- Treat `dev-<name>` as a contributor's personal development branch; use
+  `dev-bola` for Bola's work. Merge contributor work into `staging` for shared
+  integration and testing.
+- Keep `staging` as the only integration gate before `main`. Keep `main`
+  stable and release-ready; create public release tags only from `main` after
+  staging validation succeeds.
 - Before publishing, validate with `gh skill publish --dry-run` using GitHub CLI
   2.90.0 or later, then inspect the changes before committing.
