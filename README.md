@@ -129,13 +129,15 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for the validation and release flow.
 | `dev-<name>` | A contributor's personal development branch, such as `dev-bola`. |
 
 ```text
-dev-<name>  →  staging  →  main  →  GitHub Skill release / npm release
+dev-<name>  →  staging  →  pull request to main  →  npm release
 ```
 
 Open contributor pull requests from `dev-<name>` into `staging`, then validate
 the integrated result there. Open the release pull request only from `staging`
 into `main`. GitHub Actions runs the installer and package checks across this
-flow. Only tag and publish after the `main` merge is confirmed.
+flow. When that pull request is merged, the npm publish workflow verifies the
+package again and automatically publishes a version that is not yet public.
+It safely skips a version npm already has.
 
 ## Repository layout
 
@@ -146,6 +148,7 @@ bin/bolablg-skills.mjs             # Dependency-free npx installer
 lib/installer.mjs                  # Auto-discovers bundled Skills
 CONTRIBUTING.md                    # Add, validate, and release Skills
 .github/workflows/validate.yml     # Automated checks for dev-*, staging, main
+.github/workflows/publish-npm.yml  # Trusted npm publish after a main merge
 ```
 
 The local `.agents/skills` symlink is intentionally ignored by Git: it keeps a
@@ -162,10 +165,16 @@ npm run pack:check
 gh skill publish --dry-run
 ```
 
-For a release, merge the tested work into `main`, then publish from `main`:
+For an npm release, increment the version in the contributor branch before it
+reaches `staging`, then merge the tested `staging` pull request into `main`.
+The publish workflow releases the new version automatically. It uses npm
+trusted publishing, which must be configured once for this package in npm with
+the `bolablg/skills` repository and the `publish-npm.yml` workflow filename.
+
+The GitHub Agent Skills release is separate and is still published from
+`main` with its matching tag:
 
 ```sh
-npm publish --access public
 gh skill publish --tag vX.Y.Z
 ```
 
