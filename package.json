@@ -1,7 +1,7 @@
 {
   "name": "@bolablg/skills",
   "version": "0.2.0",
-  "description": "Portable, cross-agent AI skills for evidence-led product discovery, validation, and execution.",
+  "description": "Portable, cross-agent AI skills for research, development, automation, operations, and creative work.",
   "license": "MIT",
   "type": "module",
   "bin": {
@@ -38,6 +38,8 @@
     "claude-code",
     "gemini-cli",
     "opencode",
-    "product-development"
+    "research",
+    "automation",
+    "agent-workflows"
   ]
 }

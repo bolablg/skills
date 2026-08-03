@@ -1,4 +1,4 @@
-# Contributing to Bola BLG Skills
+# Contributing Skills
 
 ## Working branches
 

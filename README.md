@@ -1,8 +1,9 @@
-# Bola BLG Skills
+# Skills
 
-Portable, cross-agent AI skills for evidence-led product discovery,
-validation, and execution. This is an MIT-licensed collection built to grow:
-Product Challenger is the first Skill, not the name or limit of the project.
+A growing, MIT-licensed collection of portable, cross-agent AI skills for
+research, development, automation, operations, and creative work. The
+collection is intentionally domain-agnostic: Product Challenger is simply the
+first Skill, not the project's name or scope.
 
 [![skills.sh](https://skills.sh/b/bolablg/skills)](https://www.skills.sh/bolablg/skills)
 
