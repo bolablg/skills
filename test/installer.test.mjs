@@ -18,6 +18,14 @@ test("lists the bundled Product Challenger skill", async () => {
   assert.deepEqual(await listSkills(repositoryRoot), ["product-challenger"]);
 });
 
+test("provides a user guide for every bundled skill", async () => {
+  const skills = await listSkills(repositoryRoot);
+
+  await Promise.all(
+    skills.map((skillName) => access(path.join(repositoryRoot, "howto", `${skillName}.md`))),
+  );
+});
+
 test("resolves documented user and project locations", () => {
   const homeDir = path.join(path.sep, "example", "home");
   const cwd = path.join(path.sep, "example", "project");

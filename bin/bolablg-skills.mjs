@@ -130,6 +130,9 @@ async function run(tokens) {
 
   console.log(`Installed ${options.skillName} for ${host}.`);
   console.log(result.target);
+  console.log(
+    `How to use it: https://github.com/bolablg/skills/blob/main/howto/${options.skillName}.md`,
+  );
 
   if (result.backup) {
     console.log(`Previous installation preserved at ${result.backup}`);
