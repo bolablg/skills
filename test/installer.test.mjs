@@ -40,6 +40,11 @@ test("keeps Iyanju Agentory marketplace metadata aligned across Claude Code and 
   assert.equal(claudeMarketplace.name, "bolablg");
   assert.equal(codexMarketplace.name, claudeMarketplace.name);
   assert.equal(claudeMarketplace.version, packageManifest.version);
+  assert.deepEqual(packageManifest.author, {
+    name: "Bolaji BALOGOUN",
+    url: "https://github.com/bolablg",
+  });
+  assert.deepEqual(claudeMarketplace.owner, packageManifest.author);
   assert.equal(claudeEntry.name, "iyanju-agentory");
   assert.equal(codexEntry.name, claudeEntry.name);
   assert.equal(claudeEntry.version, packageManifest.version);
@@ -47,6 +52,9 @@ test("keeps Iyanju Agentory marketplace metadata aligned across Claude Code and 
   assert.equal(codexPlugin.name, claudeEntry.name);
   assert.equal(claudePlugin.version, packageManifest.version);
   assert.equal(codexPlugin.version, packageManifest.version);
+  assert.deepEqual(claudePlugin.author, packageManifest.author);
+  assert.deepEqual(codexPlugin.author, packageManifest.author);
+  assert.equal(codexPlugin.interface.developerName, packageManifest.author.name);
   assert.equal(claudePlugin.homepage, "https://iyanju.com");
   assert.equal(codexPlugin.homepage, claudePlugin.homepage);
   assert.equal(claudeEntry.source, "./");
