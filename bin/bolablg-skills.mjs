@@ -13,9 +13,9 @@ import {
 const packageRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
 const usage = `Usage:
-  bolablg-skills list
-  bolablg-skills install <skill> [--agent <agent>] [--scope user|project]
-                                [--dir <skills-directory>] [--force]
+  npx @bolablg/skills list
+  npx @bolablg/skills install <skill> [--agent <agent>] [--scope user|project]
+                                  [--dir <skills-directory>] [--force]
 
 Examples:
   npx @bolablg/skills install product-challenger --agent codex --scope user

@@ -1,7 +1,7 @@
-# Agent Skills Library
+# Iyanju
 
-A growing, MIT-licensed collection of portable, cross-agent AI skills for
-research, development, automation, operations, and creative work. The
+Iyanju is a growing, MIT-licensed collection of portable, cross-agent AI skills
+for research, development, automation, operations, and creative work. The
 collection is intentionally domain-agnostic: Product Challenger is simply the
 first Skill, not the project's name or scope.
 
@@ -21,7 +21,7 @@ every valid `SKILL.md` folder dynamically, so adding a new Skill does not
 require changing installer code or creating a separate package. Put its
 human-facing onboarding guide in `howto/<skill-name>.md`.
 
-## Install the collection as a marketplace plugin
+## Install Iyanju as a marketplace plugin
 
 Marketplace installation adds the complete collection and automatically makes
 future Skills in this repository available through the same plugin. It is the
@@ -32,30 +32,44 @@ In Codex:
 
 ```sh
 codex plugin marketplace add bolablg/skills
-codex plugin add agent-skills-library@bolablg-skills
+codex plugin add iyanju@iyanju
 ```
 
 In Claude Code:
 
 ```sh
 claude plugin marketplace add bolablg/skills
-claude plugin install agent-skills-library@bolablg-skills
+claude plugin install iyanju@iyanju
 ```
 
 After updating this repository, refresh the marketplace before updating the
 plugin:
 
 ```sh
-codex plugin marketplace upgrade bolablg-skills
-codex plugin add agent-skills-library@bolablg-skills
+codex plugin marketplace upgrade iyanju
+codex plugin add iyanju@iyanju
 
-claude plugin marketplace update bolablg-skills
-claude plugin update agent-skills-library@bolablg-skills
+claude plugin marketplace update iyanju
+claude plugin update iyanju@iyanju
 ```
 
 The first included Skill is Product Challenger. Read its practical guide at
 [howto/product-challenger.md](howto/product-challenger.md) before starting a
 product discovery project.
+
+### Upgrade from the prerelease marketplace name
+
+If you installed `agent-skills-library@bolablg-skills` before Iyanju v0.2.4,
+remove that prerelease plugin and marketplace once, then install Iyanju with
+the commands above:
+
+```sh
+codex plugin remove agent-skills-library@bolablg-skills
+codex plugin marketplace remove bolablg-skills
+
+claude plugin uninstall agent-skills-library@bolablg-skills
+claude plugin marketplace remove bolablg-skills
+```
 
 ## Install with Skills.sh
 

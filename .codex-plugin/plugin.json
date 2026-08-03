@@ -1,32 +1,33 @@
 {
-  "name": "agent-skills-library",
-  "version": "0.2.3",
-  "description": "Portable, cross-agent AI skills for research, product discovery, development, automation, operations, and creative work.",
+  "name": "iyanju",
+  "version": "0.2.4",
+  "description": "Iyanju is a portable, cross-agent collection of AI skills for research, product discovery, development, automation, operations, and creative work.",
   "author": {
-    "name": "bolablg",
-    "url": "https://github.com/bolablg"
+    "name": "Iyanju",
+    "url": "https://iyanju.com"
   },
-  "homepage": "https://github.com/bolablg/skills/tree/main/howto",
+  "homepage": "https://iyanju.com",
   "repository": "https://github.com/bolablg/skills",
   "license": "MIT",
   "keywords": [
     "agent-skills",
+    "iyanju",
     "product-discovery",
     "research",
     "automation"
   ],
   "skills": "./skills/",
   "interface": {
-    "displayName": "Agent Skills Library",
+    "displayName": "Iyanju",
     "shortDescription": "Portable skills for product discovery, research, and more.",
-    "longDescription": "A growing collection of portable AI skills for research, product discovery, development, automation, operations, and creative work. It begins with Product Challenger and can grow without changing how the collection is installed.",
-    "developerName": "bolablg",
+    "longDescription": "Iyanju is a growing collection of portable AI skills for research, product discovery, development, automation, operations, and creative work. It begins with Product Challenger and can grow without changing how the collection is installed.",
+    "developerName": "Iyanju",
     "category": "Productivity",
     "capabilities": [
       "Interactive",
       "Write"
     ],
-    "websiteURL": "https://github.com/bolablg/skills",
+    "websiteURL": "https://iyanju.com",
     "defaultPrompt": [
       "Use Product Challenger to capture and challenge a product idea for a specific country."
     ],

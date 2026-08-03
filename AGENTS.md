@@ -1,4 +1,4 @@
-# Agent Skills Library guidance
+# Iyanju guidance
 
 - Keep each distributable skill in `skills/<skill-name>/`; the folder name and
   `SKILL.md` frontmatter `name` must match.
