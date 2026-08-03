@@ -32,36 +32,47 @@ In Codex:
 
 ```sh
 codex plugin marketplace add bolablg/skills
-codex plugin add iyanju-agentory@iyanju
+codex plugin add iyanju-agentory@bolablg
 ```
 
 In Claude Code:
 
 ```sh
 claude plugin marketplace add bolablg/skills
-claude plugin install iyanju-agentory@iyanju
+claude plugin install iyanju-agentory@bolablg
 ```
 
 After updating this repository, refresh the marketplace before updating the
 plugin:
 
 ```sh
-codex plugin marketplace upgrade iyanju
-codex plugin add iyanju-agentory@iyanju
+codex plugin marketplace upgrade bolablg
+codex plugin add iyanju-agentory@bolablg
 
-claude plugin marketplace update iyanju
-claude plugin update iyanju-agentory@iyanju
+claude plugin marketplace update bolablg
+claude plugin update iyanju-agentory@bolablg
 ```
 
 The first included Skill is Product Challenger. Read its practical guide at
 [howto/product-challenger.md](howto/product-challenger.md) before starting a
 product discovery project.
 
-### Upgrade from the prerelease marketplace name
+### Upgrade from earlier marketplace identifiers
 
-If you installed `agent-skills-library@bolablg-skills` before Iyanju Agentory
-v0.2.4, remove that prerelease plugin and marketplace once, then install
-Iyanju Agentory with the commands above:
+If you installed Iyanju Agentory v0.2.4, replace its short-lived `iyanju`
+marketplace identifier with `bolablg` once:
+
+```sh
+codex plugin remove iyanju-agentory@iyanju
+codex plugin marketplace remove iyanju
+
+claude plugin uninstall iyanju-agentory@iyanju
+claude plugin marketplace remove iyanju
+```
+
+If you installed the earlier prerelease plugin
+`agent-skills-library@bolablg-skills`, remove that marketplace once, then use
+the current install commands above:
 
 ```sh
 codex plugin remove agent-skills-library@bolablg-skills

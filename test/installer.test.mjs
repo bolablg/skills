@@ -37,7 +37,7 @@ test("keeps Iyanju Agentory marketplace metadata aligned across Claude Code and 
   const [claudeEntry] = claudeMarketplace.plugins;
   const [codexEntry] = codexMarketplace.plugins;
 
-  assert.equal(claudeMarketplace.name, "iyanju");
+  assert.equal(claudeMarketplace.name, "bolablg");
   assert.equal(codexMarketplace.name, claudeMarketplace.name);
   assert.equal(claudeMarketplace.version, packageManifest.version);
   assert.equal(claudeEntry.name, "iyanju-agentory");
