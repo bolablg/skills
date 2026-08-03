@@ -53,7 +53,7 @@ changing marketplace metadata, also test a local Codex marketplace install:
 
 ```sh
 codex plugin marketplace add .
-codex plugin add iyanju-agentory@iyanju
+codex plugin add iyanju-agentory@bolablg
 ```
 
 Remove the temporary test marketplace and plugin afterwards if this is not
