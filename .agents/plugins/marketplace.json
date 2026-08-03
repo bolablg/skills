@@ -1,0 +1,19 @@
+{
+  "name": "bolablg-skills",
+  "interface": {
+    "displayName": "Agent Skills Library"
+  },
+  "plugins": [
+    {
+      "name": "agent-skills-library",
+      "source": {
+        "source": "local",
+        "path": "./"
+      },
+      "policy": {
+        "installation": "AVAILABLE"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

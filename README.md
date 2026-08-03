@@ -21,6 +21,42 @@ every valid `SKILL.md` folder dynamically, so adding a new Skill does not
 require changing installer code or creating a separate package. Put its
 human-facing onboarding guide in `howto/<skill-name>.md`.
 
+## Install the collection as a marketplace plugin
+
+Marketplace installation adds the complete collection and automatically makes
+future Skills in this repository available through the same plugin. It is the
+best choice when you want the collection managed by Codex or Claude Code rather
+than copying individual Skill folders.
+
+In Codex:
+
+```sh
+codex plugin marketplace add bolablg/skills
+codex plugin add agent-skills-library@bolablg-skills
+```
+
+In Claude Code:
+
+```sh
+claude plugin marketplace add bolablg/skills
+claude plugin install agent-skills-library@bolablg-skills
+```
+
+After updating this repository, refresh the marketplace before updating the
+plugin:
+
+```sh
+codex plugin marketplace upgrade bolablg-skills
+codex plugin add agent-skills-library@bolablg-skills
+
+claude plugin marketplace update bolablg-skills
+claude plugin update agent-skills-library@bolablg-skills
+```
+
+The first included Skill is Product Challenger. Read its practical guide at
+[howto/product-challenger.md](howto/product-challenger.md) before starting a
+product discovery project.
+
 ## Install with Skills.sh
 
 Skills.sh installs public GitHub Skill collections directly. To install Product
@@ -148,6 +184,10 @@ It safely skips a version npm already has.
 skills/                            # Canonical, independently usable Skills
 howto/                             # Human-facing guide for every public Skill
 .agents/skills/product-challenger  # Local ignored Codex development symlink
+.agents/plugins/marketplace.json   # Codex marketplace catalog
+.codex-plugin/plugin.json          # Codex collection plugin metadata
+.claude-plugin/marketplace.json    # Claude Code marketplace catalog
+.claude-plugin/plugin.json         # Claude Code collection plugin metadata
 bin/bolablg-skills.mjs             # Dependency-free npx installer
 lib/installer.mjs                  # Auto-discovers bundled Skills
 CONTRIBUTING.md                    # Add, validate, and release Skills

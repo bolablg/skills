@@ -1,0 +1,25 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "bolablg-skills",
+  "version": "0.2.3",
+  "description": "Portable, cross-agent AI skills for research, product discovery, development, automation, operations, and creative work.",
+  "owner": {
+    "name": "bolablg",
+    "url": "https://github.com/bolablg"
+  },
+  "plugins": [
+    {
+      "name": "agent-skills-library",
+      "source": "./",
+      "description": "A growing collection of portable agent skills, beginning with Product Challenger.",
+      "version": "0.2.3",
+      "category": "productivity",
+      "keywords": [
+        "agent-skills",
+        "product-discovery",
+        "research",
+        "automation"
+      ]
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 {
   "name": "@bolablg/skills",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Portable, cross-agent AI skills for research, development, automation, operations, and creative work.",
   "license": "MIT",
   "type": "module",
@@ -8,6 +8,9 @@
     "bolablg-skills": "bin/bolablg-skills.mjs"
   },
   "files": [
+    ".agents",
+    ".claude-plugin",
+    ".codex-plugin",
     "bin",
     "howto",
     "lib",
