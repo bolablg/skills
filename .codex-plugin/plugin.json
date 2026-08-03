@@ -1,0 +1,35 @@
+{
+  "name": "agent-skills-library",
+  "version": "0.2.3",
+  "description": "Portable, cross-agent AI skills for research, product discovery, development, automation, operations, and creative work.",
+  "author": {
+    "name": "bolablg",
+    "url": "https://github.com/bolablg"
+  },
+  "homepage": "https://github.com/bolablg/skills/tree/main/howto",
+  "repository": "https://github.com/bolablg/skills",
+  "license": "MIT",
+  "keywords": [
+    "agent-skills",
+    "product-discovery",
+    "research",
+    "automation"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Agent Skills Library",
+    "shortDescription": "Portable skills for product discovery, research, and more.",
+    "longDescription": "A growing collection of portable AI skills for research, product discovery, development, automation, operations, and creative work. It begins with Product Challenger and can grow without changing how the collection is installed.",
+    "developerName": "bolablg",
+    "category": "Productivity",
+    "capabilities": [
+      "Interactive",
+      "Write"
+    ],
+    "websiteURL": "https://github.com/bolablg/skills",
+    "defaultPrompt": [
+      "Use Product Challenger to capture and challenge a product idea for a specific country."
+    ],
+    "screenshots": []
+  }
+}
