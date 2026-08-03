@@ -5,6 +5,10 @@
 - Treat `skills/` as the source of truth. The matching ignored
   `.agents/skills/` entry is a local relative symlink for Codex discovery; do
   not replace it with a copy or commit it.
+- Keep marketplace metadata host-native and release-aligned: Codex uses
+  `.agents/plugins/marketplace.json` and `.codex-plugin/plugin.json`; Claude
+  Code uses `.claude-plugin/marketplace.json` and `.claude-plugin/plugin.json`.
+  Keep their versions aligned with `package.json`.
 - Keep each skill self-contained and avoid a README, changelog, or installation
   guide inside a skill directory. Give every public Skill user-facing onboarding
   in `howto/<skill-name>.md` and keep it aligned with the Skill's assets.

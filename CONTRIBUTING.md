@@ -44,10 +44,20 @@ Run these checks before merging to `staging`:
 npm test
 npm run pack:check
 gh skill publish --dry-run
+claude plugin validate .
 ```
 
 Run the Agent Skills validator supplied by the host you use when adding or
-editing a Skill; Codex includes a `quick_validate.py` validator for this.
+editing a Skill; Codex includes a `quick_validate.py` validator for this. When
+changing marketplace metadata, also test a local Codex marketplace install:
+
+```sh
+codex plugin marketplace add .
+codex plugin add agent-skills-library@bolablg-skills
+```
+
+Remove the temporary test marketplace and plugin afterwards if this is not
+your normal local setup.
 
 Also test the package behaviour relevant to the change. For example:
 
