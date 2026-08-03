@@ -1,7 +1,7 @@
 {
   "name": "@bolablg/skills",
   "version": "0.2.0",
-  "description": "Install portable agent skills from bolablg/skills.",
+  "description": "Portable, cross-agent AI skills for evidence-led product discovery, validation, and execution.",
   "license": "MIT",
   "type": "module",
   "bin": {

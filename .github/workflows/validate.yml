@@ -1,0 +1,39 @@
+name: Validate Skills
+
+on:
+  push:
+    branches:
+      - main
+      - dev-bola
+  pull_request:
+    branches:
+      - main
+      - dev-bola
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Node ${{ matrix.node }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node:
+          - 20
+          - 22
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: Run installer tests
+        run: npm test
+
+      - name: Inspect published package contents
+        run: npm run pack:check

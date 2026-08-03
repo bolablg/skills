@@ -1,24 +1,25 @@
-# Skills
+# Bola BLG Skills
 
-Reusable, portable Agent Skills by [bolablg](https://github.com/bolablg). The
-repository is the source of truth; each folder in `skills/` is a standalone
-skill.
+Portable, cross-agent AI skills for evidence-led product discovery,
+validation, and execution. This is an MIT-licensed collection built to grow:
+Product Challenger is the first Skill, not the name or limit of the project.
 
-## Product Challenger
+Each Skill follows the open Agent Skills format, so it can work across Codex,
+Claude Code, OpenCode, Gemini CLI, and compatible hosts.
 
-`product-challenger` is an Africa-first, research-backed product-development
-skill. It captures and combines raw product ideas, challenges customer value,
-researches competitors and market evidence, designs validation tests, and
-turns broad visions into evidence-gated product releases.
+## The collection
 
-The canonical source is
-[skills/product-challenger](skills/product-challenger). It follows the open
-Agent Skills format and works with Codex, Claude Code, OpenCode, Gemini CLI,
-and compatible hosts.
+| Skill | Purpose | Status |
+| --- | --- | --- |
+| [Product Challenger](skills/product-challenger) | Challenge, research, validate, and sequence Africa-first product ideas. | Available |
 
-## Install with npx
+Future Skills belong in `skills/<skill-name>/`. The npm installer discovers
+every valid `SKILL.md` folder dynamically, so adding a new Skill does not
+require changing installer code or creating a separate package.
 
-After the package is published to npm, install Product Challenger without a
+## Install a Skill with npx
+
+After the npm package is published, install Product Challenger without a
 global package installation:
 
 ```sh
@@ -49,9 +50,9 @@ command installs to `./my-agent/skills/product-challenger`:
 npx @bolablg/skills install product-challenger --dir ./my-agent/skills
 ```
 
-The installer never overwrites an existing skill by default. Pass `--force` to
+The installer never overwrites an existing Skill by default. Pass `--force` to
 retain the existing directory as a timestamped backup alongside the new one.
-List bundled skills or see all options with:
+List bundled Skills or see all options with:
 
 ```sh
 npx @bolablg/skills list
@@ -77,12 +78,52 @@ gh skill install bolablg/skills product-challenger --agent codex --scope user
 Change `--agent` to `claude-code`, `opencode`, or `gemini-cli`. Use
 `--scope project` to install into the current repository instead.
 
+## Add the next Skill
+
+Keep every distributable Skill independent and portable:
+
+```text
+skills/
+  product-challenger/
+    SKILL.md
+    agents/openai.yaml             # Optional host metadata
+    references/                    # Load only when needed
+    assets/                        # Reusable output materials
+  next-skill/
+    SKILL.md
+```
+
+Use a lowercase hyphenated directory name that matches the `name` in its
+`SKILL.md` frontmatter. Keep a Skill self-contained: do not add a README,
+changelog, installation guide, secrets, or customer data inside its folder.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for the validation and release flow.
+
+## Development and release flow
+
+| Branch | Role |
+| --- | --- |
+| `main` | Stable, published source and release tags. |
+| `dev-bola` | Shared development and integration branch; test here before release. |
+| `codex/<feature>` | Optional short-lived branch for one focused change, based on `dev-bola`. |
+
+```text
+codex/<feature>  →  dev-bola  →  main  →  GitHub Skill release / npm release
+```
+
+Run the relevant checks on `dev-bola` before opening the release pull request
+to `main`. GitHub Actions runs the installer and package checks on pushes and
+pull requests targeting either branch. Only tag and publish after the `main`
+merge is confirmed.
+
 ## Repository layout
 
 ```text
-skills/product-challenger/          # Canonical Skill source
-.agents/skills/product-challenger   # Local ignored Codex development symlink
-bin/bolablg-skills.mjs              # Dependency-free npx installer
+skills/                            # Canonical, independently usable Skills
+.agents/skills/product-challenger  # Local ignored Codex development symlink
+bin/bolablg-skills.mjs             # Dependency-free npx installer
+lib/installer.mjs                  # Auto-discovers bundled Skills
+CONTRIBUTING.md                    # Add, validate, and release Skills
+.github/workflows/validate.yml     # Automated checks for dev-bola and main
 ```
 
 The local `.agents/skills` symlink is intentionally ignored by Git: it keeps a
@@ -97,10 +138,15 @@ This repository is released under the [MIT License](LICENSE).
 npm test
 npm run pack:check
 gh skill publish --dry-run
+```
+
+For a release, merge the tested work into `main`, then publish from `main`:
+
+```sh
 npm publish --access public
-gh skill publish --tag v0.2.0
+gh skill publish --tag vX.Y.Z
 ```
 
 The GitHub Agent Skills release is separate from the classic GitHub Marketplace
-for Apps and Actions. The current repository and initial Product Challenger
-release are public at [bolablg/skills](https://github.com/bolablg/skills).
+for Apps and Actions. The current public releases are available at
+[bolablg/skills](https://github.com/bolablg/skills/releases).
