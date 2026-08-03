@@ -6,7 +6,8 @@
   `.agents/skills/` entry is a local relative symlink for Codex discovery; do
   not replace it with a copy or commit it.
 - Keep each skill self-contained and avoid a README, changelog, or installation
-  guide inside a skill directory.
+  guide inside a skill directory. Give every public Skill user-facing onboarding
+  in `howto/<skill-name>.md` and keep it aligned with the Skill's assets.
 - Keep credentials, private customer data, and provider-specific secrets out of
   this repository.
 - Treat `dev-<name>` as a contributor's personal development branch; the

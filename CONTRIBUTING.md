@@ -27,8 +27,10 @@ and package checks on contributor branches, staging, and main. A merge to
    `assets/`, or `scripts/` within that Skill directory.
 3. Add `agents/openai.yaml` only when the Skill needs Codex UI metadata.
 4. Do not put a README, changelog, install guide, secrets, or customer data in
-   a Skill directory.
-5. Add the new Skill to the collection table in the root `README.md`.
+   a Skill directory. Add a human-facing guide at `howto/<skill-name>.md`
+   instead.
+5. Add the new Skill and its guide to the collection table in the root
+   `README.md` and `howto/README.md`.
 
 The installer scans `skills/*/SKILL.md` dynamically. A valid new Skill is
 therefore included in `npx @bolablg/skills list` and can be installed without

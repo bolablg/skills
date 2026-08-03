@@ -14,11 +14,12 @@ Claude Code, OpenCode, Gemini CLI, and compatible hosts.
 
 | Skill | Purpose | Status |
 | --- | --- | --- |
-| [Product Challenger](skills/product-challenger) | Challenge, research, validate, and sequence Africa-first product ideas. | Available |
+| [Product Challenger](howto/product-challenger.md) | Challenge, research, validate, and sequence Africa-first product ideas. | Available |
 
 Future Skills belong in `skills/<skill-name>/`. The npm installer discovers
 every valid `SKILL.md` folder dynamically, so adding a new Skill does not
-require changing installer code or creating a separate package.
+require changing installer code or creating a separate package. Put its
+human-facing onboarding guide in `howto/<skill-name>.md`.
 
 ## Install with Skills.sh
 
@@ -74,7 +75,8 @@ npx @bolablg/skills install product-challenger --dir ./my-agent/skills
 
 The installer never overwrites an existing Skill by default. Pass `--force` to
 retain the existing directory as a timestamped backup alongside the new one.
-List bundled Skills or see all options with:
+After installation, it prints the matching guide in `howto/`. List bundled
+Skills or see all options with:
 
 ```sh
 npx @bolablg/skills list
@@ -118,7 +120,8 @@ skills/
 Use a lowercase hyphenated directory name that matches the `name` in its
 `SKILL.md` frontmatter. Keep a Skill self-contained: do not add a README,
 changelog, installation guide, secrets, or customer data inside its folder.
-See [CONTRIBUTING.md](CONTRIBUTING.md) for the validation and release flow.
+Put human onboarding in `howto/<skill-name>.md` instead. See
+[CONTRIBUTING.md](CONTRIBUTING.md) for the validation and release flow.
 
 ## Development and release flow
 
@@ -143,6 +146,7 @@ It safely skips a version npm already has.
 
 ```text
 skills/                            # Canonical, independently usable Skills
+howto/                             # Human-facing guide for every public Skill
 .agents/skills/product-challenger  # Local ignored Codex development symlink
 bin/bolablg-skills.mjs             # Dependency-free npx installer
 lib/installer.mjs                  # Auto-discovers bundled Skills
