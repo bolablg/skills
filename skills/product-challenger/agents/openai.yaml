@@ -1,0 +1,4 @@
+interface:
+  display_name: "Product Challenger"
+  short_description: "Challenge product ideas and sequence focused releases."
+  default_prompt: "Use $product-challenger to capture, challenge, and sequence my product idea for [country]."
