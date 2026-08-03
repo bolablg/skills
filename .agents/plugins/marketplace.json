@@ -1,11 +1,11 @@
 {
-  "name": "bolablg-skills",
+  "name": "iyanju",
   "interface": {
-    "displayName": "Agent Skills Library"
+    "displayName": "Iyanju Agentory"
   },
   "plugins": [
     {
-      "name": "agent-skills-library",
+      "name": "iyanju-agentory",
       "source": {
         "source": "local",
         "path": "./"

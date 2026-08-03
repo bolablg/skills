@@ -1,7 +1,7 @@
 {
   "name": "@bolablg/skills",
-  "version": "0.2.3",
-  "description": "Portable, cross-agent AI skills for research, development, automation, operations, and creative work.",
+  "version": "0.2.4",
+  "description": "Iyanju Agentory: portable, cross-agent AI skills for research, development, automation, operations, and creative work.",
   "license": "MIT",
   "type": "module",
   "bin": {
@@ -32,12 +32,14 @@
   "bugs": {
     "url": "https://github.com/bolablg/skills/issues"
   },
-  "homepage": "https://github.com/bolablg/skills#readme",
+  "homepage": "https://iyanju.com",
   "publishConfig": {
     "access": "public"
   },
   "keywords": [
     "agent-skills",
+    "iyanju",
+    "iyanju-agentory",
     "codex",
     "claude-code",
     "gemini-cli",

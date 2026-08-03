@@ -26,7 +26,7 @@ test("provides a user guide for every bundled skill", async () => {
   );
 });
 
-test("keeps Claude Code and Codex marketplace metadata aligned", async () => {
+test("keeps Iyanju Agentory marketplace metadata aligned across Claude Code and Codex", async () => {
   const readJson = async (...segments) =>
     JSON.parse(await readFile(path.join(repositoryRoot, ...segments), "utf8"));
   const packageManifest = await readJson("package.json");
@@ -37,16 +37,18 @@ test("keeps Claude Code and Codex marketplace metadata aligned", async () => {
   const [claudeEntry] = claudeMarketplace.plugins;
   const [codexEntry] = codexMarketplace.plugins;
 
-  assert.equal(claudeMarketplace.name, "bolablg-skills");
+  assert.equal(claudeMarketplace.name, "iyanju");
   assert.equal(codexMarketplace.name, claudeMarketplace.name);
   assert.equal(claudeMarketplace.version, packageManifest.version);
-  assert.equal(claudeEntry.name, "agent-skills-library");
+  assert.equal(claudeEntry.name, "iyanju-agentory");
   assert.equal(codexEntry.name, claudeEntry.name);
   assert.equal(claudeEntry.version, packageManifest.version);
   assert.equal(claudePlugin.name, claudeEntry.name);
   assert.equal(codexPlugin.name, claudeEntry.name);
   assert.equal(claudePlugin.version, packageManifest.version);
   assert.equal(codexPlugin.version, packageManifest.version);
+  assert.equal(claudePlugin.homepage, "https://iyanju.com");
+  assert.equal(codexPlugin.homepage, claudePlugin.homepage);
   assert.equal(claudeEntry.source, "./");
   assert.deepEqual(codexEntry.source, { source: "local", path: "./" });
   assert.equal(codexPlugin.skills, "./skills/");
