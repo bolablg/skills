@@ -1,10 +1,8 @@
 # Skills
 
-A source repository for reusable, portable Agent Skills. Its intended GitHub
-identity is `bolablg/skills`.
-
-`skills` is the collection name. `product-challenger` is one installable skill
-inside the collection; it has no additional wrapper brand.
+Reusable, portable Agent Skills by [bolablg](https://github.com/bolablg). The
+repository is the source of truth; each folder in `skills/` is a standalone
+skill.
 
 ## Product Challenger
 
@@ -13,56 +11,96 @@ skill. It captures and combines raw product ideas, challenges customer value,
 researches competitors and market evidence, designs validation tests, and
 turns broad visions into evidence-gated product releases.
 
-The canonical skill lives at
+The canonical source is
 [skills/product-challenger](skills/product-challenger). It follows the open
-Agent Skills format and can be used by Codex, GitHub Copilot, Claude Code,
-OpenCode, Gemini CLI, and other compatible hosts.
+Agent Skills format and works with Codex, Claude Code, OpenCode, Gemini CLI,
+and compatible hosts.
 
-## Repository layout
+## Install with npx
 
-```text
-skills/product-challenger/          # Canonical source published by gh skill
-.agents/skills/product-challenger   # Local ignored symlink for Codex discovery
+After the package is published to npm, install Product Challenger without a
+global package installation:
+
+```sh
+npx @bolablg/skills install product-challenger --agent codex --scope user
 ```
 
-The symlink keeps a single local source of truth while developing in Codex. It
-is deliberately ignored by Git because GitHub's publisher treats `.agents/skills`
-as an installation location, not a source location. After cloning from GitHub,
-use `gh skill install` to install the skill into the correct location for the
-chosen agent.
+Use a supported agent name to choose its native Skills directory:
 
-## Install after publishing to GitHub
+| Agent | User scope | Project scope |
+| --- | --- | --- |
+| Codex | `~/.agents/skills` | `.agents/skills` |
+| Claude Code | `~/.claude/skills` | `.claude/skills` |
+| OpenCode | `~/.config/opencode/skills` | `.opencode/skills` |
+| Gemini CLI | `~/.gemini/skills` | `.gemini/skills` |
 
-GitHub CLI 2.90.0 or later includes the preview `gh skill` command. Replace
-`bolablg/skills` with a fork only when installing from a fork.
+For example:
+
+```sh
+npx @bolablg/skills install product-challenger --agent claude-code --scope user
+npx @bolablg/skills install product-challenger --agent opencode --scope project
+npx @bolablg/skills install product-challenger --agent gemini-cli --scope user
+```
+
+Use `--dir` for any other host. It is the parent skills directory, so this
+command installs to `./my-agent/skills/product-challenger`:
+
+```sh
+npx @bolablg/skills install product-challenger --dir ./my-agent/skills
+```
+
+The installer never overwrites an existing skill by default. Pass `--force` to
+retain the existing directory as a timestamped backup alongside the new one.
+List bundled skills or see all options with:
+
+```sh
+npx @bolablg/skills list
+npx @bolablg/skills --help
+```
+
+Until the npm package is published, run the same installer directly from this
+public GitHub repository:
+
+```sh
+npx --yes --package=github:bolablg/skills bolablg-skills install product-challenger --agent codex --scope user
+```
+
+## Install with GitHub CLI
+
+GitHub CLI 2.90.0 or later includes the preview `gh skill` command:
 
 ```sh
 gh skill preview bolablg/skills product-challenger
 gh skill install bolablg/skills product-challenger --agent codex --scope user
 ```
 
-Choose the target host by changing `--agent`:
+Change `--agent` to `claude-code`, `opencode`, or `gemini-cli`. Use
+`--scope project` to install into the current repository instead.
 
-```sh
-gh skill install bolablg/skills product-challenger --agent codex --scope user
-gh skill install bolablg/skills product-challenger --agent claude-code --scope user
-gh skill install bolablg/skills product-challenger --agent opencode --scope user
-gh skill install bolablg/skills product-challenger --agent gemini-cli --scope user
+## Repository layout
+
+```text
+skills/product-challenger/          # Canonical Skill source
+.agents/skills/product-challenger   # Local ignored Codex development symlink
+bin/bolablg-skills.mjs              # Dependency-free npx installer
 ```
 
-Use `--scope project` to install into the current repository instead of the
-user-level skills directory.
+The local `.agents/skills` symlink is intentionally ignored by Git: it keeps a
+single development source of truth while avoiding an installation directory in
+the published source.
 
-## Validate and publish
+## Validate and release
 
-This repository is released under the [MIT License](LICENSE). Before publishing,
-ensure it has a `bolablg/skills` remote and an initial commit. Then use:
+This repository is released under the [MIT License](LICENSE).
 
 ```sh
+npm test
+npm run pack:check
 gh skill publish --dry-run
-gh skill publish --tag v0.1.0
+npm publish --access public
+gh skill publish --tag v0.2.0
 ```
 
-GitHub's agent-skills workflow publishes a skill repository and release; it is
-different from the classic GitHub Marketplace, which lists GitHub Apps and
-Actions. No GitHub remote or release has been created from this local project.
+The GitHub Agent Skills release is separate from the classic GitHub Marketplace
+for Apps and Actions. The current repository and initial Product Challenger
+release are public at [bolablg/skills](https://github.com/bolablg/skills).
