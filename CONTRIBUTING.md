@@ -16,7 +16,8 @@ git switch -c dev-<your-name>
 Open a pull request from `dev-<name>` into `staging`. Validate the integrated
 result in `staging`, then open the release pull request from `staging` to
 `main`. Keep `main` for stable releases only. GitHub Actions runs the installer
-and package checks on contributor branches, staging, and main.
+and package checks on contributor branches, staging, and main. A merge to
+`main` also starts the npm release workflow.
 
 ## Adding a Skill
 
@@ -55,8 +56,16 @@ npx skills add bolablg/skills --list
 
 ## Release
 
-1. Confirm the merged `main` branch passes the checks above.
-2. Update the package version when appropriate.
-3. Publish the npm package when the `@bolablg` npm account is authenticated.
-4. Publish the matching GitHub Skill release from `main` with the same version
+1. Update the package version in `dev-<name>` before opening its pull request
+   to `staging`.
+2. Confirm `staging` passes its checks, then open and merge the release pull
+   request from `staging` to `main`.
+3. The `Publish npm package` GitHub Actions workflow tests and publishes the
+   new `@bolablg/skills` version from `main`. It skips a version that npm
+   already contains.
+4. npm trusted publishing must be configured once in the package's npm
+   settings for the `bolablg/skills` repository and `publish-npm.yml` workflow
+   file. This uses GitHub's short-lived identity; do not add an npm token as a
+   GitHub secret.
+5. Publish the matching GitHub Skill release from `main` with the same version
    tag.
