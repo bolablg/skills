@@ -1,10 +1,10 @@
-# Contributing Skills
+# Contributing to the Agent Skills Library
 
 ## Working branches
 
-Each contributor works in a personal `dev-<name>` branch. For example,
-`dev-bola` is Bola's branch. Create a new contributor branch from the current
-integration branch:
+Each contributor works in a personal `dev-<name>` branch. The existing
+`dev-bola` branch is one example. Create a new contributor branch from the
+current integration branch:
 
 ```sh
 git fetch origin

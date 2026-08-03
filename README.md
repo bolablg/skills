@@ -1,4 +1,4 @@
-# Skills
+# Agent Skills Library
 
 A growing, MIT-licensed collection of portable, cross-agent AI skills for
 research, development, automation, operations, and creative work. The
