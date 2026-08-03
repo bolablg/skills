@@ -1,11 +1,11 @@
 {
   "name": "iyanju",
   "interface": {
-    "displayName": "Iyanju"
+    "displayName": "Iyanju Agentory"
   },
   "plugins": [
     {
-      "name": "iyanju",
+      "name": "iyanju-agentory",
       "source": {
         "source": "local",
         "path": "./"

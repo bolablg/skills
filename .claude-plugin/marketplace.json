@@ -2,21 +2,22 @@
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "iyanju",
   "version": "0.2.4",
-  "description": "Iyanju is a portable, cross-agent collection of AI skills for research, product discovery, development, automation, operations, and creative work.",
+  "description": "Iyanju Agentory is a portable, cross-agent collection of AI skills for research, product discovery, development, automation, operations, and creative work.",
   "owner": {
     "name": "Iyanju",
     "url": "https://iyanju.com"
   },
   "plugins": [
     {
-      "name": "iyanju",
+      "name": "iyanju-agentory",
       "source": "./",
-      "description": "Iyanju is a growing collection of portable agent skills, beginning with Product Challenger.",
+      "description": "Iyanju Agentory is a growing collection of portable agent skills, beginning with Product Challenger.",
       "version": "0.2.4",
       "category": "productivity",
       "keywords": [
         "agent-skills",
         "iyanju",
+        "iyanju-agentory",
         "product-discovery",
         "research",
         "automation"

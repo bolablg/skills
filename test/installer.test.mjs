@@ -26,7 +26,7 @@ test("provides a user guide for every bundled skill", async () => {
   );
 });
 
-test("keeps Iyanju marketplace metadata aligned across Claude Code and Codex", async () => {
+test("keeps Iyanju Agentory marketplace metadata aligned across Claude Code and Codex", async () => {
   const readJson = async (...segments) =>
     JSON.parse(await readFile(path.join(repositoryRoot, ...segments), "utf8"));
   const packageManifest = await readJson("package.json");
@@ -40,7 +40,7 @@ test("keeps Iyanju marketplace metadata aligned across Claude Code and Codex", a
   assert.equal(claudeMarketplace.name, "iyanju");
   assert.equal(codexMarketplace.name, claudeMarketplace.name);
   assert.equal(claudeMarketplace.version, packageManifest.version);
-  assert.equal(claudeEntry.name, "iyanju");
+  assert.equal(claudeEntry.name, "iyanju-agentory");
   assert.equal(codexEntry.name, claudeEntry.name);
   assert.equal(claudeEntry.version, packageManifest.version);
   assert.equal(claudePlugin.name, claudeEntry.name);

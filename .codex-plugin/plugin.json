@@ -1,7 +1,7 @@
 {
-  "name": "iyanju",
+  "name": "iyanju-agentory",
   "version": "0.2.4",
-  "description": "Iyanju is a portable, cross-agent collection of AI skills for research, product discovery, development, automation, operations, and creative work.",
+  "description": "Iyanju Agentory is a portable, cross-agent collection of AI skills for research, product discovery, development, automation, operations, and creative work.",
   "author": {
     "name": "Iyanju",
     "url": "https://iyanju.com"
@@ -12,15 +12,16 @@
   "keywords": [
     "agent-skills",
     "iyanju",
+    "iyanju-agentory",
     "product-discovery",
     "research",
     "automation"
   ],
   "skills": "./skills/",
   "interface": {
-    "displayName": "Iyanju",
+    "displayName": "Iyanju Agentory",
     "shortDescription": "Portable skills for product discovery, research, and more.",
-    "longDescription": "Iyanju is a growing collection of portable AI skills for research, product discovery, development, automation, operations, and creative work. It begins with Product Challenger and can grow without changing how the collection is installed.",
+    "longDescription": "Iyanju Agentory is a growing collection of portable AI skills for research, product discovery, development, automation, operations, and creative work. It begins with Product Challenger and can grow without changing how the collection is installed.",
     "developerName": "Iyanju",
     "category": "Productivity",
     "capabilities": [
