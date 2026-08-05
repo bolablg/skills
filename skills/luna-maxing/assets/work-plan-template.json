@@ -1,0 +1,34 @@
+{
+  "mode": "strict-max",
+  "concurrency": 3,
+  "timeoutMinutes": 20,
+  "workspace": ".",
+  "inheritUserConfig": true,
+  "persistSessions": true,
+  "tasks": [
+    {
+      "id": "market_evidence",
+      "objective": "Replace this with one independent, evidence-producing objective.",
+      "context": "Include only the context this worker needs.",
+      "allowedPaths": ["path/to/approved/local/artifact"],
+      "allowedHosts": ["authoritative.example"],
+      "doneWhen": ["The worker answers the objective with traceable evidence."],
+      "verification": ["Check every material claim against its cited source."],
+      "forbiddenActions": ["Do not change files or external state."],
+      "sandbox": "read-only",
+      "effort": "max"
+    },
+    {
+      "id": "technical_risk",
+      "objective": "Replace this with a distinct technical or operational investigation.",
+      "context": "Avoid duplicating the first worker's question.",
+      "allowedPaths": ["path/to/another/approved/artifact"],
+      "allowedHosts": [],
+      "doneWhen": ["The worker identifies risks, evidence, and unresolved assumptions."],
+      "verification": ["Inspect the relevant primary artifacts."],
+      "forbiddenActions": ["Do not change files or external state."],
+      "sandbox": "read-only",
+      "effort": "max"
+    }
+  ]
+}

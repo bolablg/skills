@@ -14,8 +14,8 @@ import {
 
 const repositoryRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
-test("lists the bundled Product Challenger skill", async () => {
-  assert.deepEqual(await listSkills(repositoryRoot), ["product-challenger"]);
+test("lists every bundled skill", async () => {
+  assert.deepEqual(await listSkills(repositoryRoot), ["luna-maxing", "product-challenger"]);
 });
 
 test("provides a user guide for every bundled skill", async () => {

@@ -2,8 +2,8 @@
 
 Iyanju Agentory is a growing, MIT-licensed collection of portable, cross-agent
 AI skills for research, development, automation, operations, and creative work.
-The collection is intentionally domain-agnostic: Product Challenger is simply
-the first Skill, not the project's name or scope.
+The collection is intentionally domain-agnostic: every Skill is an independent,
+portable capability rather than the project's identity.
 
 [![skills.sh](https://skills.sh/b/bolablg/skills)](https://www.skills.sh/bolablg/skills)
 
@@ -14,6 +14,7 @@ Claude Code, OpenCode, Gemini CLI, and compatible hosts.
 
 | Skill | Purpose | Status |
 | --- | --- | --- |
+| [Luna Maxing](howto/luna-maxing.md) | Coordinate verified GPT-5.6 Luna Max work packets under a GPT-5.6 Sol aggregator. | Available |
 | [Product Challenger](howto/product-challenger.md) | Challenge, research, validate, and sequence Africa-first product ideas. | Available |
 
 Future Skills belong in `skills/<skill-name>/`. The npm installer discovers
@@ -53,9 +54,7 @@ claude plugin marketplace update bolablg
 claude plugin update iyanju-agentory@bolablg
 ```
 
-The first included Skill is Product Challenger. Read its practical guide at
-[howto/product-challenger.md](howto/product-challenger.md) before starting a
-product discovery project.
+Read the practical guides in [howto/](howto/) before starting a workflow.
 
 ### Upgrade from earlier marketplace identifiers
 
@@ -101,10 +100,15 @@ npx skills add bolablg/skills --skill product-challenger
 Browse the public listing at
 [skills.sh/bolablg/skills/product-challenger](https://www.skills.sh/bolablg/skills/product-challenger).
 
+Install Luna Maxing the same way:
+
+```sh
+npx skills add bolablg/skills --skill luna-maxing --global --agent codex --yes
+```
+
 ## Install a Skill with npx
 
-After the npm package is published, install Product Challenger without a
-global package installation:
+Install an individual Skill without a global package installation:
 
 ```sh
 npx @bolablg/skills install product-challenger --agent codex --scope user
@@ -144,8 +148,7 @@ npx @bolablg/skills list
 npx @bolablg/skills --help
 ```
 
-Until the npm package is published, run the same installer directly from this
-public GitHub repository:
+To test unreleased changes directly from the public GitHub repository, run:
 
 ```sh
 npx --yes --package=github:bolablg/skills bolablg-skills install product-challenger --agent codex --scope user
@@ -169,6 +172,12 @@ Keep every distributable Skill independent and portable:
 
 ```text
 skills/
+  luna-maxing/
+    SKILL.md
+    agents/openai.yaml
+    scripts/                       # Capability probe and bounded CLI runner
+    references/
+    assets/
   product-challenger/
     SKILL.md
     agents/openai.yaml             # Optional host metadata
@@ -208,7 +217,7 @@ It safely skips a version npm already has.
 ```text
 skills/                            # Canonical, independently usable Skills
 howto/                             # Human-facing guide for every public Skill
-.agents/skills/product-challenger  # Local ignored Codex development symlink
+.agents/skills/<skill-name>        # Local ignored Codex development symlinks
 .agents/plugins/marketplace.json   # Codex marketplace catalog
 .codex-plugin/plugin.json          # Codex collection plugin metadata
 .claude-plugin/marketplace.json    # Claude Code marketplace catalog
