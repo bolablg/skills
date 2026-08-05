@@ -7,5 +7,6 @@ and put human onboarding here.
 
 | Skill | Guide |
 | --- | --- |
+| Job Hunter | [How to use Job Hunter](job-hunter.md) |
 | Luna Maxing | [How to use Luna Maxing](luna-maxing.md) |
 | Product Challenger | [How to use Product Challenger](product-challenger.md) |
