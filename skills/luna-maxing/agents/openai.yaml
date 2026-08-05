@@ -1,0 +1,4 @@
+interface:
+  display_name: "Luna Maxing"
+  short_description: "Coordinate Sol with verified Luna Max workers"
+  default_prompt: "Use $luna-maxing to split this task into verified Luna Max work packets and have Sol synthesize the result."

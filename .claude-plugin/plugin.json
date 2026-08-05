@@ -1,6 +1,6 @@
 {
   "name": "iyanju-agentory",
-  "version": "0.2.6",
+  "version": "0.3.0",
   "description": "Iyanju Agentory is a portable, cross-agent collection of AI skills for research, product discovery, development, automation, operations, and creative work.",
   "author": {
     "name": "Bolaji BALOGOUN",
@@ -15,6 +15,7 @@
     "iyanju-agentory",
     "product-discovery",
     "research",
-    "automation"
+    "automation",
+    "multi-agent"
   ]
 }

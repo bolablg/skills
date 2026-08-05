@@ -7,4 +7,5 @@ and put human onboarding here.
 
 | Skill | Guide |
 | --- | --- |
+| Luna Maxing | [How to use Luna Maxing](luna-maxing.md) |
 | Product Challenger | [How to use Product Challenger](product-challenger.md) |
