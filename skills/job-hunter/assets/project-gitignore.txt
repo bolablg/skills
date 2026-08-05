@@ -1,0 +1,11 @@
+# Job Hunter contains personal information and private activity records.
+jobhunter.yaml
+jobhunter.yml
+jobhunter.json
+info.yaml
+info.yml
+info.json
+*.secrets.*
+jobhunter-ledger/
+sessions/
+generated/
