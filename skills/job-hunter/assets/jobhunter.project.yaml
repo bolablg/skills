@@ -1,0 +1,78 @@
+schema_version: 1
+
+candidate:
+  full_name: null
+  primary_email: null
+  phone: null
+  location:
+    city: null
+    region: null
+    country: null
+  links:
+    linkedin: ""
+    portfolio: ""
+    github: ""
+
+resources:
+  resumes:
+    - id: "default"
+      path: "./resumes/resume.pdf"
+      default: true
+      target_roles: []
+  supporting:
+    - id: "portfolio-notes"
+      path: "./resources/portfolio-notes.md"
+      purpose: "Additional verified achievements and project evidence"
+
+goals:
+  functions: ["apply", "recruiter-outreach"]
+  target_roles: []
+  target_seniority: []
+  target_industries: []
+  excluded_companies: []
+  excluded_role_terms: []
+
+search:
+  sources: ["company-careers", "greenhouse", "lever", "ashby", "public-web"]
+  target_countries: []
+  work_modes: []
+  locations: []
+  posted_within_days: null
+  match_threshold: 70
+  salary_floor: null
+  salary_currency: null
+
+eligibility:
+  work_authorization:
+    REVIEW_REQUIRED_COUNTRY: null
+  requires_sponsorship: null
+  willing_to_relocate: null
+  security_clearances: []
+
+application_answers:
+  availability: "ask"
+  expected_salary: "ask"
+  voluntary_disclosures: "prefer-not-to-answer"
+
+accounts:
+  default_signup:
+    email: null
+    credential:
+      source: "prompt"
+      ref: ""
+  existing: []
+
+permissions:
+  research: true
+  application_submission: "prepare-only"
+  account_creation: "ask-each"
+  recruiter_outreach: "draft-only"
+  approved_account_domains: []
+
+outreach:
+  positioning: null
+  target_recruiter_types: []
+  preferred_channels: ["email", "linkedin-manual"]
+  daily_limit: 5
+  follow_up_days: 7
+  max_follow_ups: 1
