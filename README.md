@@ -14,7 +14,6 @@ Claude Code, OpenCode, Gemini CLI, and compatible hosts.
 
 | Skill | Purpose | Status |
 | --- | --- | --- |
-| [Job Hunter](howto/job-hunter.md) | Build a private candidate profile, research and apply to jobs safely, and connect with relevant recruiters. | Available |
 | [Luna Maxing](howto/luna-maxing.md) | Coordinate verified GPT-5.6 Luna Max work packets under a GPT-5.6 Sol aggregator. | Available |
 | [Product Challenger](howto/product-challenger.md) | Challenge, research, validate, and sequence Africa-first product ideas. | Available |
 
@@ -107,12 +106,6 @@ Install Luna Maxing the same way:
 npx skills add bolablg/skills --skill luna-maxing --global --agent codex --yes
 ```
 
-Or install Job Hunter:
-
-```sh
-npx skills add bolablg/skills --skill job-hunter --global --agent codex --yes
-```
-
 ## Install a Skill with npx
 
 Install an individual Skill without a global package installation:
@@ -179,12 +172,6 @@ Keep every distributable Skill independent and portable:
 
 ```text
 skills/
-  job-hunter/
-    SKILL.md
-    agents/openai.yaml
-    scripts/                       # Project initialization and profile validation
-    references/
-    assets/
   luna-maxing/
     SKILL.md
     agents/openai.yaml

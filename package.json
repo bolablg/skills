@@ -1,7 +1,7 @@
 {
   "name": "@bolablg/skills",
-  "version": "0.4.0",
-  "description": "Iyanju Agentory: portable, cross-agent AI skills for research, career workflows, development, automation, operations, and creative work.",
+  "version": "0.3.0",
+  "description": "Iyanju Agentory: portable, cross-agent AI skills for research, development, automation, operations, and creative work.",
   "license": "MIT",
   "author": {
     "name": "Bolaji BALOGOUN",
@@ -52,8 +52,6 @@
     "automation",
     "agent-workflows",
     "multi-agent",
-    "luna-maxing",
-    "job-search",
-    "recruiter-outreach"
+    "luna-maxing"
   ]
 }
