@@ -1,4 +1,0 @@
-interface:
-  display_name: "Job Hunter"
-  short_description: "Research jobs, apply safely, and connect with recruiters"
-  default_prompt: "Use $job-hunter to build my candidate profile, research matching opportunities, and prepare a review queue before any application or recruiter outreach."
