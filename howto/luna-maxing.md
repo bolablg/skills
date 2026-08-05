@@ -2,7 +2,7 @@
 
 Luna Maxing turns one difficult task into a small set of independent work packets, assigns those packets to GPT-5.6 Luna at maximum reasoning, and has GPT-5.6 Sol verify and combine the results. It is most useful for deep research, competing technical investigations, audits, or a few clearly separated implementation areas.
 
-It is not a reason to parallelize every task. Each worker starts with its own context, so two or three strong packets usually outperform a large swarm of overlapping ones.
+It is not a reason to parallelize every task. Each worker starts with its own context, so two or three strong packets usually outperform a large swarm of overlapping ones. Luna Maxing may create up to five concurrent tasks when five genuinely independent work packets are justified.
 
 ## Start in your AI agent
 
@@ -10,7 +10,9 @@ Install the Skill, open the project you want to work on, and ask:
 
 > Use Luna Maxing in strict-max mode. First show me the independent work packets and routing you can actually enforce. Then run them, verify the evidence, and give me one Sol-owned recommendation.
 
-If your agent can route native workers to Luna at max reasoning, the Skill can use that path. If it cannot, the Skill checks for a local Codex CLI and can launch isolated Luna sessions with explicit settings. If neither path is available, it still provides the same disciplined decomposition but labels it as portable mode rather than claiming Luna execution.
+In Codex or ChatGPT, explicitly invoking Luna Maxing creates separate user-visible tasks/threads by default. In Codex, each task should request Luna with `max` reasoning when the task-creation capability supports it. ChatGPT keeps visible tasks as the transport, but the report must disclose when exact model routing cannot be verified.
+
+Outside Codex or ChatGPT, native subagents are the default when Luna Max routing is enforceable. If it is not, the Skill can check for a local Codex CLI and launch isolated background sessions with explicit settings. A CLI session ID is not presented as a visible app task. If no exact route is available, the Skill uses portable mode rather than claiming Luna execution.
 
 ## Choose a mode
 
@@ -78,6 +80,8 @@ If external-service access is forbidden, do not run the Codex capability probe o
 ## Troubleshooting
 
 **The probe says `codex-exec`.** This is expected when Luna exists in the model catalog but the host cannot natively spawn it. The CLI runner is the verified fallback.
+
+**No visible tasks appeared in Codex or ChatGPT.** The workflow used the wrong transport or visible creation was unavailable. Check the routing receipt: subagents and `codex exec` sessions are background workers and must not be described as visible tasks.
 
 **The probe says `unavailable`.** Update or authenticate Codex, then probe again. Until Luna and max reasoning are exposed, use portable mode and disclose the limitation.
 

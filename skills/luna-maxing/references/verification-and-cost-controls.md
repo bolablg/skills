@@ -14,7 +14,7 @@ Accept a result only when its task ID matches, status is explicit, required evid
 
 ## Cost controls
 
-- Default to two or three workers and a concurrency ceiling of three.
+- Default to two or three workers. Permit four or five only for genuinely independent evidence streams; never exceed five concurrent workers.
 - Do not fan out trivial, highly sequential, or already-settled work.
 - Give each worker minimal context and one bounded objective.
 - Use `adaptive` mode when max reasoning is not essential.
@@ -23,7 +23,7 @@ Accept a result only when its task ID matches, status is explicit, required evid
 
 ## Routing receipt
 
-Record the requested model, reasoning effort, enforcement method, worker thread ID when available, timestamps, token usage when available, output paths, artifact hashes, and failure state. Explicit CLI arguments prove what was requested, not an external guarantee about provider-side execution; phrase the receipt accordingly.
+Record the transport (`visible-task`, `subagent`, or `codex-exec`), requested model, reasoning effort, enforcement method, user-visible task/thread ID and host ID when available, timestamps, token usage, output paths, artifact hashes, and failure state. A CLI `thread.started` ID is a background-session receipt, not evidence of a visible app task. Explicit CLI arguments prove what was requested, not an external guarantee about provider-side execution; phrase the receipt accordingly.
 
 ## Final synthesis
 

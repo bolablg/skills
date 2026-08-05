@@ -1,0 +1,4 @@
+interface:
+  display_name: "Job Hunter"
+  short_description: "Research jobs, apply safely, and connect with recruiters"
+  default_prompt: "Use $job-hunter to onboard me from my résumé, professional resources, target markets, and country eligibility before researching opportunities."

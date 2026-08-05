@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
 import path from "node:path";
 import test from "node:test";
 import { analyzeCatalog } from "../skills/luna-maxing/scripts/capability-probe.mjs";
@@ -27,6 +28,22 @@ const catalog = ({ sharedBackend = false, includeMax = true } = {}) => ({
       ],
     },
   ],
+});
+
+const lunaSkillRoot = path.resolve("skills", "luna-maxing");
+
+test("defaults to visible tasks in Codex or ChatGPT and background workers elsewhere", async () => {
+  const skill = await readFile(path.join(lunaSkillRoot, "SKILL.md"), "utf8");
+  const routing = await readFile(path.join(lunaSkillRoot, "references", "codex-routing.md"), "utf8");
+
+  assert.match(skill, /Codex or ChatGPT visible-thread route — default/);
+  assert.match(skill, /Do not substitute hidden subagents or CLI sessions/);
+  assert.match(routing, /create_thread/);
+  assert.match(routing, /model: gpt-5\.6-luna/);
+  assert.match(routing, /thinking: max/);
+  assert.match(routing, /wait_threads/);
+  assert.match(routing, /Outside Codex or ChatGPT, prefer native subagents/);
+  assert.match(routing, /CLI `thread\.started` ID as a visible app task/);
 });
 
 const planInput = (overrides = {}) => ({
@@ -78,6 +95,11 @@ test("plans reject dangerous sandboxes and duplicate task IDs", () => {
 
   const duplicate = planInput({ tasks: [planInput().tasks[0], planInput().tasks[0]] });
   assert.throws(() => validatePlan(duplicate), /Duplicate task id/);
+});
+
+test("allows at most five concurrent Luna workers", () => {
+  assert.equal(validatePlan(planInput({ concurrency: 5 })).concurrency, 5);
+  assert.throws(() => validatePlan(planInput({ concurrency: 6 })), /integer from 1 to 5/);
 });
 
 test("plans reject concurrent writers sharing a workspace", () => {

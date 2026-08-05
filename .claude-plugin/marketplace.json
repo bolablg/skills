@@ -1,8 +1,8 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "bolablg",
-  "version": "0.3.0",
-  "description": "Iyanju Agentory is a portable, cross-agent collection of AI skills for research, product discovery, development, automation, operations, and creative work.",
+  "version": "0.4.0",
+  "description": "Iyanju Agentory is a portable, cross-agent collection of AI skills for research, career workflows, product discovery, development, automation, operations, and creative work.",
   "owner": {
     "name": "Bolaji BALOGOUN",
     "url": "https://github.com/bolablg"
@@ -11,8 +11,8 @@
     {
       "name": "iyanju-agentory",
       "source": "./",
-      "description": "Iyanju Agentory is a growing collection of portable skills for product discovery, verified multi-agent reasoning, research, and automation.",
-      "version": "0.3.0",
+      "description": "Iyanju Agentory is a growing collection of portable skills for career workflows, product discovery, verified multi-agent reasoning, research, and automation.",
+      "version": "0.4.0",
       "category": "productivity",
       "keywords": [
         "agent-skills",
@@ -21,7 +21,8 @@
         "product-discovery",
         "research",
         "automation",
-        "multi-agent"
+        "multi-agent",
+        "job-search"
       ]
     }
   ]
