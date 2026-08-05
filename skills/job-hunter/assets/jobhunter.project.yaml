@@ -1,0 +1,82 @@
+schema_version: 1
+
+candidate:
+  full_name: null
+  primary_email: null
+  phone: null
+  current_location:
+    country: null
+    region: null
+    city: null
+    timezone: null
+resources:
+  resumes:
+    - id: "default"
+      path: "./resumes/resume.pdf"
+      default: true
+      target_roles: []
+      share_with_employers: true
+  local: []
+  online: []
+
+goals:
+  functions: ["apply", "recruiter-outreach"]
+
+career_preferences:
+  target_roles: []
+  target_seniority: []
+  target_industries: []
+  employment_types: []
+  target_markets: []
+  excluded_locations:
+    countries: []
+    regions: []
+    cities: []
+
+work_eligibility: []
+
+search_constraints:
+  sources: ["company-careers", "greenhouse", "lever", "ashby", "public-web"]
+  include_jobs_requiring_sponsorship: false
+  include_jobs_with_unknown_sponsorship: false
+  include_worldwide_remote_jobs: false
+  verify_remote_accepts_residence_country: true
+  posted_within_days: null
+  minimum_match_score: 70
+  compensation:
+    minimum: null
+    currency: null
+    period: "year"
+    negotiable: true
+  languages: []
+  excluded_companies: []
+  excluded_role_terms: []
+  maximum_travel_percent: null
+
+application_answers:
+  availability: "ask"
+  expected_salary: "ask"
+  voluntary_disclosures: "prefer-not-to-answer"
+
+accounts:
+  default_signup:
+    email: null
+    credential:
+      source: "prompt"
+      ref: ""
+  existing: []
+
+permissions:
+  research: true
+  application_submission: "prepare-only"
+  account_creation: "ask-each"
+  recruiter_outreach: "draft-only"
+  approved_account_domains: []
+
+outreach:
+  positioning: null
+  target_recruiter_types: []
+  preferred_channels: ["email", "linkedin-manual"]
+  daily_limit: 5
+  follow_up_days: 7
+  max_follow_ups: 1

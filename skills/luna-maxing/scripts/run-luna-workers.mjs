@@ -13,7 +13,7 @@ import { probeCodex } from "./capability-probe.mjs";
 
 const ALLOWED_EFFORTS = new Set(["low", "medium", "high", "xhigh", "max"]);
 const ALLOWED_SANDBOXES = new Set(["read-only", "workspace-write"]);
-const MAX_CONCURRENCY = 6;
+const MAX_CONCURRENCY = 5;
 const MAX_TASKS = 12;
 const SCRIPT_DIRECTORY = path.dirname(fileURLToPath(import.meta.url));
 const WORKER_SCHEMA = path.resolve(SCRIPT_DIRECTORY, "..", "assets", "worker-result-schema.json");

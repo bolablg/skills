@@ -9,7 +9,10 @@ State the answer or recommendation first. Include confidence and the most import
 - Coordinator model and role reported by host:
 - Coordinator identity verification basis or limitation:
 - Worker route:
+- Transport: visible-task/subagent/codex-exec/portable
 - Requested worker model and reasoning effort:
+- Visible task/thread IDs and host IDs, when applicable:
+- Background session IDs, when applicable:
 - Verified worker receipts:
 - Degraded or unavailable capabilities:
 
@@ -31,6 +34,6 @@ Prioritize the smallest actions that resolve uncertainty or move the work forwar
 
 ## Worker ledger
 
-| Work packet | Status | Evidence quality | Validation | Receipt and artifact hash |
-| --- | --- | --- | --- | --- |
-| Replace with task ID | completed/blocked/failed | high/medium/low | passed/failed/not-run | thread or result path |
+| Work packet | Transport | Status | Evidence quality | Validation | Receipt and artifact hash |
+| --- | --- | --- | --- | --- | --- |
+| Replace with task ID | visible-task/subagent/codex-exec | completed/blocked/failed | high/medium/low | passed/failed/not-run | visible task ID or background result path |
