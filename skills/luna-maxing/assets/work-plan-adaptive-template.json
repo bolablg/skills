@@ -1,0 +1,34 @@
+{
+  "mode": "adaptive",
+  "concurrency": 2,
+  "timeoutMinutes": 15,
+  "workspace": ".",
+  "inheritUserConfig": true,
+  "persistSessions": true,
+  "tasks": [
+    {
+      "id": "deep_hypothesis",
+      "objective": "Replace this with the packet that requires the deepest reasoning.",
+      "context": "Include only the context needed for this hypothesis.",
+      "allowedPaths": ["path/to/approved/evidence"],
+      "allowedHosts": [],
+      "doneWhen": ["The hypothesis is supported, falsified, or left explicitly unresolved."],
+      "verification": ["Cite the inspected primary artifacts."],
+      "forbiddenActions": ["Do not modify files or use external services."],
+      "sandbox": "read-only",
+      "effort": "max"
+    },
+    {
+      "id": "routine_inventory",
+      "objective": "Replace this with a bounded inventory or extraction packet.",
+      "context": "Do not duplicate the deep-hypothesis packet.",
+      "allowedPaths": ["path/to/approved/metadata"],
+      "allowedHosts": [],
+      "doneWhen": ["The requested facts are extracted with exact source paths."],
+      "verification": ["Check extracted values directly against their source."],
+      "forbiddenActions": ["Do not modify files or use external services."],
+      "sandbox": "read-only",
+      "effort": "high"
+    }
+  ]
+}
