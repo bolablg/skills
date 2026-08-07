@@ -106,6 +106,15 @@ function normalizeTask(task, index, root) {
   };
 }
 
+function isInsideOrEqual(parentPath, childPath) {
+  const relative = path.relative(parentPath, childPath);
+  return relative === "" || (relative !== ".." && !relative.startsWith(`..${path.sep}`));
+}
+
+function ownershipPathsOverlap(left, right) {
+  return isInsideOrEqual(left, right) || isInsideOrEqual(right, left);
+}
+
 export function validatePlan(plan, { cwd = process.cwd() } = {}) {
   if (!plan || typeof plan !== "object" || Array.isArray(plan)) {
     throw new PlanError("The plan must be a JSON object.");
@@ -148,15 +157,20 @@ export function validatePlan(plan, { cwd = process.cwd() } = {}) {
     ids.add(task.id);
   }
 
-  const writersByWorkspace = new Map();
-  for (const task of tasks.filter((entry) => entry.sandbox === "workspace-write")) {
-    const existing = writersByWorkspace.get(task.workspace);
-    if (existing) {
-      throw new PlanError(
-        `Write tasks ${existing} and ${task.id} share a workspace. Use separate worktrees or run them sequentially.`,
-      );
+  const writeTasks = tasks.filter((entry) => entry.sandbox === "workspace-write");
+  const ownership = [];
+  for (const task of writeTasks) {
+    for (const allowedPath of task.allowedPaths) {
+      const absolutePath = path.resolve(task.workspace, allowedPath);
+      for (const existing of ownership) {
+        if (ownershipPathsOverlap(existing.absolutePath, absolutePath)) {
+          throw new PlanError(
+            `Write ownership overlaps between ${existing.taskId}:${existing.allowedPath} and ${task.id}:${allowedPath}. Run coupled tasks serially; the runner does not create Git worktrees.`,
+          );
+        }
+      }
+      ownership.push({ absolutePath, allowedPath, taskId: task.id });
     }
-    writersByWorkspace.set(task.workspace, task.id);
   }
 
   return { ...root, tasks };
@@ -181,6 +195,8 @@ export function buildWorkerPrompt(task) {
 
   return [
     "Act as one bounded execution worker. Do not coordinate the overall project and do not spawn other agents.",
+    "Do not create, add, move, remove, or use Git worktrees.",
+    "Do not commit, push, open pull requests, or edit outside the paths assigned by the coordinator.",
     `Task ID: ${task.id}`,
     `Objective: ${task.objective}`,
     task.context ? `Context: ${task.context}` : "",

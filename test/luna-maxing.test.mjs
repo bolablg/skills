@@ -32,18 +32,25 @@ const catalog = ({ sharedBackend = false, includeMax = true } = {}) => ({
 
 const lunaSkillRoot = path.resolve("skills", "luna-maxing");
 
-test("defaults to visible tasks in Codex or ChatGPT and background workers elsewhere", async () => {
+test("uses visible tasks exclusively in Codex or ChatGPT and background workers only elsewhere", async () => {
   const skill = await readFile(path.join(lunaSkillRoot, "SKILL.md"), "utf8");
   const routing = await readFile(path.join(lunaSkillRoot, "references", "codex-routing.md"), "utf8");
 
-  assert.match(skill, /Codex or ChatGPT visible-thread route — default/);
-  assert.match(skill, /Do not substitute hidden subagents or CLI sessions/);
+  assert.match(skill, /Codex app or ChatGPT visible-thread route — exclusive/);
+  assert.match(skill, /Do not use subagents, child agents, background tasks, `codex exec`, CLI sessions/);
+  assert.match(skill, /stop the Luna Maxing run and report the missing capability/);
+  assert.match(skill, /do not fan out through any transport/);
   assert.match(routing, /create_thread/);
   assert.match(routing, /model: gpt-5\.6-luna/);
   assert.match(routing, /thinking: max/);
+  assert.match(routing, /environment:\s*\n\s*type: local/);
+  assert.match(skill, /Never create, request, or switch to a Git worktree/);
+  assert.match(routing, /exact, pairwise non-overlapping file or directory ownership/);
   assert.match(routing, /wait_threads/);
-  assert.match(routing, /Outside Codex or ChatGPT, prefer native subagents/);
-  assert.match(routing, /CLI `thread\.started` ID as a visible app task/);
+  assert.match(routing, /Outside the Codex app and ChatGPT, prefer native subagents/);
+  assert.match(routing, /Never use a subagent, background task, CLI session, or `codex exec` fallback there/);
+  assert.doesNotMatch(skill, /before using a background fallback/);
+  assert.match(routing, /CLI `thread\.started` ID is not a visible app task/);
 });
 
 const planInput = (overrides = {}) => ({
@@ -102,20 +109,26 @@ test("allows at most five concurrent Luna workers", () => {
   assert.throws(() => validatePlan(planInput({ concurrency: 6 })), /integer from 1 to 5/);
 });
 
-test("plans reject concurrent writers sharing a workspace", () => {
+test("concurrent writers require disjoint ownership and never rely on Git worktrees", () => {
   const first = {
     ...planInput().tasks[0],
     sandbox: "workspace-write",
-    allowedPaths: ["src/first.js"],
+    allowedPaths: ["src/features"],
   };
   const second = {
     ...first,
     id: "second_writer",
-    allowedPaths: ["src/second.js"],
+    allowedPaths: ["src/other"],
+  };
+  assert.equal(validatePlan(planInput({ concurrency: 2, tasks: [first, second] })).concurrency, 2);
+
+  const overlapping = {
+    ...second,
+    allowedPaths: ["src/features/generated"],
   };
   assert.throws(
-    () => validatePlan(planInput({ tasks: [first, second] })),
-    /Use separate worktrees or run them sequentially/,
+    () => validatePlan(planInput({ concurrency: 2, tasks: [first, overlapping] })),
+    /Write ownership overlaps.*Run coupled tasks serially.*does not create Git worktrees/,
   );
 });
 
@@ -135,6 +148,8 @@ test("worker command explicitly enforces Luna, effort, sandbox, and no recursion
   assert.match(joined, /--sandbox read-only/);
   assert.doesNotMatch(joined, /danger-full-access|dangerously-bypass/);
   assert.match(buildWorkerPrompt(task), /do not spawn other agents/i);
+  assert.match(buildWorkerPrompt(task), /Do not create, add, move, remove, or use Git worktrees/);
+  assert.match(buildWorkerPrompt(task), /Do not commit, push, open pull requests, or edit outside/);
   assert.match(buildWorkerPrompt(task), /Inspect only these local paths.*package\.json/i);
   assert.match(buildWorkerPrompt(task), /Do not access network services/i);
 });
