@@ -10,9 +10,11 @@ Install the Skill, open the project you want to work on, and ask:
 
 > Use Luna Maxing in strict-max mode. First show me the independent work packets and routing you can actually enforce. Then run them, verify the evidence, and give me one Sol-owned recommendation.
 
-In Codex or ChatGPT, explicitly invoking Luna Maxing creates separate user-visible tasks/threads by default. In Codex, each task should request Luna with `max` reasoning when the task-creation capability supports it. ChatGPT keeps visible tasks as the transport, but the report must disclose when exact model routing cannot be verified.
+In the Codex app or ChatGPT, asking to use Luna Maxing creates separate user-visible tasks/threads exclusively. The Skill itself prohibits subagents, background tasks, `codex exec`, CLI sessions, and Git worktrees on those hosts; users do not need to repeat those exclusions. In Codex, each task requests Luna with `max` reasoning and explicitly uses the saved project's local environment. Concurrent tasks may research, test, or implement whatever Sol assigns, but concurrent writers must own non-overlapping paths. ChatGPT keeps visible tasks as the transport, but the report must disclose when exact model routing cannot be verified.
 
-Outside Codex or ChatGPT, native subagents are the default when Luna Max routing is enforceable. If it is not, the Skill can check for a local Codex CLI and launch isolated background sessions with explicit settings. A CLI session ID is not presented as a visible app task. If no exact route is available, the Skill uses portable mode rather than claiming Luna execution.
+Each Luna Max task receives one concrete action and reports what it did. Sol actively waits for that handoff, inspects the real artifacts and evidence, and either accepts it or sends precise corrections back to the same task. The Luna task then adjusts its work and reports again. This review loop repeats for up to three rounds by default; unresolved work is reported as blocked.
+
+Outside the Codex app and ChatGPT, native subagents are the default when Luna Max routing is enforceable. If it is not, the Skill can check for a local Codex CLI and launch isolated background sessions with explicit settings. These mechanisms are never used as an in-app fallback. If no exact route is available, the Skill uses portable mode rather than claiming Luna execution.
 
 ## Choose a mode
 
@@ -33,7 +35,7 @@ Code investigation:
 
 Implementation:
 
-> Use Luna Maxing to plan this feature, but only delegate work that has disjoint file ownership. Put concurrent writers in separate worktrees, validate each result, then have Sol integrate and test the whole change.
+> Use Luna Maxing to implement this feature without Git worktrees. Have Sol split the work into independent packets with exact, non-overlapping file ownership, let Luna Max tasks edit their assigned paths concurrently, then have Sol inspect the combined diff and run integration tests.
 
 Decision challenge:
 
@@ -60,14 +62,16 @@ Remove `--dry-run` to execute. Add `--output-dir /absolute/path/to/receipts` if 
 
 ## Write work safely
 
-Read-only packets are the default. For an authorized write packet:
+Read-only packets are the default. For authorized concurrent write packets:
 
 - set `sandbox` to `workspace-write`;
 - list every permitted relative path in `allowedPaths`;
-- give simultaneous writers separate worktrees;
+- give every writer exact, pairwise non-overlapping `allowedPaths`;
+- never create or request a Git worktree;
+- forbid commits, pushes, pull requests, and edits outside ownership while writers run concurrently;
 - keep integration and whole-project testing with the coordinator.
 
-The supplied runner rejects dangerous sandbox values and simultaneous write workers that share a workspace. These checks reduce risk; they do not replace reviewing the work packet before execution.
+The supplied runner rejects dangerous sandbox values and overlapping writer ownership. It never invokes Git worktree commands. These checks reduce risk; they do not detect every logical dependency, so Sol must serialize coupled work even when paths differ.
 
 ## Read the final report
 
@@ -81,7 +85,7 @@ If external-service access is forbidden, do not run the Codex capability probe o
 
 **The probe says `codex-exec`.** This is expected when Luna exists in the model catalog but the host cannot natively spawn it. The CLI runner is the verified fallback.
 
-**No visible tasks appeared in Codex or ChatGPT.** The workflow used the wrong transport or visible creation was unavailable. Check the routing receipt: subagents and `codex exec` sessions are background workers and must not be described as visible tasks.
+**No visible tasks appeared in the Codex app or ChatGPT.** The run must stop and report the missing task capability. Subagents and `codex exec` are forbidden substitutes on these hosts.
 
 **The probe says `unavailable`.** Update or authenticate Codex, then probe again. Until Luna and max reasoning are exposed, use portable mode and disclose the limitation.
 
@@ -89,4 +93,4 @@ If external-service access is forbidden, do not run the Codex capability probe o
 
 **The task is costing too much.** Use `adaptive`, reduce the worker count, shorten packet context, and stop fan-out when new packets would repeat existing evidence.
 
-**Several workers need to edit the same files.** Run them sequentially or redesign ownership. Do not bypass the shared-workspace protection.
+**Several workers need the same file or generated output.** Give the coupled area to one worker or run those tasks serially. Do not weaken the ownership boundary.

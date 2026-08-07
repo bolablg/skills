@@ -12,7 +12,7 @@ Create a worker only when its result can be produced and judged largely independ
 - `doneWhen`: observable completion criteria.
 - `verification`: checks the worker should perform.
 - `forbiddenActions`: scope boundaries and prohibited side effects.
-- `sandbox`: prefer `read-only`; use `workspace-write` only for authorized implementation.
+- `sandbox`: use `read-only` for analysis and `workspace-write` for Sol-authorized implementation with exact path ownership.
 - `effort`: `max` in strict mode; calibrated in adaptive mode.
 
 Define ambiguous terms before delegation. For example, “latest package version” might mean the highest semantic version, a registry dist-tag, or a hosting platform's selected release.
@@ -29,7 +29,7 @@ Define ambiguous terms before delegation. For example, “latest package version
 - Several workers answering the same vague question.
 - Packets that depend on unfinished outputs from each other but run concurrently.
 - Tiny tasks whose startup context costs more than the work.
-- Multiple write workers sharing one checkout.
+- Concurrent writers with overlapping paths, shared generated outputs, hidden dependencies, or unclear ownership.
 - A worker asked to synthesize the whole project or spawn more workers.
 
-For write work, use separate worktrees with disjoint ownership or run packets sequentially. Integrate and test centrally after workers finish.
+Never create or request Git worktrees. Sol may run writers concurrently in the saved checkout only after assigning exact, pairwise non-overlapping files or directories. Treat a directory and anything beneath it as overlapping ownership. Give coupled manifests, lockfiles, migrations, generated outputs, and shared interfaces to one worker or run their tasks serially. Workers do not commit or publish while concurrent; Sol inspects the combined diff, resolves integration issues, and validates centrally.

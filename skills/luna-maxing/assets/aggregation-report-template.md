@@ -34,6 +34,6 @@ Prioritize the smallest actions that resolve uncertainty or move the work forwar
 
 ## Worker ledger
 
-| Work packet | Transport | Status | Evidence quality | Validation | Receipt and artifact hash |
-| --- | --- | --- | --- | --- | --- |
-| Replace with task ID | visible-task/subagent/codex-exec | completed/blocked/failed | high/medium/low | passed/failed/not-run | visible task ID or background result path |
+| Work packet | Transport | Review round | Sol decision | Evidence quality | Validation | Receipt and artifact hash |
+| --- | --- | --- | --- | --- | --- | --- |
+| Replace with task ID | visible-task/subagent/codex-exec | 1-3 | accepted/corrected/blocked | high/medium/low | passed/failed/not-run | visible task ID or background result path |
