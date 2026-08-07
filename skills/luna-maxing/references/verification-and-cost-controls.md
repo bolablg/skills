@@ -10,7 +10,7 @@
 
 ## Worker acceptance
 
-Accept a result only when its task ID matches, status is explicit, required evidence is traceable, promised validation ran, and changes stay within scope. Reinspect changed files and rerun relevant checks before integration.
+Accept a result only when its task ID matches, status is explicit, required evidence is traceable, promised validation ran, and changes stay within scope. Reinspect changed files and rerun relevant checks before integration. If acceptance fails, send concrete findings and correction criteria to the same task, then inspect its revised handoff. Default to at most three Sol review rounds and report unresolved work as blocked rather than pretending it passed.
 
 ## Cost controls
 

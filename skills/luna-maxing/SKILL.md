@@ -17,10 +17,11 @@ If the user says “Sora as aggregator,” correct the term once: this workflow 
 3. Read [references/orchestration-protocol.md](references/orchestration-protocol.md). Choose `strict-max` when Luna Max is explicit; otherwise choose `adaptive` and calibrate effort.
 4. Create two or three independent work packets by default and up to five only when each adds distinct value. Read [references/task-decomposition.md](references/task-decomposition.md) when boundaries, dependencies, or write ownership are non-trivial.
 5. Identify the host surface, then select and verify its permitted route using the rules below. Keep visible-thread transport separate from model-routing verification.
-6. Launch bounded workers. In the Codex app or ChatGPT, a direct request to use Luna Maxing—including `$luna-maxing`—authorizes visible tasks in the saved project's local environment and no other worker transport. Sol may assign analysis or implementation; concurrent writers require exact, non-overlapping path ownership. Never let a worker coordinate the project or spawn more agents.
-7. Wait for all useful packets using the host's thread-wait mechanism, then validate their claims and artifacts. Read [references/verification-and-cost-controls.md](references/verification-and-cost-controls.md) for consequential or expensive work.
-8. Resolve conflicts using evidence quality, not majority vote.
-9. Synthesize one answer owned by the coordinator. Use [assets/aggregation-report-template.md](assets/aggregation-report-template.md) for a formal report.
+6. Launch bounded workers. In the Codex app or ChatGPT, a direct request to use Luna Maxing—including `$luna-maxing`—authorizes visible tasks in the saved project's local environment and no other worker transport. Give each Luna Max task one explicit execution action: research, inspect, test, write, or another authorized operation. Concurrent writers require exact, non-overlapping path ownership. Never let a worker coordinate the project or spawn more agents.
+7. Require each worker to return a structured handoff with actions performed, artifacts changed, verification evidence, blockers, and remaining uncertainty. Actively wait for and read that handoff; do not assume an automatic callback.
+8. Sol inspects the actual result and challenges incomplete, incorrect, weakly evidenced, or out-of-scope work. Send precise corrections to the same visible task, wait for its revised handoff, and repeat until accepted, blocked, or the bounded retry limit is reached. Read [references/verification-and-cost-controls.md](references/verification-and-cost-controls.md) for consequential or expensive work.
+9. Resolve conflicts using evidence quality, not majority vote.
+10. Synthesize one answer owned by the coordinator. Use [assets/aggregation-report-template.md](assets/aggregation-report-template.md) for a formal report.
 
 ## Select a routing path
 
@@ -30,7 +31,9 @@ Read [references/codex-routing.md](references/codex-routing.md) when exact model
 
 When explicitly invoked in the Codex app or ChatGPT, create two or three separate user-visible tasks/threads by default and up to five when the decomposition justifies them. Treat `$luna-maxing` as an explicit request for those tasks. Set every worker to `gpt-5.6-luna` and `max` when the creation schema supports both, explicitly select the saved project's local environment, retain each returned task/thread identifier, wait for their results, and synthesize in the original coordinator task.
 
-Never create, request, or switch to a Git worktree. Visible tasks share the saved checkout and may write when Sol gives each task an exact, non-overlapping set of files or directories. Serialize tasks with overlapping ownership, shared generated outputs, or dependencies. Workers preserve pre-existing edits and do not commit, push, or open pull requests while running concurrently. The original Sol coordinator owns decomposition, integration, conflict resolution, repository-wide validation, and publishing.
+Never create, request, or switch to a Git worktree. Visible tasks share the saved checkout and may research, test, write, or perform another authorized action when Sol gives each task a specific objective, acceptance criteria, and ownership boundary. Serialize tasks with overlapping ownership, shared generated outputs, or dependencies. Workers preserve pre-existing edits and do not commit, push, or open pull requests while running concurrently. The original Sol coordinator owns decomposition, inspection, correction, integration, repository-wide validation, acceptance, and publishing.
+
+After a task reports completion, Sol must inspect the real output rather than accepting the summary. When adjustment is needed, use the host's follow-up mechanism to send exact findings and required corrections to the same task, then wait for and inspect its revised result. Do not create a replacement task merely to avoid the correction loop.
 
 Do not use subagents, child agents, background tasks, `codex exec`, CLI sessions, or any other hidden worker transport in the Codex app or ChatGPT. If visible task creation or required monitoring is unavailable, stop the Luna Maxing run and report the missing capability. Do not degrade silently or ask the user to provide these exclusions.
 
@@ -87,6 +90,8 @@ When exact Luna routing is unavailable, still prepare the same work packets and 
 - Do not allow recursive delegation by workers.
 - Do not fan out merely to create activity; every packet must add distinct evidence or output.
 - Do not accept a worker's confidence as verification.
+- Do not accept a worker's first handoff by default; inspect its actual artifacts and evidence, then accept, correct, or block it explicitly.
+- Keep corrections in the same visible task and cap the loop at three Sol review rounds unless the user requests otherwise.
 - Do not hide failed packets, contradictions, or degraded routing.
 - Do not exceed five concurrent visible tasks, subagents, or CLI workers. The supplied runner may process up to twelve total packets sequentially; prefer fewer.
 
