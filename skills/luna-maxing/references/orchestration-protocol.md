@@ -15,11 +15,12 @@
 3. Select `adaptive` or `strict-max` mode.
 4. Create non-overlapping work packets with an objective, context, done conditions, verification, and forbidden actions.
 5. Select visible-task transport exclusively in the Codex app or ChatGPT and subagent transport elsewhere, then probe model-routing capability before claiming a model was used. Fail closed instead of using an in-app background fallback.
-6. Launch no more workers than the evidence streams justify; default to two or three and cap concurrent threads/workers at five. Do not count an internal session ID as a visible task.
-7. Retain each worker's output, visible task/thread ID or background-session receipt, status, and validation result.
-8. Validate important claims against primary artifacts or another independent worker.
-9. Resolve disagreements explicitly. Do not hide minority evidence.
-10. Produce one coordinator-owned answer using the aggregation report template.
+6. Give each worker one explicit execution action and acceptance criteria. Launch no more workers than the work packets justify; default to two or three and cap concurrent threads/workers at five. Do not count an internal session ID as a visible task.
+7. Require a structured handoff with actions, changed artifacts, verification, blockers, and uncertainty. Retain the output, visible task/thread ID or external-host receipt, status, and validation result.
+8. Sol inspects the actual result. Send precise corrections to the same task when needed, then wait for and inspect the revision; cap this at three review rounds by default.
+9. Validate important claims against primary artifacts or another independent worker.
+10. Resolve disagreements explicitly. Do not hide minority evidence.
+11. Produce one coordinator-owned answer using the aggregation report template.
 
 ## Modes
 

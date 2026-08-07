@@ -47,6 +47,11 @@ test("uses visible tasks exclusively in Codex or ChatGPT and background workers 
   assert.match(skill, /Never create, request, or switch to a Git worktree/);
   assert.match(routing, /exact, pairwise non-overlapping file or directory ownership/);
   assert.match(routing, /wait_threads/);
+  assert.match(routing, /read_thread/);
+  assert.match(routing, /send_message_to_thread/);
+  assert.match(skill, /research, inspect, test, write, or another authorized operation/);
+  assert.match(skill, /same visible task/);
+  assert.match(skill, /three Sol review rounds/);
   assert.match(routing, /Outside the Codex app and ChatGPT, prefer native subagents/);
   assert.match(routing, /Never use a subagent, background task, CLI session, or `codex exec` fallback there/);
   assert.doesNotMatch(skill, /before using a background fallback/);
