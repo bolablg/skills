@@ -1,0 +1,4 @@
+interface:
+  display_name: "Luna Maxing"
+  short_description: "Coordinate Sol with verified Luna Max workers"
+  default_prompt: "Use $luna-maxing to complete this work now. Execute first, verify the result, and return the requested outcome without explaining the orchestration unless I ask."

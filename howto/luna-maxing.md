@@ -4,17 +4,19 @@ Luna Maxing turns one difficult task into a small set of independent work packet
 
 It is not a reason to parallelize every task. Each worker starts with its own context, so two or three strong packets usually outperform a large swarm of overlapping ones. Luna Maxing may create up to five concurrent tasks when five genuinely independent work packets are justified.
 
-## Start in your AI agent
+## Start in Codex
 
-Install the Skill, open the project you want to work on, and ask:
+Install the Iyanju Agentory plugin in Codex, open the project you want to work on, and ask:
 
-> Use Luna Maxing in strict-max mode. First show me the independent work packets and routing you can actually enforce. Then run them, verify the evidence, and give me one Sol-owned recommendation.
+> Use Luna Maxing to complete this task. Start the work immediately, verify the result, and give me the outcome without explaining the orchestration unless something fails or I ask.
 
-In the Codex app or ChatGPT, asking to use Luna Maxing creates separate user-visible tasks/threads exclusively. The Skill itself prohibits subagents, background tasks, `codex exec`, CLI sessions, and Git worktrees on those hosts; users do not need to repeat those exclusions. In Codex, each task requests Luna with `max` reasoning and explicitly uses the saved project's local environment. Concurrent tasks may research, test, or implement whatever Sol assigns, but concurrent writers must own non-overlapping paths. ChatGPT keeps visible tasks as the transport, but the report must disclose when exact model routing cannot be verified.
+Ask to see the packets or routing only when you want to audit the process. By default, the Skill does not explain Luna Maxing, introduce the model roles, or show its packet plan before beginning the requested work.
+
+Luna Maxing is Codex-only. In the Codex app, it creates separate user-visible tasks exclusively. The Skill itself prohibits subagents, background tasks, `codex exec`, CLI sessions, and Git worktrees in the app; users do not need to repeat those exclusions. Each task requests Luna with `max` reasoning and explicitly uses the saved project's local environment. Concurrent tasks may research, test, or implement whatever Sol assigns, but concurrent writers must own non-overlapping paths.
 
 Each Luna Max task receives one concrete action and reports what it did. Sol actively waits for that handoff, inspects the real artifacts and evidence, and either accepts it or sends precise corrections back to the same task. The Luna task then adjusts its work and reports again. This review loop repeats for up to three rounds by default; unresolved work is reported as blocked.
 
-Outside the Codex app and ChatGPT, native subagents are the default when Luna Max routing is enforceable. If it is not, the Skill can check for a local Codex CLI and launch isolated background sessions with explicit settings. These mechanisms are never used as an in-app fallback. If no exact route is available, the Skill uses portable mode rather than claiming Luna execution.
+In Codex CLI, the Skill can check the current Codex model catalog and launch isolated sessions with explicit Luna Max settings and receipts. These mechanisms are never used as an in-app fallback. Claude Code, ChatGPT, Gemini CLI, OpenCode, and other hosts must not install or emulate Luna Maxing.
 
 ## Choose a mode
 
@@ -46,13 +48,13 @@ Decision challenge:
 The agent normally handles this for you. To inspect it yourself from a repository checkout:
 
 ```sh
-node skills/luna-maxing/scripts/capability-probe.mjs --pretty --require-luna
+node codex-plugins/luna-maxing/skills/luna-maxing/scripts/capability-probe.mjs --pretty --require-luna
 ```
 
-Make a working copy of `skills/luna-maxing/assets/work-plan-template.json`, replace its sample objectives, then preview the worker commands without launching them:
+Make a working copy of `codex-plugins/luna-maxing/skills/luna-maxing/assets/work-plan-template.json`, replace its sample objectives, then preview the worker commands without launching them:
 
 ```sh
-node skills/luna-maxing/scripts/run-luna-workers.mjs \
+node codex-plugins/luna-maxing/skills/luna-maxing/scripts/run-luna-workers.mjs \
   --plan /absolute/path/to/work-plan.json \
   --dry-run \
   --pretty
@@ -79,15 +81,15 @@ A trustworthy result includes the route actually used, requested worker model an
 
 The explicit CLI arguments and artifact hashes prove what the workflow requested and preserve what it returned. They are not an independent audit of provider-side execution, so the report should phrase them as routing receipts rather than absolute guarantees.
 
-If external-service access is forbidden, do not run the Codex capability probe or worker launcher. Ask the agent to prepare portable work packets only and state that exact routing was not tested.
+If external-service access is forbidden, do not run the Codex capability probe or worker launcher; report that verified routing could not be checked.
 
 ## Troubleshooting
 
 **The probe says `codex-exec`.** This is expected when Luna exists in the model catalog but the host cannot natively spawn it. The CLI runner is the verified fallback.
 
-**No visible tasks appeared in the Codex app or ChatGPT.** The run must stop and report the missing task capability. Subagents and `codex exec` are forbidden substitutes on these hosts.
+**No visible tasks appeared in the Codex app.** The run must stop and report the missing task capability. Subagents and `codex exec` are forbidden substitutes in the app.
 
-**The probe says `unavailable`.** Update or authenticate Codex, then probe again. Until Luna and max reasoning are exposed, use portable mode and disclose the limitation.
+**The probe says `unavailable`.** Update or authenticate Codex, then probe again. Until Luna and max reasoning are exposed, stop the run and disclose the limitation.
 
 **A worker timed out or returned no structured result.** Keep the failure in the report. Narrow that packet or rerun it; do not let the coordinator invent the missing evidence.
 

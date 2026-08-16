@@ -7,34 +7,34 @@ portable capability rather than the project's identity.
 
 [![skills.sh](https://skills.sh/b/bolablg/skills)](https://www.skills.sh/bolablg/skills)
 
-Each Skill follows the open Agent Skills format, so it can work across Codex,
-Claude Code, OpenCode, Gemini CLI, and compatible hosts.
+Portable Skills follow the open Agent Skills format and work across Codex,
+Claude Code, OpenCode, Gemini CLI, and compatible hosts. Codex-only Skills are
+kept in a separate distribution root and are not exposed to other hosts.
 
 ## The collection
 
 | Skill | Purpose | Status |
 | --- | --- | --- |
 | [Job Hunter](howto/job-hunter.md) | Build a private candidate profile, research and apply to jobs safely, and connect with relevant recruiters. | Available |
-| [Luna Maxing](howto/luna-maxing.md) | Coordinate verified GPT-5.6 Luna Max work packets under a GPT-5.6 Sol aggregator. | Available |
+| [Luna Maxing](howto/luna-maxing.md) | Coordinate verified GPT-5.6 Luna Max work packets under a GPT-5.6 Sol aggregator. | Codex only |
 | [Product Challenger](howto/product-challenger.md) | Challenge, research, validate, and sequence Africa-first product ideas. | Available |
 
-Future Skills belong in `skills/<skill-name>/`. The npm installer discovers
-every valid `SKILL.md` folder dynamically, so adding a new Skill does not
-require changing installer code or creating a separate package. Put its
+Portable Skills belong in `skills/<skill-name>/`. Each Codex-only Skill belongs
+in a dedicated `codex-plugins/<skill-name>/skills/<skill-name>/` plugin. Put each
 human-facing onboarding guide in `howto/<skill-name>.md`.
 
 ## Install Iyanju Agentory as a marketplace plugin
 
-Marketplace installation adds the complete collection and automatically makes
-future Skills in this repository available through the same plugin. It is the
-best choice when you want the collection managed by Codex or Claude Code rather
-than copying individual Skill folders.
+Codex marketplace installation adds the complete collection, including
+Codex-only Skills. Claude Code marketplace installation adds only the portable
+Skills under `skills/`; Luna Maxing is intentionally excluded.
 
 In Codex:
 
 ```sh
 codex plugin marketplace add bolablg/skills
 codex plugin add iyanju-agentory@bolablg
+codex plugin add luna-maxing@bolablg
 ```
 
 In Claude Code:
@@ -50,6 +50,7 @@ plugin:
 ```sh
 codex plugin marketplace upgrade bolablg
 codex plugin add iyanju-agentory@bolablg
+codex plugin add luna-maxing@bolablg
 
 claude plugin marketplace update bolablg
 claude plugin update iyanju-agentory@bolablg
@@ -101,10 +102,13 @@ npx skills add bolablg/skills --skill product-challenger
 Browse the public listing at
 [skills.sh/bolablg/skills/product-challenger](https://www.skills.sh/bolablg/skills/product-challenger).
 
-Install Luna Maxing the same way:
+Luna Maxing is intentionally not published through Skills.sh or exposed to
+Claude Code, ChatGPT, Gemini CLI, OpenCode, generic agents, or other LLM hosts.
+Install it only through the Codex marketplace plugin:
 
 ```sh
-npx skills add bolablg/skills --skill luna-maxing --global --agent codex --yes
+codex plugin marketplace add bolablg/skills
+codex plugin add luna-maxing@bolablg
 ```
 
 Or install Job Hunter:
@@ -175,7 +179,9 @@ Change `--agent` to `claude-code`, `opencode`, or `gemini-cli`. Use
 
 ## Add the next Skill
 
-Keep every distributable Skill independent and portable:
+Keep portable Skills independent. Put a Skill in `codex-plugins/` only when it
+depends on Codex-specific models or task controls and must not be distributed
+to other hosts:
 
 ```text
 skills/
@@ -185,19 +191,23 @@ skills/
     scripts/                       # Project initialization and profile validation
     references/
     assets/
-  luna-maxing/
-    SKILL.md
-    agents/openai.yaml
-    scripts/                       # Capability probe and bounded CLI runner
-    references/
-    assets/
   product-challenger/
     SKILL.md
     agents/openai.yaml             # Optional host metadata
     references/                    # Load only when needed
     assets/                        # Reusable output materials
-  next-skill/
+  next-portable-skill/
     SKILL.md
+codex-plugins/
+  luna-maxing/
+    .codex-plugin/plugin.json
+    skills/
+      luna-maxing/
+        SKILL.md
+        agents/openai.yaml
+        scripts/                       # Capability probe and bounded Codex CLI runner
+        references/
+        assets/
 ```
 
 Use a lowercase hyphenated directory name that matches the `name` in its
@@ -228,7 +238,8 @@ It safely skips a version npm already has.
 ## Repository layout
 
 ```text
-skills/                            # Canonical, independently usable Skills
+skills/                            # Portable, cross-agent Skills
+codex-plugins/                     # Dedicated Codex-only Skill plugins
 howto/                             # Human-facing guide for every public Skill
 .agents/skills/<skill-name>        # Local ignored Codex development symlinks
 .agents/plugins/marketplace.json   # Codex marketplace catalog

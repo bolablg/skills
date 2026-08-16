@@ -1,8 +1,10 @@
 # Iyanju Agentory guidance
 
-- Keep each distributable skill in `skills/<skill-name>/`; the folder name and
-  `SKILL.md` frontmatter `name` must match.
-- Treat `skills/` as the source of truth. The matching ignored
+- Keep portable skills in `skills/<skill-name>/` and each Codex-only skill in
+  `codex-plugins/<skill-name>/skills/<skill-name>/`; the folder name and
+  `SKILL.md` frontmatter `name` must match. Never expose a Codex-only skill
+  through another host.
+- Treat `skills/` and `codex-plugins/` as their respective sources of truth. The matching ignored
   `.agents/skills/` entry is a local relative symlink for Codex discovery; do
   not replace it with a copy or commit it.
 - Keep marketplace metadata host-native and release-aligned: Codex uses

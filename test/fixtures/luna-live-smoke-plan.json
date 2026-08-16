@@ -9,17 +9,17 @@
     {
       "id": "release_metadata_audit",
       "objective": "Verify the package release version and the name declared by the new Skill.",
-      "context": "This is a bounded read-only smoke test. Read only package.json and the YAML frontmatter at the start of skills/luna-maxing/SKILL.md. Do not inspect any other repository file.",
-      "allowedPaths": ["package.json", "skills/luna-maxing/SKILL.md"],
+      "context": "This is a bounded read-only smoke test. Read only package.json and the YAML frontmatter at the start of codex-plugins/luna-maxing/skills/luna-maxing/SKILL.md. Do not inspect any other repository file.",
+      "allowedPaths": ["package.json", "codex-plugins/luna-maxing/skills/luna-maxing/SKILL.md"],
       "allowedHosts": [],
       "doneWhen": [
         "Report the exact package version from package.json.",
-        "Report the exact Skill name from skills/luna-maxing/SKILL.md.",
+        "Report the exact Skill name from codex-plugins/luna-maxing/skills/luna-maxing/SKILL.md.",
         "Cite both inspected file paths."
       ],
       "verification": [
         "Read package.json directly.",
-        "Read only the YAML frontmatter of skills/luna-maxing/SKILL.md directly."
+        "Read only the YAML frontmatter of codex-plugins/luna-maxing/skills/luna-maxing/SKILL.md directly."
       ],
       "forbiddenActions": [
         "Do not modify files.",

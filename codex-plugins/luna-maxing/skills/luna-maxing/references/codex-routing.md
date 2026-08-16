@@ -6,13 +6,11 @@ Model catalogs and host schemas change. Probe the current environment instead of
 
 Transport and model verification are separate decisions:
 
-1. In the Codex app or ChatGPT, an explicit Luna Maxing invocation requests user-visible tasks/threads exclusively. Use the host's task-creation capability, not subagents.
-2. Set each visible worker to `gpt-5.6-luna` with `max` reasoning when the task-creation schema supports those fields. Record its task/thread ID and host ID when available, then use the host's wait/read primitives.
-3. If visible tasks are supported but exact model controls are not, keep the visible transport and label the routing unverified. Never call it verified Luna Max.
-4. In the Codex app or ChatGPT, if visible creation or monitoring is unavailable, stop and report the missing capability. Never use a subagent, background task, CLI session, or `codex exec` fallback there. A CLI `thread.started` ID is not a visible app task and cannot satisfy this route.
-5. Outside the Codex app and ChatGPT, prefer native subagents when the spawn schema explicitly accepts Luna and `max`.
-6. When external native routing cannot enforce both settings, run `scripts/capability-probe.mjs`; if the Codex catalog exposes Luna and `max`, use `scripts/run-luna-workers.mjs` with explicit arguments.
-7. Otherwise use portable work packets and disclose that Luna Max execution was unavailable.
+1. In the Codex app, an explicit Luna Maxing invocation requests user-visible tasks exclusively. Use Codex task creation, not subagents.
+2. Set each visible worker to `gpt-5.6-luna` with `max` reasoning. Record its task ID and host ID, then use Codex wait/read primitives.
+3. If visible task creation, monitoring, or exact Luna Max controls are unavailable, stop and report the missing capability. Never use a subagent, background task, CLI session, or `codex exec` fallback in the app. A CLI `thread.started` ID is not a visible app task and cannot satisfy this route.
+4. In Codex CLI, run `scripts/capability-probe.mjs`; if the Codex catalog exposes Luna and `max`, use `scripts/run-luna-workers.mjs` with explicit arguments and receipts.
+5. On any non-Codex host, stop. Do not emulate Luna Maxing with native subagents, portable packets, another LLM, or another provider.
 
 In the Codex app, resolve the saved project with `list_projects`, then create one worker per packet with `create_thread`. Set `model: gpt-5.6-luna`, `thinking: max`, and the target environment explicitly to local:
 
@@ -32,9 +30,7 @@ Local visible tasks share the saved checkout. Sol gives every task one explicit 
 
 Track each returned `threadId` and `hostId`. Use `wait_threads` to monitor completion and `read_thread` to inspect the structured handoff. Sol then inspects the actual artifacts, diff, tests, or research evidence. If the result is incomplete or incorrect, call `send_message_to_thread` with exact findings and required adjustments, then wait for and read the same task again. Repeat for at most three Sol review rounds unless the user requests another limit. Accept or block each packet explicitly; never create a fresh task simply to bypass corrections. The original Sol task remains the coordinator and owns inspection, correction, integration, repository-wide verification, acceptance, and publishing. Do not use `spawn_agent` for this visible-task route.
 
-In ChatGPT, use the equivalent user-visible task/thread creation and waiting capabilities. Select the existing project/local environment when the surface exposes that choice and never request a worktree. Apply the same exact-ownership rule to concurrent writers. If that surface does not expose model controls, report the tasks as visible portable workers rather than verified Luna Max workers.
-
-The capability probe is for hosts outside the Codex app and ChatGPT. It invokes the local Codex CLI and may consult authenticated or refreshed model state. Never use it as an in-app fallback. If the user prohibits external-service access, do not probe or launch CLI workers; use portable planning and disclose that routing was not tested.
+The capability probe is for Codex CLI. It may consult authenticated or refreshed model state. Never use it as an in-app fallback. If the user prohibits external-service access, do not probe or launch CLI workers; report that verified routing could not be checked.
 
 The catalog probe can call a route `native-candidate`; this means only that the model catalog is compatible. The host's live spawn schema remains the authority.
 

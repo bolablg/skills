@@ -4,7 +4,7 @@
 
 - Sol is the coordinator: interpret ambiguity, design work packets, resolve conflicts, and own the final answer.
 - Luna Max is a bounded worker: execute one explicit packet, produce evidence, and stop.
-- The host is the transport: user-visible tasks exclusively in the Codex app or ChatGPT; native subagents elsewhere; isolated CLI sessions only on external hosts when native routing is unavailable.
+- Codex is the only host: use user-visible tasks exclusively in the Codex app and isolated sessions only in Codex CLI.
 
 “Sora as aggregator” is a naming mistake. Sora is OpenAI's video generation model. The coordinator in this pattern is GPT-5.6 Sol.
 
@@ -14,9 +14,9 @@
 2. Decide whether parallelism creates independent evidence or merely duplicates work.
 3. Select `adaptive` or `strict-max` mode.
 4. Create non-overlapping work packets with an objective, context, done conditions, verification, and forbidden actions.
-5. Select visible-task transport exclusively in the Codex app or ChatGPT and subagent transport elsewhere, then probe model-routing capability before claiming a model was used. Fail closed instead of using an in-app background fallback.
+5. Select visible-task transport exclusively in the Codex app or verified CLI routing in Codex CLI. Fail closed instead of using an in-app background fallback or another host.
 6. Give each worker one explicit execution action and acceptance criteria. Launch no more workers than the work packets justify; default to two or three and cap concurrent threads/workers at five. Do not count an internal session ID as a visible task.
-7. Require a structured handoff with actions, changed artifacts, verification, blockers, and uncertainty. Retain the output, visible task/thread ID or external-host receipt, status, and validation result.
+7. Require a structured handoff with actions, changed artifacts, verification, blockers, and uncertainty. Retain the output, Codex task ID or CLI receipt, status, and validation result.
 8. Sol inspects the actual result. Send precise corrections to the same task when needed, then wait for and inspect the revision; cap this at three review rounds by default.
 9. Validate important claims against primary artifacts or another independent worker.
 10. Resolve disagreements explicitly. Do not hide minority evidence.

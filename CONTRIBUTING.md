@@ -21,8 +21,10 @@ and package checks on contributor branches, staging, and main. A merge to
 
 ## Adding a Skill
 
-1. Create `skills/<skill-name>/SKILL.md` with a lowercase hyphenated directory
-   name that matches the frontmatter `name`.
+1. Create portable Skills in `skills/<skill-name>/SKILL.md`. Put an intentionally
+   Codex-only Skill in `codex-plugins/<skill-name>/skills/<skill-name>/SKILL.md`
+   with its own Codex plugin manifest. Use a lowercase hyphenated directory name
+   that matches the frontmatter `name`.
 2. Keep the instructions concise and place optional materials in `references/`,
    `assets/`, or `scripts/` within that Skill directory.
 3. Add `agents/openai.yaml` only when the Skill needs Codex UI metadata.
@@ -32,9 +34,10 @@ and package checks on contributor branches, staging, and main. A merge to
 5. Add the new Skill and its guide to the collection table in the root
    `README.md` and `howto/README.md`.
 
-The installer scans `skills/*/SKILL.md` dynamically. A valid new Skill is
+The cross-agent installer scans `skills/*/SKILL.md` dynamically. A valid portable Skill is
 therefore included in `npx @bolablg/skills list` and can be installed without
-changing the installer.
+changing the installer. Codex-only Skills are loaded through their dedicated
+`codex-plugins/` entries and must not be added to Claude or generic installer roots.
 
 ## Validate
 
@@ -54,6 +57,7 @@ changing marketplace metadata, also test a local Codex marketplace install:
 ```sh
 codex plugin marketplace add .
 codex plugin add iyanju-agentory@bolablg
+codex plugin add luna-maxing@bolablg
 ```
 
 Remove the temporary test marketplace and plugin afterwards if this is not
