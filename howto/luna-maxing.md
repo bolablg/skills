@@ -8,7 +8,9 @@ It is not a reason to parallelize every task. Each worker starts with its own co
 
 Install the Skill, open the project you want to work on, and ask:
 
-> Use Luna Maxing in strict-max mode. First show me the independent work packets and routing you can actually enforce. Then run them, verify the evidence, and give me one Sol-owned recommendation.
+> Use Luna Maxing to complete this task. Start the work immediately, verify the result, and give me the outcome without explaining the orchestration unless something fails or I ask.
+
+Ask to see the packets or routing only when you want to audit the process. By default, the Skill does not explain Luna Maxing, introduce the model roles, or show its packet plan before beginning the requested work.
 
 In the Codex app or ChatGPT, asking to use Luna Maxing creates separate user-visible tasks/threads exclusively. The Skill itself prohibits subagents, background tasks, `codex exec`, CLI sessions, and Git worktrees on those hosts; users do not need to repeat those exclusions. In Codex, each task requests Luna with `max` reasoning and explicitly uses the saved project's local environment. Concurrent tasks may research, test, or implement whatever Sol assigns, but concurrent writers must own non-overlapping paths. ChatGPT keeps visible tasks as the transport, but the report must disclose when exact model routing cannot be verified.
 

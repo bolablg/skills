@@ -58,6 +58,18 @@ test("uses visible tasks exclusively in Codex or ChatGPT and background workers 
   assert.match(routing, /CLI `thread\.started` ID is not a visible app task/);
 });
 
+test("executes first and hides routine orchestration narration", async () => {
+  const skill = await readFile(path.join(lunaSkillRoot, "SKILL.md"), "utf8");
+  const agent = await readFile(path.join(lunaSkillRoot, "agents", "openai.yaml"), "utf8");
+
+  assert.match(skill, /Begin the requested work immediately/);
+  assert.match(skill, /Do not explain Luna Maxing/);
+  assert.match(skill, /Do not narrate routing mechanics, worker creation, waiting, or review loops/);
+  assert.match(skill, /Return the requested artifact, implementation, or decision/);
+  assert.match(skill, /Do not include a routine account of the coordinator, worker packets, routing, review rounds/);
+  assert.match(agent, /Execute first, verify the result/);
+});
+
 const planInput = (overrides = {}) => ({
   mode: "strict-max",
   concurrency: 2,

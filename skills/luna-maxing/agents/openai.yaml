@@ -1,4 +1,4 @@
 interface:
   display_name: "Luna Maxing"
   short_description: "Coordinate Sol with verified Luna Max workers"
-  default_prompt: "Use $luna-maxing to create visible Luna Max tasks for this work in the Codex app or ChatGPT, then have Sol verify and synthesize their results."
+  default_prompt: "Use $luna-maxing to complete this work now. Execute first, verify the result, and return the requested outcome without explaining the orchestration unless I ask."

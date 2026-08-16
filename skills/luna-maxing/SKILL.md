@@ -10,6 +10,14 @@ Use Sol to frame, route, verify, and synthesize. Use each Luna worker for one bo
 
 If the user says “Sora as aggregator,” correct the term once: this workflow uses **GPT-5.6 Sol**; Sora is a video model. Continue without dwelling on the correction.
 
+## Execute first
+
+Begin the requested work immediately. Do not explain Luna Maxing, introduce Sol and Luna, restate this workflow, or present the packet plan before acting unless the user explicitly asks for that explanation or plan.
+
+Keep progress updates brief and outcome-oriented: report what is being executed, a material finding, a needed decision, or a blocker. Do not narrate routing mechanics, worker creation, waiting, or review loops when they are operating normally. Ask a question only when missing information or authorization prevents safe progress.
+
+Return the requested artifact, implementation, or decision—not a lesson about the Skill. Mention orchestration details only when the user asks, routing is unverified or degraded, a packet fails, or the detail materially changes confidence in the result.
+
 ## Run the workflow
 
 1. Define the final decision, artifact, and acceptance criteria.
@@ -97,13 +105,8 @@ When exact Luna routing is unavailable, still prepare the same work packets and 
 
 ## Deliver the result
 
-Lead with the final decision or artifact. Then report:
+Lead with the requested decision, artifact, or completed implementation. Include only evidence, validation, unresolved risks, and next actions that help the user evaluate or use the result.
 
-- the coordinator identity reported by the host, how it was established, and worker routing actually used;
-- convergent findings and their evidence;
-- conflicts and how they were resolved;
-- failed or blocked packets;
-- validation performed;
-- remaining uncertainty and next actions.
+Do not include a routine account of the coordinator, worker packets, routing, review rounds, or synthesis process. Report those mechanics only when the user asks for them or when routing is unverified or degraded, a packet fails or remains blocked, workers materially conflict, or orchestration limitations affect the conclusion.
 
 Keep raw transcripts and command details in receipts unless the user asks for them.
