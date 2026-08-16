@@ -1,0 +1,35 @@
+{
+  "name": "luna-maxing",
+  "version": "0.4.2",
+  "description": "Codex-only Sol and Luna Max orchestration for complex research and implementation work.",
+  "author": {
+    "name": "Bolaji BALOGOUN",
+    "url": "https://github.com/bolablg"
+  },
+  "homepage": "https://iyanju.com",
+  "repository": "https://github.com/bolablg/skills",
+  "license": "MIT",
+  "keywords": [
+    "codex",
+    "luna-maxing",
+    "multi-agent",
+    "orchestration"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Luna Maxing",
+    "shortDescription": "Codex-only verified Luna Max orchestration.",
+    "longDescription": "Use GPT-5.6 Sol to plan and verify bounded GPT-5.6 Luna Max tasks for complex work in Codex.",
+    "developerName": "Bolaji BALOGOUN",
+    "category": "Productivity",
+    "capabilities": [
+      "Interactive",
+      "Write"
+    ],
+    "websiteURL": "https://iyanju.com",
+    "defaultPrompt": [
+      "Use Luna Maxing to complete this task now and return the verified outcome."
+    ],
+    "screenshots": []
+  }
+}

@@ -1,6 +1,6 @@
 {
   "name": "@bolablg/skills",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "Iyanju Agentory: portable, cross-agent AI skills for research, career workflows, development, automation, operations, and creative work.",
   "license": "MIT",
   "author": {
@@ -16,6 +16,7 @@
     ".claude-plugin",
     ".codex-plugin",
     "bin",
+    "codex-plugins",
     "howto",
     "lib",
     "skills",
