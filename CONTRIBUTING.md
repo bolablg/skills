@@ -22,7 +22,7 @@ and package checks on contributor branches, staging, and main. A merge to
 ## Adding a Skill
 
 1. Create portable Skills in `skills/<skill-name>/SKILL.md`. Put an intentionally
-   Codex-only Skill in `codex-plugins/<skill-name>/skills/<skill-name>/SKILL.md`
+   Codex-only Skill in `.codex-plugin/plugins/<skill-name>/skills/<skill-name>/SKILL.md`
    with its own Codex plugin manifest. Use a lowercase hyphenated directory name
    that matches the frontmatter `name`.
 2. Keep the instructions concise and place optional materials in `references/`,
@@ -37,7 +37,7 @@ and package checks on contributor branches, staging, and main. A merge to
 The cross-agent installer scans `skills/*/SKILL.md` dynamically. A valid portable Skill is
 therefore included in `npx @bolablg/skills list` and can be installed without
 changing the installer. Codex-only Skills are loaded through their dedicated
-`codex-plugins/` entries and must not be added to Claude or generic installer roots.
+hidden `.codex-plugin/plugins/` entries and must not be added to Claude or generic installer roots.
 
 ## Validate
 
