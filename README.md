@@ -20,7 +20,8 @@ kept in a separate distribution root and are not exposed to other hosts.
 | [Product Challenger](howto/product-challenger.md) | Challenge, research, validate, and sequence Africa-first product ideas. | Available |
 
 Portable Skills belong in `skills/<skill-name>/`. Each Codex-only Skill belongs
-in a dedicated `codex-plugins/<skill-name>/skills/<skill-name>/` plugin. Put each
+in a dedicated hidden `.codex-plugin/plugins/<skill-name>/skills/<skill-name>/`
+plugin. Put each
 human-facing onboarding guide in `howto/<skill-name>.md`.
 
 ## Install Iyanju Agentory as a marketplace plugin
@@ -179,7 +180,7 @@ Change `--agent` to `claude-code`, `opencode`, or `gemini-cli`. Use
 
 ## Add the next Skill
 
-Keep portable Skills independent. Put a Skill in `codex-plugins/` only when it
+Keep portable Skills independent. Put a Skill in `.codex-plugin/plugins/` only when it
 depends on Codex-specific models or task controls and must not be distributed
 to other hosts:
 
@@ -198,16 +199,17 @@ skills/
     assets/                        # Reusable output materials
   next-portable-skill/
     SKILL.md
-codex-plugins/
-  luna-maxing/
-    .codex-plugin/plugin.json
-    skills/
-      luna-maxing/
-        SKILL.md
-        agents/openai.yaml
-        scripts/                       # Capability probe and bounded Codex CLI runner
-        references/
-        assets/
+.codex-plugin/
+  plugins/
+    luna-maxing/
+      .codex-plugin/plugin.json
+      skills/
+        luna-maxing/
+          SKILL.md
+          agents/openai.yaml
+          scripts/                     # Capability probe and bounded Codex CLI runner
+          references/
+          assets/
 ```
 
 Use a lowercase hyphenated directory name that matches the `name` in its
@@ -239,7 +241,7 @@ It safely skips a version npm already has.
 
 ```text
 skills/                            # Portable, cross-agent Skills
-codex-plugins/                     # Dedicated Codex-only Skill plugins
+.codex-plugin/plugins/             # Hidden Codex-only Skill plugins
 howto/                             # Human-facing guide for every public Skill
 .agents/skills/<skill-name>        # Local ignored Codex development symlinks
 .agents/plugins/marketplace.json   # Codex marketplace catalog

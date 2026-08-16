@@ -48,13 +48,13 @@ Decision challenge:
 The agent normally handles this for you. To inspect it yourself from a repository checkout:
 
 ```sh
-node codex-plugins/luna-maxing/skills/luna-maxing/scripts/capability-probe.mjs --pretty --require-luna
+node .codex-plugin/plugins/luna-maxing/skills/luna-maxing/scripts/capability-probe.mjs --pretty --require-luna
 ```
 
-Make a working copy of `codex-plugins/luna-maxing/skills/luna-maxing/assets/work-plan-template.json`, replace its sample objectives, then preview the worker commands without launching them:
+Make a working copy of `.codex-plugin/plugins/luna-maxing/skills/luna-maxing/assets/work-plan-template.json`, replace its sample objectives, then preview the worker commands without launching them:
 
 ```sh
-node codex-plugins/luna-maxing/skills/luna-maxing/scripts/run-luna-workers.mjs \
+node .codex-plugin/plugins/luna-maxing/skills/luna-maxing/scripts/run-luna-workers.mjs \
   --plan /absolute/path/to/work-plan.json \
   --dry-run \
   --pretty
