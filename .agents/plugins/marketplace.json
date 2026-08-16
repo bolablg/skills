@@ -19,7 +19,7 @@
       "name": "luna-maxing",
       "source": {
         "source": "local",
-        "path": "./codex-plugins/luna-maxing"
+        "path": "./.codex-plugin/plugins/luna-maxing"
       },
       "policy": {
         "installation": "AVAILABLE"

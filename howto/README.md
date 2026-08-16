@@ -4,7 +4,7 @@ This folder contains user-facing guides for the Skills in this collection.
 Each guide explains how to set up a useful workspace, start well, and continue
 using the Skill over time. Keep portable runtime instructions in
 `skills/<skill-name>/`, Codex-only runtime instructions in their dedicated
-`codex-plugins/<skill-name>/skills/<skill-name>/` plugin, and human onboarding here.
+`.codex-plugin/plugins/<skill-name>/skills/<skill-name>/` plugin, and human onboarding here.
 
 | Skill | Guide |
 | --- | --- |
