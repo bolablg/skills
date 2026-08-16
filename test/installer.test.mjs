@@ -14,12 +14,22 @@ import {
 
 const repositoryRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
-test("lists every bundled skill", async () => {
+test("lists only portable cross-agent skills", async () => {
   assert.deepEqual(await listSkills(repositoryRoot), [
     "job-hunter",
-    "luna-maxing",
     "product-challenger",
   ]);
+});
+
+test("excludes Luna Maxing from the cross-agent installer", async () => {
+  await assert.rejects(
+    installSkill({
+      sourceRoot: repositoryRoot,
+      skillName: "luna-maxing",
+      destinationRoot: path.join(os.tmpdir(), "non-codex-skills"),
+    }),
+    (error) => error instanceof InstallerError && error.code === "SKILL_NOT_FOUND",
+  );
 });
 
 test("provides a user guide for every bundled skill", async () => {
@@ -39,7 +49,13 @@ test("keeps Iyanju Agentory marketplace metadata aligned across Claude Code and 
   const codexMarketplace = await readJson(".agents", "plugins", "marketplace.json");
   const codexPlugin = await readJson(".codex-plugin", "plugin.json");
   const [claudeEntry] = claudeMarketplace.plugins;
-  const [codexEntry] = codexMarketplace.plugins;
+  const [codexEntry, lunaCodexEntry] = codexMarketplace.plugins;
+  const lunaCodexPlugin = await readJson(
+    "codex-plugins",
+    "luna-maxing",
+    ".codex-plugin",
+    "plugin.json",
+  );
 
   assert.equal(claudeMarketplace.name, "bolablg");
   assert.equal(codexMarketplace.name, claudeMarketplace.name);
@@ -64,6 +80,18 @@ test("keeps Iyanju Agentory marketplace metadata aligned across Claude Code and 
   assert.equal(claudeEntry.source, "./");
   assert.deepEqual(codexEntry.source, { source: "local", path: "./" });
   assert.equal(codexPlugin.skills, "./skills/");
+  assert.equal(lunaCodexEntry.name, "luna-maxing");
+  assert.deepEqual(lunaCodexEntry.source, {
+    source: "local",
+    path: "./codex-plugins/luna-maxing",
+  });
+  assert.equal(lunaCodexPlugin.name, lunaCodexEntry.name);
+  assert.equal(lunaCodexPlugin.version, packageManifest.version);
+  assert.equal(lunaCodexPlugin.skills, "./skills/");
+  await access(
+    path.join(repositoryRoot, "codex-plugins", "luna-maxing", "skills", "luna-maxing", "SKILL.md"),
+  );
+  await assert.rejects(access(path.join(repositoryRoot, "skills", "luna-maxing", "SKILL.md")));
 });
 
 test("resolves documented user and project locations", () => {

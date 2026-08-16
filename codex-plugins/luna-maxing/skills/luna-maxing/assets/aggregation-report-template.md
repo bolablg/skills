@@ -9,7 +9,7 @@ State the answer or recommendation first. Include confidence and the most import
 - Coordinator model and role reported by host:
 - Coordinator identity verification basis or limitation:
 - Worker route:
-- Transport: visible-task/subagent/codex-exec/portable
+- Transport: Codex visible task or Codex CLI
 - Requested worker model and reasoning effort:
 - Visible task/thread IDs and host IDs, when applicable:
 - Background session IDs, when applicable:
@@ -36,4 +36,4 @@ Prioritize the smallest actions that resolve uncertainty or move the work forwar
 
 | Work packet | Transport | Review round | Sol decision | Evidence quality | Validation | Receipt and artifact hash |
 | --- | --- | --- | --- | --- | --- | --- |
-| Replace with task ID | visible-task/subagent/codex-exec | 1-3 | accepted/corrected/blocked | high/medium/low | passed/failed/not-run | visible task ID or background result path |
+| Replace with task ID | visible-task/Codex-CLI | 1-3 | accepted/corrected/blocked | high/medium/low | passed/failed/not-run | Codex task ID or CLI result path |

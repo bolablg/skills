@@ -11,7 +11,7 @@
     {
       "name": "iyanju-agentory",
       "source": "./",
-      "description": "Iyanju Agentory is a growing collection of portable skills for career workflows, product discovery, verified multi-agent reasoning, research, and automation.",
+      "description": "Iyanju Agentory is a growing collection of portable skills for career workflows, product discovery, research, and automation.",
       "version": "0.4.2",
       "category": "productivity",
       "keywords": [

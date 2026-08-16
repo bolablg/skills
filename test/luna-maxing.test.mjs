@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import test from "node:test";
-import { analyzeCatalog } from "../skills/luna-maxing/scripts/capability-probe.mjs";
+import { analyzeCatalog } from "../codex-plugins/luna-maxing/skills/luna-maxing/scripts/capability-probe.mjs";
 import {
   PlanError,
   buildCodexArgs,
@@ -10,7 +10,7 @@ import {
   classifyWorkerResult,
   executePlan,
   validatePlan,
-} from "../skills/luna-maxing/scripts/run-luna-workers.mjs";
+} from "../codex-plugins/luna-maxing/skills/luna-maxing/scripts/run-luna-workers.mjs";
 
 const catalog = ({ sharedBackend = false, includeMax = true } = {}) => ({
   models: [
@@ -30,13 +30,14 @@ const catalog = ({ sharedBackend = false, includeMax = true } = {}) => ({
   ],
 });
 
-const lunaSkillRoot = path.resolve("skills", "luna-maxing");
+const lunaSkillRoot = path.resolve("codex-plugins", "luna-maxing", "skills", "luna-maxing");
 
-test("uses visible tasks exclusively in Codex or ChatGPT and background workers only elsewhere", async () => {
+test("is Codex-only and uses visible tasks exclusively in the Codex app", async () => {
   const skill = await readFile(path.join(lunaSkillRoot, "SKILL.md"), "utf8");
   const routing = await readFile(path.join(lunaSkillRoot, "references", "codex-routing.md"), "utf8");
 
-  assert.match(skill, /Codex app or ChatGPT visible-thread route — exclusive/);
+  assert.match(skill, /Codex app visible-task route — exclusive/);
+  assert.match(skill, /This Skill is available only in Codex/);
   assert.match(skill, /Do not use subagents, child agents, background tasks, `codex exec`, CLI sessions/);
   assert.match(skill, /stop the Luna Maxing run and report the missing capability/);
   assert.match(skill, /do not fan out through any transport/);
@@ -52,8 +53,9 @@ test("uses visible tasks exclusively in Codex or ChatGPT and background workers 
   assert.match(skill, /research, inspect, test, write, or another authorized operation/);
   assert.match(skill, /same visible task/);
   assert.match(skill, /three Sol review rounds/);
-  assert.match(routing, /Outside the Codex app and ChatGPT, prefer native subagents/);
-  assert.match(routing, /Never use a subagent, background task, CLI session, or `codex exec` fallback there/);
+  assert.match(routing, /On any non-Codex host, stop/);
+  assert.match(skill, /Never provide a portable, simulated, or alternate-provider version/);
+  assert.doesNotMatch(skill, /ChatGPT|native subagent route|Portable route/);
   assert.doesNotMatch(skill, /before using a background fallback/);
   assert.match(routing, /CLI `thread\.started` ID is not a visible app task/);
 });

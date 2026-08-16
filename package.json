@@ -16,6 +16,7 @@
     ".claude-plugin",
     ".codex-plugin",
     "bin",
+    "codex-plugins",
     "howto",
     "lib",
     "skills",

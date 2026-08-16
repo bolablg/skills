@@ -23,7 +23,7 @@
   "interface": {
     "displayName": "Iyanju Agentory",
     "shortDescription": "Portable skills for product discovery, research, and more.",
-    "longDescription": "Iyanju Agentory is a growing collection of portable AI skills for research, career workflows, product discovery, verified multi-agent reasoning, development, automation, operations, and creative work.",
+    "longDescription": "Iyanju Agentory is a growing collection of portable AI skills for research, career workflows, product discovery, development, automation, operations, and creative work.",
     "developerName": "Bolaji BALOGOUN",
     "category": "Productivity",
     "capabilities": [
@@ -33,7 +33,6 @@
     "websiteURL": "https://iyanju.com",
     "defaultPrompt": [
       "Use Product Challenger to capture and challenge a product idea for a specific country.",
-      "Use Luna Maxing to split a complex task into verified Luna Max work packets and have Sol synthesize the result.",
       "Use Job Hunter to build my candidate profile, research matching opportunities, and prepare a review queue before any application or recruiter outreach."
     ],
     "screenshots": []
