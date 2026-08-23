@@ -16,10 +16,10 @@
       "category": "Productivity"
     },
     {
-      "name": "luna-maxing",
+      "name": "iyanju-codex",
       "source": {
         "source": "local",
-        "path": "./.codex-plugin/plugins/luna-maxing"
+        "path": "./.codex-plugin/plugins/iyanju-codex"
       },
       "policy": {
         "installation": "AVAILABLE"

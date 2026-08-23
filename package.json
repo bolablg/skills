@@ -1,6 +1,6 @@
 {
   "name": "@bolablg/skills",
-  "version": "0.4.4",
+  "version": "0.4.5",
   "description": "Iyanju Agentory: portable, cross-agent AI skills for research, career workflows, development, automation, operations, and creative work.",
   "license": "MIT",
   "author": {
@@ -52,6 +52,7 @@
     "automation",
     "agent-workflows",
     "multi-agent",
+    "iyanju-codex",
     "luna-maxing",
     "job-search",
     "recruiter-outreach"

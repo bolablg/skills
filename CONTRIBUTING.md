@@ -22,8 +22,8 @@ and package checks on contributor branches, staging, and main. A merge to
 ## Adding a Skill
 
 1. Create portable Skills in `skills/<skill-name>/SKILL.md`. Put an intentionally
-   Codex-only Skill in `.codex-plugin/plugins/<skill-name>/skills/<skill-name>/SKILL.md`
-   with its own Codex plugin manifest. Use a lowercase hyphenated directory name
+   Codex-only Skill in `.codex-plugin/plugins/iyanju-codex/skills/<skill-name>/SKILL.md`
+   under the shared Iyanju Codex plugin. Use a lowercase hyphenated directory name
    that matches the frontmatter `name`.
 2. Keep the instructions concise and place optional materials in `references/`,
    `assets/`, or `scripts/` within that Skill directory.
@@ -36,8 +36,8 @@ and package checks on contributor branches, staging, and main. A merge to
 
 The cross-agent installer scans `skills/*/SKILL.md` dynamically. A valid portable Skill is
 therefore included in `npx @bolablg/skills list` and can be installed without
-changing the installer. Codex-only Skills are loaded through their dedicated
-hidden `.codex-plugin/plugins/` entries and must not be added to Claude or generic installer roots.
+changing the installer. Codex-only Skills are loaded through the shared Iyanju
+Codex plugin and must not be added to Claude or generic installer roots.
 
 ## Validate
 
@@ -57,7 +57,7 @@ changing marketplace metadata, also test a local Codex marketplace install:
 ```sh
 codex plugin marketplace add .
 codex plugin add iyanju-agentory@bolablg
-codex plugin add luna-maxing@bolablg
+codex plugin add iyanju-codex@bolablg
 ```
 
 Remove the temporary test marketplace and plugin afterwards if this is not

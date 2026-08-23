@@ -3,8 +3,8 @@
 This folder contains user-facing guides for the Skills in this collection.
 Each guide explains how to set up a useful workspace, start well, and continue
 using the Skill over time. Keep portable runtime instructions in
-`skills/<skill-name>/`, Codex-only runtime instructions in their dedicated
-`.codex-plugin/plugins/<skill-name>/skills/<skill-name>/` plugin, and human onboarding here.
+`skills/<skill-name>/`, Codex-only runtime instructions in the shared
+`.codex-plugin/plugins/iyanju-codex/skills/<skill-name>/` plugin, and human onboarding here.
 
 | Skill | Guide |
 | --- | --- |
