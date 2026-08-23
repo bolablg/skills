@@ -22,6 +22,8 @@ ALLOWED_WORK_MODES = {"remote", "hybrid", "onsite"}
 ALLOWED_RELOCATION = {"yes", "no", "case-by-case"}
 ALLOWED_AUTHORIZATION = {"authorized", "not-authorized", "unknown"}
 ALLOWED_ACCESS_MODES = {"public", "user-provided", "browser-session", "manual-handoff"}
+ALLOWED_RESUME_STYLES = {"classic-single-column"}
+ALLOWED_RESUME_LENGTHS = {1, 2}
 ALLOWED_RESOURCE_USES = {
     "candidate-evidence",
     "application-tailoring",
@@ -321,6 +323,46 @@ def _validate_search_constraints(
             errors.append("At least one target market requires sponsorship, but sponsored jobs are excluded.")
 
 
+def _validate_resume_workflow(value: Any, errors: list[str]) -> None:
+    if value is None:
+        return
+    workflow = _mapping(value, "resume_workflow", errors)
+    _required(
+        workflow,
+        "resume_workflow",
+        (
+            "application_resume_policy",
+            "default_style",
+            "allowed_lengths",
+            "final_artifact",
+            "require_text_extraction",
+            "require_page_balance",
+            "require_no_orphan_headings",
+            "require_overqualification_gate",
+            "preserve_official_titles_and_chronology",
+        ),
+        errors,
+    )
+    if workflow.get("default_style") not in ALLOWED_RESUME_STYLES:
+        errors.append("resume_workflow.default_style must be classic-single-column.")
+    lengths = workflow.get("allowed_lengths")
+    if not isinstance(lengths, list) or not lengths or any(length not in ALLOWED_RESUME_LENGTHS for length in lengths):
+        errors.append("resume_workflow.allowed_lengths must contain only 1 and/or 2.")
+    elif len(lengths) != len(set(lengths)):
+        errors.append("resume_workflow.allowed_lengths must not contain duplicates.")
+    if workflow.get("final_artifact") != "PDF":
+        errors.append("resume_workflow.final_artifact must be PDF.")
+    for field in (
+        "require_text_extraction",
+        "require_page_balance",
+        "require_no_orphan_headings",
+        "require_overqualification_gate",
+        "preserve_official_titles_and_chronology",
+    ):
+        if workflow.get(field) is not True:
+            errors.append(f"resume_workflow.{field} must be true.")
+
+
 def validate(profile_path: Path, mode: str) -> tuple[list[str], list[str], dict[str, Any]]:
     errors: list[str] = []
     warnings: list[str] = []
@@ -345,6 +387,8 @@ def validate(profile_path: Path, mode: str) -> tuple[list[str], list[str], dict[
     constraints = _mapping(profile.get("search_constraints"), "search_constraints", errors)
     permissions = _mapping(profile.get("permissions"), "permissions", errors)
     accounts = _mapping(profile.get("accounts", {}), "accounts", errors)
+
+    _validate_resume_workflow(profile.get("resume_workflow"), errors)
 
     _required(candidate, "candidate", ("full_name", "primary_email"), errors)
     email = candidate.get("primary_email")

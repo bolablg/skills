@@ -13,6 +13,52 @@ const migrator = path.join(skillRoot, "scripts", "migrate_legacy.py");
 const validator = path.join(skillRoot, "scripts", "validate_profile.py");
 const actionLogger = path.join(skillRoot, "scripts", "action_log.py");
 
+test("enforces the classic resume style and overqualification gate", async () => {
+  const skill = await readFile(path.join(skillRoot, "SKILL.md"), "utf8");
+  const writing = await readFile(path.join(skillRoot, "references", "writing-materials.md"), "utf8");
+  const style = await readFile(
+    path.join(skillRoot, "references", "resume-style-and-seniority-calibration.md"),
+    "utf8",
+  );
+  const packet = await readFile(path.join(skillRoot, "assets", "application-packet-template.md"), "utf8");
+  const template = await readFile(path.join(skillRoot, "assets", "jobhunter.project.yaml"), "utf8");
+
+  assert.match(skill, /classic single-column style/);
+  assert.match(writing, /overqualification gate as mandatory/);
+  assert.match(style, /Mandatory overqualification gate/);
+  assert.match(style, /Preserve official titles, employers, dates, and chronology/);
+  assert.match(style, /Fail closed/);
+  assert.match(packet, /Overqualification risk \(low\/moderate\/high\)/);
+  assert.match(template, /default_style: "classic-single-column"/);
+  assert.match(template, /require_overqualification_gate: true/);
+});
+
+test("validates the resume style and overqualification policy", async (context) => {
+  const temporaryRoot = await mkdtemp(path.join(os.tmpdir(), "job-hunter-resume-policy-test-"));
+  context.after(() => rm(temporaryRoot, { recursive: true, force: true }));
+  await writeFile(path.join(temporaryRoot, "resume.pdf"), "test resume artifact\n");
+  const template = configureTemplate(
+    await readFile(path.join(skillRoot, "assets", "jobhunter.project.yaml"), "utf8"),
+    "./resume.pdf",
+  );
+  const validPath = path.join(temporaryRoot, "valid.yaml");
+  await writeFile(validPath, template);
+  const valid = runPython(validator, [validPath, "--mode", "profile"]);
+  assert.equal(valid.status, 0, valid.stderr || valid.stdout);
+
+  const invalidPath = path.join(temporaryRoot, "invalid.yaml");
+  await writeFile(
+    invalidPath,
+    template
+      .replace('default_style: "classic-single-column"', 'default_style: "decorative-sidebar"')
+      .replace("require_overqualification_gate: true", "require_overqualification_gate: false"),
+  );
+  const invalid = runPython(validator, [invalidPath, "--mode", "profile"]);
+  assert.equal(invalid.status, 1);
+  assert.match(invalid.stdout, /default_style must be classic-single-column/);
+  assert.match(invalid.stdout, /require_overqualification_gate must be true/);
+});
+
 function runPython(script, args) {
   return spawnSync("python3", [script, ...args], {
     cwd: repositoryRoot,

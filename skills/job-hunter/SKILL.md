@@ -69,7 +69,7 @@ Do not infer authorization, sponsorship, clearance, citizenship, demographics, s
 
 ### 3. Prepare truthful packets
 
-For each qualified job, read [references/writing-materials.md](references/writing-materials.md) and [references/application-workflow.md](references/application-workflow.md). Copy `assets/application-packet-template.md`; select the best configured résumé, map claims to sources, tailor without changing facts, and identify missing answers.
+For each qualified job, read [references/writing-materials.md](references/writing-materials.md), [references/resume-style-and-seniority-calibration.md](references/resume-style-and-seniority-calibration.md), and [references/application-workflow.md](references/application-workflow.md). Copy `assets/application-packet-template.md`; select the best configured résumé, map claims to sources, complete the overqualification gate, tailor without changing facts, and identify missing answers. Emit application résumés only in the required classic single-column style unless the candidate explicitly approves a different layout for that exact application.
 
 ### 4. Approve exact actions
 

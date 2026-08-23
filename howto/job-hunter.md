@@ -112,6 +112,8 @@ After reviewing the queue:
 
 Job Hunter records each role and its first decisive reason. A submission is marked successful only after a visible confirmation or authorized receipt.
 
+For each role that clears the qualification gate, Job Hunter creates a fresh application résumé in a classic, monochrome, single-column style with standard section headings and ATS-readable text. It calibrates the summary, skills, bullet selection, leadership emphasis, and length to the exact job level while preserving official titles and chronology. A mandatory overqualification gate blocks applications that still create an unsupported level, compensation, flight-risk, or scope-mismatch signal.
+
 ## 6. Connect with recruiters and headhunters
 
 Start with drafts:
