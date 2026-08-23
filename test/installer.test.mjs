@@ -49,11 +49,11 @@ test("keeps Iyanju Agentory marketplace metadata aligned across Claude Code and 
   const codexMarketplace = await readJson(".agents", "plugins", "marketplace.json");
   const codexPlugin = await readJson(".codex-plugin", "plugin.json");
   const [claudeEntry] = claudeMarketplace.plugins;
-  const [codexEntry, lunaCodexEntry] = codexMarketplace.plugins;
-  const lunaCodexPlugin = await readJson(
+  const [codexEntry, codexOnlyEntry] = codexMarketplace.plugins;
+  const codexOnlyPlugin = await readJson(
     ".codex-plugin",
     "plugins",
-    "luna-maxing",
+    "iyanju-codex",
     ".codex-plugin",
     "plugin.json",
   );
@@ -81,20 +81,20 @@ test("keeps Iyanju Agentory marketplace metadata aligned across Claude Code and 
   assert.equal(claudeEntry.source, "./");
   assert.deepEqual(codexEntry.source, { source: "local", path: "./" });
   assert.equal(codexPlugin.skills, "./skills/");
-  assert.equal(lunaCodexEntry.name, "luna-maxing");
-  assert.deepEqual(lunaCodexEntry.source, {
+  assert.equal(codexOnlyEntry.name, "iyanju-codex");
+  assert.deepEqual(codexOnlyEntry.source, {
     source: "local",
-    path: "./.codex-plugin/plugins/luna-maxing",
+    path: "./.codex-plugin/plugins/iyanju-codex",
   });
-  assert.equal(lunaCodexPlugin.name, lunaCodexEntry.name);
-  assert.equal(lunaCodexPlugin.version, packageManifest.version);
-  assert.equal(lunaCodexPlugin.skills, "./skills/");
+  assert.equal(codexOnlyPlugin.name, codexOnlyEntry.name);
+  assert.equal(codexOnlyPlugin.version, packageManifest.version);
+  assert.equal(codexOnlyPlugin.skills, "./skills/");
   await access(
     path.join(
       repositoryRoot,
       ".codex-plugin",
       "plugins",
-      "luna-maxing",
+      "iyanju-codex",
       "skills",
       "luna-maxing",
       "SKILL.md",

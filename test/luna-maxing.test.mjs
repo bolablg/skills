@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import test from "node:test";
-import { analyzeCatalog } from "../.codex-plugin/plugins/luna-maxing/skills/luna-maxing/scripts/capability-probe.mjs";
+import { analyzeCatalog } from "../.codex-plugin/plugins/iyanju-codex/skills/luna-maxing/scripts/capability-probe.mjs";
 import {
   PlanError,
   buildCodexArgs,
@@ -10,7 +10,7 @@ import {
   classifyWorkerResult,
   executePlan,
   validatePlan,
-} from "../.codex-plugin/plugins/luna-maxing/skills/luna-maxing/scripts/run-luna-workers.mjs";
+} from "../.codex-plugin/plugins/iyanju-codex/skills/luna-maxing/scripts/run-luna-workers.mjs";
 
 const catalog = ({ sharedBackend = false, includeMax = true } = {}) => ({
   models: [
@@ -33,7 +33,7 @@ const catalog = ({ sharedBackend = false, includeMax = true } = {}) => ({
 const lunaSkillRoot = path.resolve(
   ".codex-plugin",
   "plugins",
-  "luna-maxing",
+  "iyanju-codex",
   "skills",
   "luna-maxing",
 );

@@ -19,23 +19,23 @@ kept in a separate distribution root and are not exposed to other hosts.
 | [Luna Maxing](howto/luna-maxing.md) | Coordinate verified GPT-5.6 Luna Max work packets under a GPT-5.6 Sol aggregator. | Codex only |
 | [Product Challenger](howto/product-challenger.md) | Challenge, research, validate, and sequence Africa-first product ideas. | Available |
 
-Portable Skills belong in `skills/<skill-name>/`. Each Codex-only Skill belongs
-in a dedicated hidden `.codex-plugin/plugins/<skill-name>/skills/<skill-name>/`
-plugin. Put each
-human-facing onboarding guide in `howto/<skill-name>.md`.
+Portable Skills belong in `skills/<skill-name>/`. Codex-only Skills belong in
+the shared hidden `.codex-plugin/plugins/iyanju-codex/skills/<skill-name>/`
+plugin. Put each human-facing onboarding guide in `howto/<skill-name>.md`.
 
 ## Install Iyanju Agentory as a marketplace plugin
 
-Codex marketplace installation adds the complete collection, including
-Codex-only Skills. Claude Code marketplace installation adds only the portable
-Skills under `skills/`; Luna Maxing is intentionally excluded.
+Codex marketplace installation provides the complete collection through two
+plugins: Iyanju Agentory for portable Skills and Iyanju Codex for Codex-only
+Skills. Claude Code marketplace installation adds only the portable Skills
+under `skills/`; Luna Maxing is intentionally excluded.
 
 In Codex:
 
 ```sh
 codex plugin marketplace add bolablg/skills
 codex plugin add iyanju-agentory@bolablg
-codex plugin add luna-maxing@bolablg
+codex plugin add iyanju-codex@bolablg
 ```
 
 In Claude Code:
@@ -51,7 +51,7 @@ plugin:
 ```sh
 codex plugin marketplace upgrade bolablg
 codex plugin add iyanju-agentory@bolablg
-codex plugin add luna-maxing@bolablg
+codex plugin add iyanju-codex@bolablg
 
 claude plugin marketplace update bolablg
 claude plugin update iyanju-agentory@bolablg
@@ -105,11 +105,11 @@ Browse the public listing at
 
 Luna Maxing is intentionally not published through Skills.sh or exposed to
 Claude Code, ChatGPT, Gemini CLI, OpenCode, generic agents, or other LLM hosts.
-Install it only through the Codex marketplace plugin:
+Install it only through the Iyanju Codex plugin:
 
 ```sh
 codex plugin marketplace add bolablg/skills
-codex plugin add luna-maxing@bolablg
+codex plugin add iyanju-codex@bolablg
 ```
 
 Or install Job Hunter:
@@ -180,7 +180,8 @@ Change `--agent` to `claude-code`, `opencode`, or `gemini-cli`. Use
 
 ## Add the next Skill
 
-Keep portable Skills independent. Put a Skill in `.codex-plugin/plugins/` only when it
+Keep portable Skills independent. Put a Skill under the shared
+`.codex-plugin/plugins/iyanju-codex/skills/<skill-name>/` plugin only when it
 depends on Codex-specific models or task controls and must not be distributed
 to other hosts:
 
@@ -201,7 +202,7 @@ skills/
     SKILL.md
 .codex-plugin/
   plugins/
-    luna-maxing/
+    iyanju-codex/
       .codex-plugin/plugin.json
       skills/
         luna-maxing/
@@ -210,6 +211,8 @@ skills/
           scripts/                     # Capability probe and bounded Codex CLI runner
           references/
           assets/
+        next-codex-only-skill/
+          SKILL.md
 ```
 
 Use a lowercase hyphenated directory name that matches the `name` in its
@@ -241,7 +244,7 @@ It safely skips a version npm already has.
 
 ```text
 skills/                            # Portable, cross-agent Skills
-.codex-plugin/plugins/             # Hidden Codex-only Skill plugins
+.codex-plugin/plugins/             # Shared Iyanju Codex plugin
 howto/                             # Human-facing guide for every public Skill
 .agents/skills/<skill-name>        # Local ignored Codex development symlinks
 .agents/plugins/marketplace.json   # Codex marketplace catalog
