@@ -2,9 +2,11 @@
 
 ## Prepare
 
-For each qualified role, copy `assets/application-packet-template.md` into the session and complete it from current evidence. Re-open the posting, select the best configured résumé, map each material claim to a source, draft truthful materials, and list every unresolved answer.
+For each qualified role, copy `assets/application-packet-template.md` into the session and complete it from current evidence. Re-open the posting, select the best configured résumé, map each material claim to a source, read `resume-style-and-seniority-calibration.md`, complete the overqualification gate, draft truthful materials, and list every unresolved answer.
 
 Do not optimize a résumé by changing facts, dates, titles, degrees, certifications, employers, authorization, or metrics. Reordering, shortening, and emphasizing verified material is allowed. Preserve a copy of the exact submitted résumé and answers.
+
+Create a fresh application résumé only after the role clears the research, eligibility, compensation, deduplication, live-posting, and fit gates. Use the required classic single-column style, calibrate the positioning to the exact job level, and validate the final PDF's text extraction, page count, page balance, section continuity, filename, and readability. Block transmission when style, pagination, factual evidence, or overqualification calibration fails.
 
 ## Approval
 

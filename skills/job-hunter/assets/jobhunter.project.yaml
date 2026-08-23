@@ -73,6 +73,18 @@ permissions:
   recruiter_outreach: "draft-only"
   approved_account_domains: []
 
+resume_workflow:
+  application_resume_policy: "role-specific-after-qualification"
+  default_style: "classic-single-column"
+  allowed_lengths: [1, 2]
+  final_artifact: "PDF"
+  require_text_extraction: true
+  require_page_balance: true
+  require_no_orphan_headings: true
+  require_overqualification_gate: true
+  preserve_official_titles_and_chronology: true
+  style_override: "ask-for-exact-application"
+
 outreach:
   positioning: null
   target_recruiter_types: []

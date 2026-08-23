@@ -10,6 +10,12 @@ Reading permission is not sharing permission. Mention, link, or attach a resourc
 
 Tailor by selecting, ordering, and phrasing verified evidence for the target role. Preserve the underlying facts and keep the candidate's intended seniority. Optimize for clarity and relevant terminology, not keyword stuffing. Keep an immutable copy of the original and a clearly named generated variant.
 
+Read `resume-style-and-seniority-calibration.md` before drafting or formatting any application résumé. Use its classic single-column layout as the default and treat its overqualification gate as mandatory. Separate the factual chronology from positioning: preserve official titles, employers, and dates, but calibrate the summary, skills order, bullet selection, leadership emphasis, length, and quantified scale to the actual job level.
+
+Generate a fresh role-specific résumé only after the job is verified, scored, and selected for application preparation. Do not create speculative variants for stale, duplicate, blocked, or below-threshold roles. For a two-page application résumé, fill both pages deliberately without crowding page one, leaving excessive whitespace on page two, or stranding a section heading at a page break.
+
+Block the résumé when the summary claims a higher target level than the job, when manager/director language dominates an individual-contributor application, or when removing seniority risk would require hiding or falsifying chronology. Record the risk and use a manual handoff instead.
+
 ## Cover letters and short answers
 
 Use a direct, specific voice. Most cover letters should be 150–250 words:
@@ -29,6 +35,9 @@ Answer screening questions directly and within the character limit. Legal, autho
 - No hidden commitments or invented enthusiasm.
 - No unnecessary sensitive information.
 - Exact approved résumé and attachment names.
+- Classic single-column style validation completed.
+- Seniority and overqualification gate completed against the exact job description.
+- No orphaned section heading, excessive second-page whitespace, or page-one crowding.
 - Human-readable, concise language without generic AI filler.
 
 For recruiter notes, lead with relevance and one differentiator. Do not attach a résumé or share contact details until the user approves the exact recipient and channel.
