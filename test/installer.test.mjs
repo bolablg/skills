@@ -18,6 +18,7 @@ test("lists only portable cross-agent skills", async () => {
   assert.deepEqual(await listSkills(repositoryRoot), [
     "job-hunter",
     "product-challenger",
+    "wlan",
   ]);
 });
 

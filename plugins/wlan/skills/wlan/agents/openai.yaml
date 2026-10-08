@@ -1,0 +1,4 @@
+interface:
+  display_name: "Wlan Studio"
+  short_description: "Styles, drafts, and revisions"
+  default_prompt: "Use Wlan Studio to find my queued rewrite request, apply its chosen style, check the revision, and submit the result within its revision budget."
