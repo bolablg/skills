@@ -34,8 +34,9 @@ claude plugin marketplace add ./marketplaces/iyanju
 claude plugin install wlan@iyanju
 ```
 
-The catalog fetches the self-contained `plugins/wlan` package from the public
-repository's `main` branch. Keep the clone while using this local catalog.
+The catalog fetches the self-contained package from the public repository's
+`main` branch: Codex uses `plugins/wlan/codex`; Claude Code uses `plugins/wlan`.
+Keep the clone while using this local catalog.
 Run `git pull --ff-only` in it before refreshing the catalog and plugin:
 
 ```sh
@@ -55,9 +56,15 @@ valid. If an older `iyanju` catalog is already registered, inspect its source
 before replacing it; preserve installed plugins and configuration. The new
 `iyanju` catalog currently contains Wlan only, not the legacy collection.
 
-The Codex plugin has both a portable Agent Plugins manifest and a native
-`.codex-plugin/plugin.json` compatibility manifest. Claude Code uses its own
-`.claude-plugin/plugin.json`; neither requires a local server process.
+The Codex catalog selects the native `.codex-plugin/plugin.json` package so its
+OAuth scope list is loaded. The parent package retains the portable Agent Plugins
+manifest for compatible hosts and the private account package. Portable MCP 1.0
+does not accept native scope fields; adding them would invalidate that server,
+and the portable manifest takes precedence over a native compatibility overlay.
+Claude Code uses its own `.claude-plugin/plugin.json` and `oauth.scopes` string.
+Gemini CLI uses its native `oauth.scopes` array. Each native client requests the
+five Wlan scopes, `user:org:read`, and optional `offline_access` for refresh;
+identity and metadata scopes are excluded. No package runs a local server.
 
 ## Gemini CLI
 
@@ -70,7 +77,7 @@ gemini extensions install ./plugins/wlan
 Or install the published repository release directly:
 
 ```sh
-gemini extensions install https://github.com/bolablg/skills --ref v0.5.0
+gemini extensions install https://github.com/bolablg/skills --ref v0.5.1
 ```
 
 The root `gemini-extension.json` and Wlan release archive provide the native
@@ -145,9 +152,12 @@ a cloud sign-in control. Register the cloud MCP connection first:
    OAuth.
 3. Open Advanced OAuth settings. Confirm the Clerk issuer, canonical Wlan
    resource, and the five `wlan:*` scopes plus `user:org:read`. Use the discovered
-   CIMD registration method, or supported DCR. Leave base scopes empty and
-   disable optional OIDC when the host would otherwise request `openid` or
-   identity scopes outside Wlan's allowed client scopes. OAuth stays enabled.
+   CIMD registration method, or supported DCR. Leave base scopes empty. Inspect
+   the separate **OIDC scopes supported** field: automatic discovery can copy
+   the issuer's full catalog into it, including `public_metadata` and
+   `private_metadata`. Remove that broad list. If OIDC is needed, keep only
+   `openid`, `email`, and `profile`; otherwise disable optional OIDC. OAuth stays
+   enabled. Never request Clerk metadata scopes for Wlan.
 4. Review the connection warning, select Create as a plugin, and complete
    browser sign-in and consent yourself.
 5. Retain the actual connection ID from the resulting URL (`plugin_asdk_app...`).

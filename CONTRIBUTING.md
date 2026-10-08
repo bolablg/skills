@@ -94,6 +94,12 @@ additive `marketplaces/iyanju` catalogs. Do not edit generated files directly.
 The existing root catalogs keep the `bolablg` namespace. The added catalogs
 resolve Wlan from `bolablg/skills` on `main` and provide `wlan@iyanju`.
 
+Codex catalogs select the native `plugins/wlan/codex` package so its explicit
+OAuth scopes survive loading. Claude Code uses the parent `.mcp.json` with a
+space-separated `oauth.scopes`; Gemini uses an array. Keep native scope settings
+out of portable `mcp.json`, whose schema rejects them. Maintain both generated
+copies of the portable Wlan Skill through the sync script.
+
 Run `npm test`, `claude plugin validate plugins/wlan`,
 `claude plugin validate marketplaces/iyanju`, `gemini extensions validate .`,
 `gemini extensions validate plugins/wlan`, and `gh skill publish --dry-run`.

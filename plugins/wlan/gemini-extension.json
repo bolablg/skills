@@ -1,10 +1,22 @@
 {
   "name": "wlan",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Wlan Studio connects your assistant to authorized writing styles, drafts, and bounded rewrite requests in Wlan, your collaborative writing studio.",
   "mcpServers": {
     "wlan": {
-      "httpUrl": "https://wlan.iyanju.com/mcp"
+      "httpUrl": "https://wlan.iyanju.com/mcp",
+      "oauth": {
+        "enabled": true,
+        "scopes": [
+          "wlan:styles:read",
+          "wlan:drafts:read",
+          "wlan:drafts:write",
+          "wlan:requests:read",
+          "wlan:requests:write",
+          "user:org:read",
+          "offline_access"
+        ]
+      }
     }
   },
   "contextFileName": "GEMINI.md"
