@@ -1,0 +1,25 @@
+import assert from 'node:assert/strict';
+
+const origin = 'https://wlan.iyanju.com';
+const resource = `${origin}/mcp`;
+const issuer = 'https://clerk.wlan.iyanju.com';
+const required = ['wlan:styles:read', 'wlan:drafts:read', 'wlan:drafts:write', 'wlan:requests:read', 'wlan:requests:write', 'user:org:read'];
+const options = { redirect: 'error', signal: AbortSignal.timeout(20000) };
+const metadataResponse = await fetch(`${origin}/.well-known/oauth-protected-resource/mcp`, options);
+assert.equal(metadataResponse.status, 200, 'Protected-resource discovery must be public');
+const metadata = await metadataResponse.json();
+assert.equal(metadata.resource, resource);
+assert.ok(metadata.authorization_servers.includes(issuer));
+for (const scope of required) assert.ok(metadata.scopes_supported.includes(scope), `Resource scope missing: ${scope}`);
+const discoveryResponse = await fetch(`${issuer}/.well-known/oauth-authorization-server`, options);
+assert.equal(discoveryResponse.status, 200);
+const discovery = await discoveryResponse.json();
+assert.equal(discovery.issuer.replace(/\/$/, ''), issuer);
+assert.ok(discovery.code_challenge_methods_supported.includes('S256'));
+for (const scope of required) assert.ok(discovery.scopes_supported.includes(scope), `Issuer scope missing: ${scope}`);
+for (const key of ['authorization_endpoint', 'token_endpoint', 'registration_endpoint']) assert.equal(new URL(discovery[key]).origin, issuer, `Unexpected ${key}`);
+const denied = await fetch(resource, { ...options, method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json, text/event-stream' }, body: JSON.stringify({ jsonrpc: '2.0', id: 1, method: 'tools/list', params: {} }) });
+assert.equal(denied.status, 401, 'Anonymous tool access must be denied');
+assert.ok(denied.headers.get('www-authenticate')?.includes(`${origin}/.well-known/oauth-protected-resource/mcp`));
+console.log('PASS: public resource/issuer discovery, six scopes, PKCE S256, DCR endpoint, and anonymous tools/list rejection.');
+console.log('NOT TESTED: real-client OAuth, browser workspace approval, authorized tools, or a complete rewrite.');
