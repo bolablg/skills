@@ -20,12 +20,11 @@ no transfer or catalog rename is part of this release.
 - [Installation and web-chat guide](wlan.md): sign-in, workspace approval,
   migration compatibility, tool workflow, conflicts and limits.
 
-The intended public release is
-[v0.5.0](https://github.com/bolablg/skills/releases/tag/v0.5.0), after the contributor
-branch passes through `staging` into `main`. Until that tag exists, this link is
-an intended destination, not evidence of publication. The npm workflow publishes
-[@bolablg/skills](https://www.npmjs.com/package/@bolablg/skills) from `main`;
-verify its registry version and workflow conclusion before claiming success.
+Published [v0.5.0](https://github.com/bolablg/skills/releases/tag/v0.5.0) from
+`main` commit `e8b5694`, after contributor work passed through `staging`. The
+release includes `wlan-0.5.0.tar.gz`. The trusted npm workflow succeeded and
+[@bolablg/skills 0.5.0](https://www.npmjs.com/package/@bolablg/skills/v/0.5.0)
+was confirmed available from the public registry.
 
 ## Compatibility evidence
 
@@ -34,15 +33,16 @@ verify its registry version and workflow conclusion before claiming success.
 | Repository suite | 30 tests passed, including installer compatibility, package isolation, native metadata versions, and canonical Wlan content |
 | GitHub CLI | 2.97.0; `gh skill publish --dry-run` passed |
 | Agent Skills | Codex `quick_validate.py skills/wlan` passed |
-| Codex CLI 0.161.0 | Local `wlan@bolablg` and Git-backed `wlan@iyanju` installations succeeded in isolated profiles; enabled version 0.5.0 reported (Iyanju tested against the contributor branch before release) |
-| Claude Code 2.1.293 | Wlan plugin and both catalogs passed native validation; isolated local installation reported one Wlan skill and one remote MCP server |
-| Gemini CLI 0.63.0 | Root and self-contained Wlan extension passed native validation; local extension installed and enabled in an isolated profile after folder trust consent |
+| Codex CLI 0.161.0 | Local `wlan@bolablg` and Git-backed `wlan@iyanju` installations succeeded in isolated profiles; the published `main` package reported enabled version 0.5.0 |
+| Claude Code 2.1.293 | Wlan plugin and both catalogs passed native validation; isolated installations, including published `main`, reported one Wlan skill and one remote MCP server |
+| Gemini CLI 0.63.0 | Root and self-contained Wlan extension passed native validation; isolated local and GitHub release installations succeeded; the latter resolved `v0.5.0` as a GitHub release |
 | npm package | Dry run inspected; Wlan manifests and instructions included; no Wlan private `.local/`, `data-source/`, `archive/`, environment files or dependencies included |
 | Production resource discovery | Correct resource and Clerk issuer; five Wlan scopes plus `user:org:read` advertised |
 | Production issuer discovery | Matching issuer, PKCE S256, required scopes and public registration endpoint confirmed |
 | Anonymous protected tools | `tools/list` rejected with HTTP 401 and protected-resource discovery challenge |
 | Wlan implementation contracts | 93 existing tests passed across MCP server, HTTP, authentication, workspace grants and backend suites; these use test fixtures/mocks |
-| Real-client OAuth and workspace approval | Not yet tested; browser approval by an admitted Wlan user required |
+| Codex OAuth request construction | Explicit six-scope login produced the canonical resource, PKCE S256 and those scopes plus optional `offline_access`; no `openid`, email, profile or metadata scopes requested; browser consent not completed |
+| Real-client OAuth and workspace approval | An attempted browser login returned `invalid_scope` for `openid`; explicit resource scopes and the cloud registration steps are documented; successful consent and workspace approval remain unverified |
 | Authorized production tools and full rewrite | Not yet tested; do not infer success from discovery, packaging, private account upload or mocked tests |
 
 Public discovery is reproducible with `npm run wlan:discovery`; it uses no

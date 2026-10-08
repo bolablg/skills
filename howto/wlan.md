@@ -98,8 +98,17 @@ Codex also supports direct configuration:
 
 ```sh
 codex mcp add wlan --url https://wlan.iyanju.com/mcp
-codex mcp login wlan
+codex mcp login wlan --scopes wlan:styles:read,wlan:drafts:read,wlan:drafts:write,wlan:requests:read,wlan:requests:write,user:org:read
 ```
+
+Use the explicit scope list if Codex reports `invalid_scope` for `openid` or
+another identity scope. Wlan needs the six resource scopes shown above; its
+dynamic-client policy also permits optional `offline_access` for refresh tokens.
+Codex CLI 0.161.0 was checked to construct this request with those six scopes,
+`offline_access`, the canonical Wlan resource and PKCE S256. This checks request
+construction, not completed sign-in. For a plugin-provided connection, use its
+actual server name from the host's MCP settings in place of `wlan`. Do not expand
+Clerk's scope permissions to the issuer's entire advertised scope catalog.
 
 Claude Code also supports:
 
@@ -128,10 +137,27 @@ credentials into JSON or chat. `offline_access` is optional for token refresh.
 Connect Wlan as a custom remote MCP integration in ChatGPT Work on the web,
 where your account and workspace policy permit custom connections. The local
 Codex marketplace installation above does not automatically add a cloud-chat
-connection. Open the Plugins tab and install the Wlan Studio account plugin, or import
-its portable package through the supported plugin-creation flow. Authorize its
-remote MCP connection at `https://wlan.iyanju.com/mcp` using the host's supported
-OAuth discovery flow. The current [MCP guide](https://learn.chatgpt.com/docs/extend/mcp)
+connection. A portable account package can show its MCP server without exposing
+a cloud sign-in control. Register the cloud MCP connection first:
+
+1. Open Plugins → Add → Add custom MCP server.
+2. Enter Wlan Studio and `https://wlan.iyanju.com/mcp`; keep Authentication set to
+   OAuth.
+3. Open Advanced OAuth settings. Confirm the Clerk issuer, canonical Wlan
+   resource, and the five `wlan:*` scopes plus `user:org:read`. Use the discovered
+   CIMD registration method, or supported DCR. Leave base scopes empty and
+   disable optional OIDC when the host would otherwise request `openid` or
+   identity scopes outside Wlan's allowed client scopes. OAuth stays enabled.
+4. Review the connection warning, select Create as a plugin, and complete
+   browser sign-in and consent yourself.
+5. Retain the actual connection ID from the resulting URL (`plugin_asdk_app...`).
+   A private account package can bind that registered connection through
+   `.app.json` and `extensions.com.openai.apps`. Use only the host-returned ID;
+   do not invent an ID or commit an account-specific mapping to this public
+   package.
+
+The current [package and connection guide](https://developers.openai.com/plugins/build/plugins),
+[MCP guide](https://learn.chatgpt.com/docs/extend/mcp)
 and [connect-and-test guide](https://developers.openai.com/plugins/deploy/connect-chatgpt)
 are the source of truth for the UI available to your account.
 
