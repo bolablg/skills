@@ -30,7 +30,7 @@
       "name": "wlan",
       "source": {
         "source": "local",
-        "path": "./plugins/wlan"
+        "path": "./plugins/wlan/codex"
       },
       "policy": {
         "installation": "AVAILABLE",

@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "wlan": {
+      "type": "http",
+      "url": "https://wlan.iyanju.com/mcp",
+      "scopes": [
+        "wlan:styles:read",
+        "wlan:drafts:read",
+        "wlan:drafts:write",
+        "wlan:requests:read",
+        "wlan:requests:write",
+        "user:org:read"
+      ]
+    }
+  }
+}
