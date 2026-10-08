@@ -1,0 +1,24 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "iyanju",
+  "version": "0.5.0",
+  "owner": {
+    "name": "Bolaji BALOGOUN",
+    "url": "https://github.com/bolablg"
+  },
+  "description": "Iyanju integrations, including Wlan Studio.",
+  "plugins": [
+    {
+      "name": "wlan",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/bolablg/skills.git",
+        "path": "plugins/wlan",
+        "ref": "main"
+      },
+      "version": "0.5.0",
+      "description": "Wlan Studio connects your assistant to authorized writing styles, drafts, and bounded rewrite requests in Wlan, your collaborative writing studio.",
+      "category": "productivity"
+    }
+  ]
+}

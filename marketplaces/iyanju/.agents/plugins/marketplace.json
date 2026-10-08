@@ -1,0 +1,22 @@
+{
+  "name": "iyanju",
+  "interface": {
+    "displayName": "Iyanju"
+  },
+  "plugins": [
+    {
+      "name": "wlan",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/bolablg/skills.git",
+        "path": "./plugins/wlan",
+        "ref": "main"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

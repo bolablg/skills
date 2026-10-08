@@ -17,11 +17,18 @@ kept in a separate distribution root and are not exposed to other hosts.
 | --- | --- | --- |
 | [Job Hunter](howto/job-hunter.md) | Build a private candidate profile, research and apply to jobs safely, and connect with relevant recruiters. | Available |
 | [Luna Maxing](howto/luna-maxing.md) | Coordinate verified GPT-5.6 Luna Max work packets under a GPT-5.6 Sol aggregator. | Codex only |
+| [Wlan Studio](howto/wlan.md) | Discover styles, read authorized drafts, and check and submit rewrites through hosted MCP. | Available |
 | [Product Challenger](howto/product-challenger.md) | Challenge, research, validate, and sequence Africa-first product ideas. | Available |
 
 Portable Skills belong in `skills/<skill-name>/`. Codex-only Skills belong in
 the shared hidden `.codex-plugin/plugins/iyanju-codex/skills/<skill-name>/`
-plugin. Put each human-facing onboarding guide in `howto/<skill-name>.md`.
+plugin. Self-contained service integrations live in `plugins/<name>/`; their
+portable Skills remain canonical under `skills/` and are synchronized during
+validation. Put each human-facing onboarding guide in `howto/<skill-name>.md`.
+
+For Wlan Studio, use the additional `wlan@iyanju` catalog and native Gemini
+CLI extension described in [the Wlan guide](howto/wlan.md). The existing
+`bolablg` catalogs and installation paths remain supported.
 
 ## Install Iyanju Agentory as a marketplace plugin
 

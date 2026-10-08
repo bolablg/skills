@@ -11,3 +11,4 @@ using the Skill over time. Keep portable runtime instructions in
 | Job Hunter | [How to use Job Hunter](job-hunter.md) |
 | Luna Maxing (Codex only) | [How to use Luna Maxing](luna-maxing.md) |
 | Product Challenger | [How to use Product Challenger](product-challenger.md) |
+| Wlan Studio | [How to use Wlan Studio](wlan.md) |

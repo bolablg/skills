@@ -85,3 +85,24 @@ npx skills add bolablg/skills --list
    GitHub secret.
 5. Publish the matching GitHub Skill release from `main` with the same version
    tag.
+
+## Wlan integration packages
+
+Edit the portable workflow under `skills/wlan/`. Run `npm run wlan:sync` to
+regenerate `plugins/wlan`, the root Gemini extension manifest/context, and the
+additive `marketplaces/iyanju` catalogs. Do not edit generated files directly.
+The existing root catalogs keep the `bolablg` namespace. The added catalogs
+resolve Wlan from `bolablg/skills` on `main` and provide `wlan@iyanju`.
+
+Run `npm test`, `claude plugin validate plugins/wlan`,
+`claude plugin validate marketplaces/iyanju`, `gemini extensions validate .`,
+`gemini extensions validate plugins/wlan`, and `gh skill publish --dry-run`.
+Check public discovery with `npm run wlan:discovery` separately from tests; it
+requires network access and never authenticates or reads a user's content.
+An actual OAuth/approval/rewrite test requires an admitted user in a real client.
+
+For a release, attach the self-contained Wlan archive from `plugins/wlan` to the
+matching GitHub release. Keep `gemini-extension.json` at the archive root. Add
+the GitHub topic `gemini-cli-extension` only after the root manifest is public;
+gallery indexing remains external and must be verified before claiming a listing.
+Record publication and compatibility evidence in `howto/wlan-release.md`.

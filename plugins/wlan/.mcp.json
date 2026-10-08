@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "wlan": {
+      "type": "http",
+      "url": "https://wlan.iyanju.com/mcp"
+    }
+  }
+}
