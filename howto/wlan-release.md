@@ -34,9 +34,9 @@ verify its registry version and workflow conclusion before claiming success.
 | Repository suite | 30 tests passed, including installer compatibility, package isolation, native metadata versions, and canonical Wlan content |
 | GitHub CLI | 2.97.0; `gh skill publish --dry-run` passed |
 | Agent Skills | Codex `quick_validate.py skills/wlan` passed |
-| Codex CLI 0.161.0 | Local `wlan@bolablg` installation succeeded in an isolated profile; enabled version 0.5.0 reported |
-| Claude Code 2.1.293 | Wlan plugin and both catalogs passed native validation |
-| Gemini CLI 0.63.0 | Root and self-contained Wlan extension passed native validation |
+| Codex CLI 0.161.0 | Local `wlan@bolablg` and Git-backed `wlan@iyanju` installations succeeded in isolated profiles; enabled version 0.5.0 reported (Iyanju tested against the contributor branch before release) |
+| Claude Code 2.1.293 | Wlan plugin and both catalogs passed native validation; isolated local installation reported one Wlan skill and one remote MCP server |
+| Gemini CLI 0.63.0 | Root and self-contained Wlan extension passed native validation; local extension installed and enabled in an isolated profile after folder trust consent |
 | npm package | Dry run inspected; Wlan manifests and instructions included; no Wlan private `.local/`, `data-source/`, `archive/`, environment files or dependencies included |
 | Production resource discovery | Correct resource and Clerk issuer; five Wlan scopes plus `user:org:read` advertised |
 | Production issuer discovery | Matching issuer, PKCE S256, required scopes and public registration endpoint confirmed |
