@@ -18,7 +18,7 @@
     "remote-mcp"
   ],
   "skills": "./skills/",
-  "mcpServers": "./codex/.mcp.json",
+  "mcpServers": "./.mcp.json",
   "interface": {
     "displayName": "Wlan Studio",
     "shortDescription": "Styles, drafts, and revisions",

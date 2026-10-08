@@ -9,7 +9,7 @@
       "source": {
         "source": "git-subdir",
         "url": "https://github.com/bolablg/skills.git",
-        "path": "./plugins/wlan",
+        "path": "./plugins/wlan/codex",
         "ref": "main"
       },
       "policy": {

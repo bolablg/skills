@@ -1,5 +1,36 @@
 # Wlan Studio release record
 
+## 0.5.1: native OAuth scope pinning
+
+The native Codex catalog now selects `plugins/wlan/codex`, which has no portable
+manifest masking its native MCP configuration. Its `scopes` array contains the
+six Wlan/workspace permissions. Claude Code's `.mcp.json` pins the same set with
+the supported space-separated `oauth.scopes` field. Gemini's native manifests
+pin that set plus optional `offline_access`. Codex and Claude may append
+`offline_access` for refresh. No native package requests OIDC identity or Clerk
+metadata scopes. The portable `mcp.json` keeps its supported URL-only shape.
+
+The installation guide also explains the separate ChatGPT OIDC scope field:
+never copy Clerk's full scope catalog there; use only supported identity scopes
+when needed, or turn optional OIDC off while keeping OAuth enabled.
+
+| 0.5.1 check | Result |
+| --- | --- |
+| Repository suite | 30 tests passed; scope fields, native catalog destinations, portable schema shape and self-contained files checked |
+| Codex CLI 0.161.0 | Isolated native plugin installation succeeded; login without a CLI scope override produced exactly the six Wlan/workspace scopes plus `offline_access`, the canonical resource and PKCE S256 |
+| Claude Code 2.1.293 | Native plugin and both catalogs validated; isolated plugin installation succeeded; its authorization URL requested the same seven scopes |
+| Gemini CLI 0.63.0 | Root and packaged extension passed native validation; shipped provider preserves configured scopes through discovery; DCR succeeded, then the test stopped at the browser-opening consent prompt |
+| Gemini authorization URL | Not observed: automatic approval review rejected advancing the consent prompt; no browser was opened and no token was obtained |
+| npm archive | Dry run inspected; all 15 Wlan distribution files included; no Wlan private workspace, source corpus or dependencies included |
+| GitHub Skill publication | `gh skill publish --dry-run` passed |
+
+Release artifacts use [v0.5.1](https://github.com/bolablg/skills/releases/tag/v0.5.1)
+and `wlan-0.5.1.tar.gz`. The following 0.5.0 record remains historical; successful
+browser consent, workspace approval and a complete production rewrite are not
+claimed by package or authorization-URL checks.
+
+## 0.5.0: initial distribution
+
 Release: **0.5.0**, 8 October 2026. Source repository:
 [bolablg/skills](https://github.com/bolablg/skills). The repository stays in place;
 no transfer or catalog rename is part of this release.

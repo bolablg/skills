@@ -27,8 +27,13 @@ async function emit(relative, content) {
     await writeFile(target, content);
   }
 }
-for (const file of files) await emit(path.relative(root, path.join(destination, file)), await readFile(path.join(source, file), 'utf8'));
+for (const file of files) {
+  const content = await readFile(path.join(source, file), 'utf8');
+  await emit(path.relative(root, path.join(destination, file)), content);
+  await emit(`plugins/wlan/codex/skills/wlan/${file}`, content);
+}
 const json = value => `${JSON.stringify(value, null, 2)}\n`;
+const scopes = ['wlan:styles:read', 'wlan:drafts:read', 'wlan:drafts:write', 'wlan:requests:read', 'wlan:requests:write', 'user:org:read'];
 const metadata = {
   name: 'wlan', version: pkg.version,
   description: 'Wlan Studio connects your assistant to authorized writing styles, drafts, and bounded rewrite requests in Wlan, your collaborative writing studio.',
@@ -47,22 +52,24 @@ await emit('plugins/wlan/plugin.json', json({
   $schema: 'https://agent-plugins.org/schemas/1.0.0/plugin.schema.json',
   ...metadata, extensions: { 'com.openai': { interface: presentation } },
 }));
-await emit('plugins/wlan/.codex-plugin/plugin.json', json({ ...metadata, skills: './skills/', mcpServers: './.mcp.json', interface: presentation }));
+await emit('plugins/wlan/.codex-plugin/plugin.json', json({ ...metadata, skills: './skills/', mcpServers: './codex/.mcp.json', interface: presentation }));
+await emit('plugins/wlan/codex/.codex-plugin/plugin.json', json({ ...metadata, skills: './skills/', mcpServers: './.mcp.json', interface: presentation }));
+await emit('plugins/wlan/codex/.mcp.json', json({ mcpServers: { wlan: { type: 'http', url: 'https://wlan.iyanju.com/mcp', scopes } } }));
 await emit('plugins/wlan/.claude-plugin/plugin.json', json(metadata));
 await emit('plugins/wlan/mcp.json', json({
   $schema: 'https://agent-plugins.org/schemas/1.0.0/mcp.schema.json',
   mcpServers: { wlan: { type: 'streamable-http', url: 'https://wlan.iyanju.com/mcp' } },
 }));
-await emit('plugins/wlan/.mcp.json', json({ mcpServers: { wlan: { type: 'http', url: 'https://wlan.iyanju.com/mcp' } } }));
+await emit('plugins/wlan/.mcp.json', json({ mcpServers: { wlan: { type: 'http', url: 'https://wlan.iyanju.com/mcp', oauth: { scopes: scopes.join(' ') } } } }));
 const gemini = json({ name: 'wlan', version: pkg.version, description: metadata.description,
-  mcpServers: { wlan: { httpUrl: 'https://wlan.iyanju.com/mcp' } }, contextFileName: 'GEMINI.md' });
+  mcpServers: { wlan: { httpUrl: 'https://wlan.iyanju.com/mcp', oauth: { enabled: true, scopes: [...scopes, 'offline_access'] } } }, contextFileName: 'GEMINI.md' });
 const context = '# Wlan Studio\n\nFor Wlan styles, drafts, or rewrites, load the bundled `skills/wlan/SKILL.md`\nand its `references/tool-contract.md`. Use the connected remote Wlan MCP tools.\nLet the host handle OAuth; the user signs in and explicitly approves a workspace\nin the browser. Never use a local Wlan daemon, pairing flow, or API key. Start\nwork from the connected chat; this extension does not wake an idle assistant.\n';
 await emit('plugins/wlan/gemini-extension.json', gemini);
 await emit('plugins/wlan/GEMINI.md', context);
 await emit('gemini-extension.json', gemini);
 await emit('GEMINI.md', context);
 const remoteSource = { source: 'git-subdir', url: 'https://github.com/bolablg/skills.git', path: 'plugins/wlan', ref: 'main' };
-await emit('marketplaces/iyanju/.agents/plugins/marketplace.json', json({ name: 'iyanju', interface: { displayName: 'Iyanju' }, plugins: [{ name: 'wlan', source: { ...remoteSource, path: './plugins/wlan' }, policy: { installation: 'AVAILABLE', authentication: 'ON_USE' }, category: 'Productivity' }] }));
+await emit('marketplaces/iyanju/.agents/plugins/marketplace.json', json({ name: 'iyanju', interface: { displayName: 'Iyanju' }, plugins: [{ name: 'wlan', source: { ...remoteSource, path: './plugins/wlan/codex' }, policy: { installation: 'AVAILABLE', authentication: 'ON_USE' }, category: 'Productivity' }] }));
 await emit('marketplaces/iyanju/.claude-plugin/marketplace.json', json({
   $schema: 'https://anthropic.com/claude-code/marketplace.schema.json',
   name: 'iyanju', version: pkg.version, owner: pkg.author,
