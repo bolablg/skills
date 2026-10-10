@@ -1,7 +1,7 @@
 # Wlan hosted tool contract
 
 Derived from `wlan-studio/lib/mcp/server.ts`, `lib/mcp/auth-shared.ts`,
-`convex/mcpData.ts`, and `docs/mcp-authentication.md` on 8 October 2026.
+`convex/mcpData.ts`, and `docs/mcp-authentication.md` on 10 October 2026.
 Discover the installed server schema before calling; fail clearly on drift.
 All tools accept optional `orgId` for an already authorized team workspace.
 
@@ -40,14 +40,19 @@ set `isError`. Inspect the envelope before consuming data. On
 reconnection, workspace review, waiting, or explicit failure reporting.
 
 A draft save returns `{ status: "saved", id, revision }`. A rewrite submission
-returns `{ id, status, revision, evaluation? }`. Inspect `evaluation.accepted`,
+returns `{ id, status, revision, revision_state, evaluation? }`. Request retrieval
+also returns `revision_state`, `latestStep` and `bestStep` when available.
+`revision_state` includes `maximum_iterations`, `completed_iterations`,
+`remaining_iterations`, `can_continue`, `next_action` and `instruction`.
+Continue only while `can_continue` is true, using the current revision and latest
+feedback. Terminal states require stopping and returning the best candidate,
+not resetting the budget. Inspect `evaluation.accepted`,
 fidelity, length, language, scorable state, deviations, and any AI-style check.
 For a request with a separate structure profile, standalone checks fetch the
 style by `styleId`; submission evaluates the complete stored request profile
 and is authoritative. Do not treat style score alone, HTTP 200, or `ok: true`
-as acceptance. Do not
-resubmit a terminal request. Preserve current request state after ambiguous
-writes; the server guards revisions and may recognize identical submissions.
+as acceptance. Do not resubmit a terminal request. Preserve current request
+state after ambiguous writes; the server guards revisions and may recognize identical submissions.
 
 OAuth workspace approval requests expire after ten minutes. Grants last thirty
 days, bind one user/client/workspace and can be revoked at
