@@ -6,12 +6,15 @@
 - Exact role:
 - Canonical URL:
 - ATS/domain:
-- Match score and first decisive reason:
+- Internal advisory fit score (not an ATS score) and first decisive reason:
 - Evidence checked at:
 - Resume ID and path:
+- Preferred baseline and reason for any departure:
+- Editable DOCX and final PDF paths:
 - Resume style validation:
 - Exact page count and extraction check:
 - Page-balance and orphan-heading check:
+- Visual inspection of every rendered page:
 - Target seniority signal:
 - Overqualification risk (low/moderate/high):
 - Overqualification mitigation applied:
@@ -22,8 +25,23 @@
 
 ## Evidence map
 
-| Job requirement | Candidate evidence | Source file/page | Confidence |
-| --- | --- | --- | --- |
+Map the top three to five job priorities here; reuse confirmed evidence and record unresolved requirements separately from preferences.
+
+| Job priority | Requirement or preference | Candidate evidence and IDs | Source file/page/section | Confidence | Where emphasized | Missing support |
+| --- | --- | --- | --- | --- | --- | --- |
+
+## Résumé editing and QA notes
+
+- Brief diagnosis and material changes (headline/summary first):
+- Evidence IDs or source locators for changed claims:
+- Personal versus team contribution, prototype versus production, observed versus intended results checked:
+- Metric context and any derived calculations:
+- Relevance, clarity, impact, and credibility:
+- Dates, chronology, consistency, links, and formatting:
+- Highest-value missing facts (reuse prior answers):
+- Unverified checks and readiness blockers:
+
+Keep these notes outside the résumé. Add original-to-revised bullet comparisons or interview questions when useful or requested; a routine application does not require separate reports for each output.
 
 ## Seniority and overqualification gate
 

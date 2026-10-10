@@ -17,6 +17,8 @@ Unknown salary is not a rejection unless salary transparency is required. Unknow
 
 ## Evidence-grounded match score
 
+This is Job Hunter's internal advisory fit assessment, not an employer's ATS score, screening result, or probability of interview or hire. Label it accordingly and keep it outside the résumé. Do not claim that keyword matching reveals an employer's screening system.
+
 | Dimension | Weight |
 | --- | ---: |
 | Core responsibilities | 25 |

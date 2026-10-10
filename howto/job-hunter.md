@@ -114,6 +114,20 @@ Job Hunter records each role and its first decisive reason. A submission is mark
 
 For each role that clears the qualification gate, Job Hunter creates a fresh application résumé in a classic, monochrome, single-column style with standard section headings and ATS-readable text. It calibrates the summary, skills, bullet selection, leadership emphasis, and length to the exact job level while preserving official titles and chronology. A mandatory overqualification gate blocks applications that still create an unsupported level, compensation, flight-risk, or scope-mismatch signal.
 
+### Build or improve a résumé
+
+You can request a general résumé review without selecting a job first:
+
+> Use $job-hunter to improve my résumé using my approved profile, confirmed achievements, and previous answers. Start with my preferred baseline, improve the headline and summary first, and change experience bullets where relevance, clarity, or evidence warrants it. Explain what I built, who used it, and the supported outcome. Keep evidence notes outside the résumé.
+
+Record a preferred baseline by role scope in the private `jobhunter-ledger/candidate-evidence.md`, using a résumé ID from `resources.resumes`. For example, you may prefer a GCP résumé for IC applications while using another variant for management roles. This is a candidate preference, not a cloud assumption applied to everyone.
+
+For a specific job, Job Hunter maps its three to five main priorities to real evidence, distinguishes requirements from preferences, and checks hands-on, Staff/Principal, or management positioning. Without a job description, alignment and seniority calibration remain provisional. It distinguishes personal contributions from team results, prototypes from production, and observed outcomes from intended benefits. Missing metrics become focused questions rather than invented numbers.
+
+The default is two readable pages when relevant evidence supports them; a candidate-selected one-page format remains available. Job Hunter keeps editable DOCX and final PDF files, checks extracted text and the actual page count, and visually inspects every rendered page. Any unavailable check stays explicitly unverified and blocks upload readiness.
+
+Routine applications receive a concise change log, evidence alignment, and QA record in the private packet. A detailed review or interview-preparation request can include bullet comparisons and achievement questions. These supporting notes stay outside the employer-facing résumé. Job Hunter's internal fit score is advisory; it never claims to be an employer's ATS score or hiring prediction.
+
 ## 6. Connect with recruiters and headhunters
 
 Start with drafts:
