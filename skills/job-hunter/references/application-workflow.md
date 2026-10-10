@@ -2,11 +2,11 @@
 
 ## Prepare
 
-For each qualified role, copy `assets/application-packet-template.md` into the session and complete it from current evidence. Re-open the posting, select the best configured résumé, map each material claim to a source, read `resume-style-and-seniority-calibration.md`, complete the overqualification gate, draft truthful materials, and list every unresolved answer.
+For each qualified role, copy `assets/application-packet-template.md` into the session and complete it from current evidence. Re-open the posting, read `resume-building-framework.md`, reuse confirmed evidence and prior answers, select the preferred configured résumé, and map the top three to five job priorities and each material claim to sources. Read `resume-style-and-seniority-calibration.md`, complete the overqualification gate, draft truthful materials, and list every unresolved answer. Keep a concise change log and QA record in the packet; alignment, calculations, evidence notes, and interview questions stay outside the résumé.
 
 Do not optimize a résumé by changing facts, dates, titles, degrees, certifications, employers, authorization, or metrics. Reordering, shortening, and emphasizing verified material is allowed. Preserve a copy of the exact submitted résumé and answers.
 
-Create a fresh application résumé only after the role clears the research, eligibility, compensation, deduplication, live-posting, and fit gates. Use the required classic single-column style, calibrate the positioning to the exact job level, and validate the final PDF's text extraction, page count, page balance, section continuity, filename, and readability. Block transmission when style, pagination, factual evidence, or overqualification calibration fails.
+Create a fresh application résumé only after the role clears the research, eligibility, compensation, deduplication, live-posting, and fit gates. Use the required classic single-column style, calibrate the positioning to the exact job level, retain editable DOCX and final PDF artifacts, and validate the PDF's text extraction, actual page count, page balance, section continuity, filename, and readability. Visually inspect every rendered page. Block transmission when required checks fail or remain unverified, including style, pagination, factual evidence, or overqualification calibration.
 
 ## Approval
 

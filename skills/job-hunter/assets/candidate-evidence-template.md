@@ -15,6 +15,13 @@ This private document is the source of truth for generated materials. Record onl
 | Resource ID | Type | Path/URI | Access mode | Allowed uses | Share with employers | Last checked |
 | --- | --- | --- | --- | --- | --- | --- |
 
+## Résumé preferences
+
+Record candidate-selected baselines by role scope using IDs from `resources.resumes`. Reuse the preferred baseline and confirmed answers before asking again. Keep personal defaults in this private document rather than the portable Skill.
+
+| Role scope | Preferred résumé ID | Length preference | Restricted details | Candidate confirmed at |
+| --- | --- | --- | --- | --- |
+
 ## Search geography and eligibility
 
 | Market ID | Priority | Countries | Work modes | Candidate residence for remote | Relocation | Eligibility evidence | Last confirmed |
@@ -30,6 +37,22 @@ This private document is the source of truth for generated materials. Record onl
 
 | Organization | Title | Start | End | Scope | Source evidence IDs | Status |
 | --- | --- | --- | --- | --- | --- | --- |
+
+## Achievement context
+
+For the strongest achievements, capture the business problem, personal contribution, team responsibility, system or deliverable, actual technologies, operating scope, consumers and downstream use, and observed result. Distinguish prototypes from production and intended benefits from demonstrated outcomes. A supported qualitative result is sufficient.
+
+### Achievement record (repeat as needed)
+
+- Evidence IDs and source locators:
+- Business domain and initial problem:
+- Personal action and responsibility versus team result:
+- System or deliverable and actual technologies:
+- Operating scope and prototype/production status:
+- Consumers and decisions or workflows supported:
+- Observed result versus intended benefit:
+- Measurements, units, time periods, baselines, and calculation if derived:
+- Confirmed answers, unresolved facts, and confidentiality constraints:
 
 ## Skills and domains
 
