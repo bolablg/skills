@@ -10,6 +10,25 @@ There is no local Wlan daemon, pairing step, CLI execution, or API key.
 Installing a client plugin only installs instructions and a remote connection.
 Wlan remains invite-only; use an admitted account.
 
+## Quick install from GitHub
+
+Use the root `bolablg` catalog for the shortest Codex or Claude Code setup:
+
+```sh
+# Codex
+codex plugin marketplace add bolablg/skills
+codex plugin add wlan@bolablg
+
+# Claude Code
+claude plugin marketplace add bolablg/skills
+claude plugin install wlan@bolablg
+```
+
+The display name is **Wlan Studio** in either catalog. Install just one of
+`wlan@bolablg` and `wlan@iyanju`. Gemini CLI uses the release installation below.
+See [Claude's plugin guide](https://code.claude.com/docs/en/discover-plugins)
+for client-specific installation scopes and updates.
+
 ## Install as wlan@iyanju
 
 The public repository is [bolablg/skills](https://github.com/bolablg/skills).
@@ -74,11 +93,17 @@ From the clone above, install the native extension:
 gemini extensions install ./plugins/wlan
 ```
 
-Or install the published repository release directly:
+Or install the latest published repository release directly:
 
 ```sh
-gemini extensions install https://github.com/bolablg/skills --ref v0.5.1
+gemini extensions install https://github.com/bolablg/skills
 ```
+
+For a reproducible 0.6.0 install, append `--ref v0.6.0`. For an existing
+installation, run `gemini extensions update wlan` and restart Gemini CLI. A
+previously pinned tag may remain pinned; to change its source, uninstall only
+the `wlan` extension with `gemini extensions uninstall wlan`, then install
+using the desired command above.
 
 The root `gemini-extension.json` and Wlan release archive provide the native
 `httpUrl` configuration and Wlan context. In a Gemini CLI chat, inspect `/mcp`
@@ -141,48 +166,35 @@ credentials into JSON or chat. `offline_access` is optional for token refresh.
 
 ## ChatGPT Work and web chats
 
-Connect Wlan as a custom remote MCP integration in ChatGPT Work on the web,
-where your account and workspace policy permit custom connections. The local
-Codex marketplace installation above does not automatically add a cloud-chat
-connection. A portable account package can show its MCP server without exposing
-a cloud sign-in control. Register the cloud MCP connection first:
+Wlan Studio is available through GitHub for Codex, Claude Code and Gemini CLI.
+Its shared ChatGPT directory listing is not published; portal submission is
+paused. No OpenAI directory listing or cloud event installation is included in
+this GitHub release. A future shared listing can use the existing
+`https://wlan.iyanju.com/mcp` with the same account and workspace controls; no
+second Wlan server is needed.
 
-1. Open Plugins → Add → Add custom MCP server.
-2. Enter Wlan Studio and `https://wlan.iyanju.com/mcp`; keep Authentication set to
-   OAuth.
-3. Open Advanced OAuth settings. Confirm the Clerk issuer, canonical Wlan
-   resource, and the five `wlan:*` scopes plus `user:org:read`. Use the discovered
-   CIMD registration method, or supported DCR. Leave base scopes empty. Inspect
-   the separate **OIDC scopes supported** field: automatic discovery can copy
-   the issuer's full catalog into it, including `public_metadata` and
-   `private_metadata`. Remove that broad list. If OIDC is needed, keep only
-   `openid`, `email`, and `profile`; otherwise disable optional OIDC. OAuth stays
-   enabled. Never request Clerk metadata scopes for Wlan.
-4. Review the connection warning, select Create as a plugin, and complete
-   browser sign-in and consent yourself.
-5. Retain the actual connection ID from the resulting URL (`plugin_asdk_app...`).
-   A private account package can bind that registered connection through
-   `.app.json` and `extensions.com.openai.apps`. Use only the host-returned ID;
-   do not invent an ID or commit an account-specific mapping to this public
-   package.
+OpenAI treats imported packages declaring MCP servers as desktop-only, including
+HTTPS servers. Installing this repository package in Codex does not install a
+hosted ChatGPT event source. Public submission registers the same remote MCP
+through OpenAI's portal, with domain verification, OAuth, scans and review; the
+portal generates the hosted app binding. A public upload must not include
+`.app.json` or `apps` declarations. Do not fabricate an app ID or copy a private
+account binding into the public package. See [OpenAI's publication workflow](https://developers.openai.com/plugins/deploy/submission)
+and [desktop-only package rules](https://learn.chatgpt.com/docs/enterprise/plugin-management#desktop-only-plugins).
 
-The current [package and connection guide](https://developers.openai.com/plugins/build/plugins),
-[MCP guide](https://learn.chatgpt.com/docs/extend/mcp)
-and [connect-and-test guide](https://developers.openai.com/plugins/deploy/connect-chatgpt)
-are the source of truth for the UI available to your account.
+For developers who explicitly choose private testing, ChatGPT's supported
+**Add custom MCP server** flow can register this same URL using OAuth. Retain
+the five `wlan:*` permissions and `user:org:read`. If optional OIDC is enabled,
+limit its identity scopes to `openid`, `email` and `profile`; never request
+`public_metadata` or `private_metadata`. Follow the actual account UI and
+[official connection guide](https://developers.openai.com/plugins/deploy/connect-chatgpt).
+This private testing option is separate from shared directory publication.
 
-Some workspaces expose the custom-app flow under Settings → Apps → Create with
-developer mode enabled. An authorized admin/developer supplies the MCP URL,
-chooses OAuth, scans tools, creates the draft integration and tests it. Only a
-workspace admin can publish it to that workspace. If those controls are absent,
-ask the workspace owner to enable the supported flow; do not select anonymous
-authentication or invent a client secret. See OpenAI's
-[developer mode and workspace controls](https://help.openai.com/en/articles/12584461-developer-mode-and-mcp-apps-in-chatgpt).
-
-Select the connected Wlan integration in the chat and start the writing task.
-Complete the separate Wlan workspace approval below when a protected tool asks
-for it. A connection appearing in settings does not prove an authorized rewrite
-works. Account eligibility and administration controls can change.
+After a hosted installation, complete Wlan workspace approval when a protected
+tool returns an approval link. Confirm `wlan.rewrite_requested` in the installed
+plugin's event catalogue before asking a Work cloud chat or dot to subscribe.
+An installation, OAuth login, workspace grant and event subscription are four
+separate states. Your space has no separate public URL.
 
 ## Claude web
 
@@ -232,11 +244,40 @@ Try one of these prompts:
   candidate, and submit within the remaining five-pass budget. Report anything
   that still fails.”
 
+For a queued rewrite, the assistant follows the server's remaining revision
+budget, checks every complete candidate and stops at acceptance or a terminal
+status. It returns the complete best article and reports any unmet checks, even
+when the five-pass budget ends without acceptance. It does not reset the budget
+or claim a separate draft save without a confirmed save.
+
 The assistant writes with its own model. Wlan checks style, length, fidelity,
 language and configured indicators, and independently checks submissions.
 The AI-style indicator does not prove authorship or guarantee detector evasion.
 An accepted rewrite and a saved draft are distinct outcomes. Work starts in the
-connected chat: MCP alone cannot wake an idle assistant from Wlan.
+connected chat unless a compatible host has confirmed an explicit event
+subscription. Standard MCP alone cannot wake an idle assistant from Wlan.
+
+## Automatic rewrites in supported cloud hosts
+
+Wlan also supports the optional webhook Events extension. Eligible ChatGPT Work
+cloud chats and dots can subscribe to `wlan.rewrite_requested` after installing
+the hosted plugin and approving the intended workspace. Other hosts need
+explicit support for that extension; installing the Codex, Claude or Gemini
+package is not evidence of automatic wake-up.
+
+In a supported host, ask:
+
+> Subscribe to Wlan's wlan.rewrite_requested event for Your space. For each new
+> request, fetch its snapshot and chosen style, preserve facts and meaning, check
+> every candidate, and submit within its remaining five-pass budget. Report unmet
+> checks. Do not publish, message anyone or save a separate draft.
+
+The host supplies its callback and signing secret. Confirm its actual subscription
+result before queuing a neutral test draft in Wlan. If Wlan is absent from event
+sources, check the hosted installation and event discovery; do not invent a
+subscription tool. Repeated events must not duplicate submissions. Stop at a
+terminal request status or revoked access, and use the host's unsubscribe control
+when asked. See [Wlan's event guide](https://wlan.iyanju.com/faq#mcp-events).
 
 ## Verification and publication status
 
