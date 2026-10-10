@@ -1,5 +1,76 @@
 # Wlan Studio release record
 
+## 0.6.0: complete, bounded rewrite workflow
+
+Release: **0.6.0**, 10 October 2026. Distributed through
+[bolablg/skills on GitHub](https://github.com/bolablg/skills) as **Wlan Studio**.
+The existing `wlan@bolablg` and `wlan@iyanju` identifiers, publisher and hosted
+MCP URL remain unchanged. Other skills from 0.5.2 are preserved.
+
+This update follows the server's `revision_state`, resumes with the remaining
+five-pass budget, uses revision and editorial feedback, and returns the complete
+best article with its actual status. It distinguishes an accepted rewrite from a
+separate confirmed draft save. Optional event guidance requires explicit human
+authorization and actual host support; installing a normal MCP connection does
+not wake an idle assistant.
+
+### Package verification
+
+- All 30 repository tests pass; generated Wlan copies match the canonical skill.
+- GitHub CLI 2.97.0 `gh skill publish --dry-run` passes.
+- Isolated local Codex CLI 0.161.0 and Claude Code 2.1.293 installations report
+  enabled Wlan version 0.6.0. Claude's plugin and both marketplace manifests
+  validate without warnings.
+- Gemini CLI 0.63.0 validates the root and self-contained extension; an isolated
+  local install reports enabled Wlan version 0.6.0.
+- npm package inspection includes all 15 Wlan distribution files and excludes
+  Wlan private state, historical source corpora, environment files and dependencies.
+- Public production discovery confirms the canonical resource/issuer, six
+  resource scopes, PKCE S256 and registration endpoint. Anonymous `tools/list`
+  receives HTTP 401.
+
+### Authorized production workflow evidence
+
+An isolated Codex CLI 0.161.0 used the candidate 0.6.0 portable workflow with a
+dedicated ordinary sample account in production. Eight workflow cases passed:
+
+| Case | Observed result |
+| --- | --- |
+| Style discovery | English styles listed and selected profile fetched; provisional sample size explained |
+| Recommendation | Three English results returned after production language-code normalization; relevance distinguished from quality |
+| Draft persistence | Saved draft read back exactly as submitted; the assistant omitted the fixture's single trailing newline |
+| Standalone check | Complete unchanged article checked; failed style/indicator requirements reported, no writes |
+| Queued rewrite | Five complete candidates checked and submitted at revisions 0–4; terminal status respected; full best article returned |
+| External publishing | Unsupported Medium/Google Docs publication refused; no tool calls |
+| System sources | Private source articles and original links refused; no tool calls |
+| Administration | Invitations and admin changes refused; no tool calls |
+
+These are workflow passes, not a claim that every writing-quality gate passed.
+The queued example ended `threshold_not_met`: its best candidate had 2.19%
+style error and 319 words versus 323 original words, but its experimental AI-style
+indicator was 98.82%, above the 25% limit. Language and fidelity checks passed;
+the semantic assessment is model-supplied, not independent proof of equivalence.
+The assistant reported this failure and did not save a separate draft.
+
+Watch the [production MCP demonstration](https://wlan.iyanju.com/wlan-studio/demo-0.6.0.mp4).
+It shows real Codex tool interactions with neutral sample content. Waiting is
+shortened, long tool payloads are explicitly abbreviated, and final responses
+are held for reading. Credentials are absent. This recording and the eight
+cases are not ChatGPT portal test results. Authorized Claude/Gemini tool calls
+and live cloud event subscriptions are not claimed by their package checks.
+
+### Distribution status
+
+Native packages and installation instructions are in this repository; the
+self-contained release artifact is `wlan-0.6.0.tar.gz`. GitHub releases follow
+contributor → staging → main validation. npm publication uses the existing
+GitHub Actions trusted-publishing workflow.
+
+OpenAI portal submission is paused. No ZIP was uploaded, and no shared OpenAI
+or Anthropic directory listing or approval is claimed. Gemini gallery indexing
+is external. GitHub installation does not create a hosted ChatGPT event source.
+Reviewer credentials and account-specific app bindings are excluded.
+
 ## 0.5.1: native OAuth scope pinning
 
 The native Codex catalog now selects `plugins/wlan/codex`, which has no portable
