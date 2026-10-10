@@ -9,6 +9,21 @@ const read = p => readFile(path.join(root, p), 'utf8');
 const json = async p => JSON.parse(await read(p));
 const scopes = ['wlan:styles:read', 'wlan:drafts:read', 'wlan:drafts:write', 'wlan:requests:read', 'wlan:requests:write', 'user:org:read'];
 
+test('all native clients start with the same public read-only onboarding guide', async () => {
+  const guide = 'https://wlan.iyanju.com/agent-onboarding.md';
+  for (const file of ['skills/wlan/SKILL.md', 'plugins/wlan/skills/wlan/SKILL.md', 'plugins/wlan/codex/skills/wlan/SKILL.md', 'GEMINI.md', 'plugins/wlan/GEMINI.md']) {
+    const instructions = (await read(file)).replace(/\s+/g, ' ');
+    assert.ok(instructions.includes(guide), `${file} must use the canonical guide`);
+    assert.match(instructions, /Before the first Wlan task in a session, fetch and read/);
+    assert.match(instructions, /Codex, Claude and Gemini follow/);
+    assert.match(instructions, /fallback/);
+    assert.match(instructions, /do not edit drafts, submit rewrites or subscribe/i);
+    assert.match(instructions, /list(?:ing)? up to five styles and fetch(?:ing)? one/);
+  }
+  assert.equal(await read('GEMINI.md'), await read('plugins/wlan/GEMINI.md'));
+  assert.ok((await read('howto/wlan.md')).includes(guide));
+});
+
 test('Wlan packages preserve identities, versions and remote-only transports', async () => {
   const pkg = await json('package.json');
   for (const file of ['plugins/wlan/plugin.json', 'plugins/wlan/.codex-plugin/plugin.json', 'plugins/wlan/codex/.codex-plugin/plugin.json', 'plugins/wlan/.claude-plugin/plugin.json', 'plugins/wlan/gemini-extension.json', 'gemini-extension.json']) {

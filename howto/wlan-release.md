@@ -1,5 +1,29 @@
 # Wlan Studio release record
 
+## 0.6.1: shared public agent onboarding
+
+Release: **0.6.1**, 10 October 2026. Codex and Claude's shared Wlan skill and
+both Gemini contexts now start with the same public
+[agent onboarding guide](https://wlan.iyanju.com/agent-onboarding.md). The
+installation guide includes a copyable prompt for that read-only flow.
+
+Agents reuse an existing connection, leave browser consent to the user, and
+verify access by listing styles and fetching one profile. The bundled skill and
+tool contract remain available if the public guide cannot be fetched. Onboarding
+does not authorize draft changes, rewrite submission or event subscriptions.
+The existing MCP endpoint, scope sets, publisher and marketplace identifiers
+are preserved, as is the bounded rewrite workflow introduced in 0.6.0.
+
+Verification: all 31 repository tests pass, including shared-guide parity and
+the existing native configuration checks. Claude's plugin validator, Gemini's
+packaged-extension validator and `gh skill publish --dry-run` pass. The npm
+dry-run archive contains all 15 Wlan distribution files without private state,
+source corpora, environment files or dependencies. This instruction-only update
+does not claim a new authenticated client session or cloud event subscription.
+
+The self-contained release artifact is `wlan-0.6.1.tar.gz`. Publication follows
+staging → main validation and the existing trusted npm workflow.
+
 ## 0.6.0: complete, bounded rewrite workflow
 
 Release: **0.6.0**, 10 October 2026. Distributed through
