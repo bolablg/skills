@@ -10,6 +10,25 @@ There is no local Wlan daemon, pairing step, CLI execution, or API key.
 Installing a client plugin only installs instructions and a remote connection.
 Wlan remains invite-only; use an admitted account.
 
+## Shared agent onboarding
+
+The public [Wlan agent onboarding guide](https://wlan.iyanju.com/agent-onboarding.md)
+is the shared starting point for Codex, Claude and Gemini. It is readable without
+signing in; protected MCP tools still require an admitted account, native OAuth
+consent and approval for the selected Wlan space. All shipped Wlan instructions
+point to this guide, with the bundled skill as a fallback if it is unavailable.
+
+Copy this prompt to your agent:
+
+> Read https://wlan.iyanju.com/agent-onboarding.md and follow its onboarding
+> steps. Reuse my existing Wlan connection if available. Let me complete any
+> sign-in or workspace approval in the browser. Verify read-only access to Your
+> space by listing up to five styles and fetching one returned profile. Do not
+> edit drafts, submit rewrites or subscribe to events during onboarding. Report
+> success only after those protected tool calls succeed.
+
+The installation commands below add the package when it is not already present.
+
 ## Quick install from GitHub
 
 Use the root `bolablg` catalog for the shortest Codex or Claude Code setup:
@@ -99,7 +118,7 @@ Or install the latest published repository release directly:
 gemini extensions install https://github.com/bolablg/skills
 ```
 
-For a reproducible 0.6.0 install, append `--ref v0.6.0`. For an existing
+For a reproducible 0.6.1 install, append `--ref v0.6.1`. For an existing
 installation, run `gemini extensions update wlan` and restart Gemini CLI. A
 previously pinned tag may remain pinned; to change its source, uninstall only
 the `wlan` extension with `gemini extensions uninstall wlan`, then install
