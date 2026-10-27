@@ -8,8 +8,7 @@
         "wlan:drafts:read",
         "wlan:drafts:write",
         "wlan:requests:read",
-        "wlan:requests:write",
-        "user:org:read"
+        "wlan:requests:write"
       ]
     }
   }

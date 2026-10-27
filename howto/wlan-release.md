@@ -1,5 +1,17 @@
 # Wlan Studio release record
 
+## 0.6.2: central iYANJU authentication
+
+New Wlan connections authenticate at `https://clerk.iyanju.com`. Codex,
+Claude and Gemini request only the five Wlan permissions, with optional refresh
+access. Wlan retains its separate invitation and workspace approval checks.
+Existing legacy connections remain supported by the server; credentials are
+never copied between identity providers or clients. Update the plugin before
+starting a new central sign-in. The public onboarding guide remains the shared
+source for all hosts.
+
+
+
 ## 0.6.1: shared public agent onboarding
 
 Release: **0.6.1**, 10 October 2026. Codex and Claude's shared Wlan skill and
