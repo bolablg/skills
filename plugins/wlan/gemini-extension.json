@@ -1,6 +1,6 @@
 {
   "name": "wlan",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "description": "Wlan Studio connects your assistant to authorized writing styles, drafts, and bounded rewrite requests in Wlan, your collaborative writing studio.",
   "mcpServers": {
     "wlan": {
@@ -13,7 +13,6 @@
           "wlan:drafts:write",
           "wlan:requests:read",
           "wlan:requests:write",
-          "user:org:read",
           "offline_access"
         ]
       }
