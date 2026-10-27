@@ -153,9 +153,9 @@ codex mcp login wlan --scopes wlan:styles:read,wlan:drafts:read,wlan:drafts:writ
 ```
 
 Use the explicit scope list if Codex reports `invalid_scope` for `openid` or
-another identity scope. Wlan needs the six resource scopes shown above; its
+another identity scope. Wlan needs the five resource scopes shown above; its
 dynamic-client policy also permits optional `offline_access` for refresh tokens.
-Codex CLI 0.161.0 was checked to construct this request with those six scopes,
+Codex CLI 0.161.0 was checked to construct this request with those five scopes,
 `offline_access`, the canonical Wlan resource and PKCE S256. This checks request
 construction, not completed sign-in. For a plugin-provided connection, use its
 actual server name from the host's MCP settings in place of `wlan`. Do not expand
