@@ -101,7 +101,7 @@ does not accept native scope fields; adding them would invalidate that server,
 and the portable manifest takes precedence over a native compatibility overlay.
 Claude Code uses its own `.claude-plugin/plugin.json` and `oauth.scopes` string.
 Gemini CLI uses its native `oauth.scopes` array. Each native client requests the
-five Wlan scopes, `user:org:read`, and optional `offline_access` for refresh;
+five Wlan scopes and optional `offline_access` for refresh;
 identity and metadata scopes are excluded. No package runs a local server.
 
 ## Gemini CLI
@@ -118,7 +118,7 @@ Or install the latest published repository release directly:
 gemini extensions install https://github.com/bolablg/skills
 ```
 
-For a reproducible 0.6.1 install, append `--ref v0.6.1`. For an existing
+For a reproducible 0.6.2 install, append `--ref v0.6.2`. For an existing
 installation, run `gemini extensions update wlan` and restart Gemini CLI. A
 previously pinned tag may remain pinned; to change its source, uninstall only
 the `wlan` extension with `gemini extensions uninstall wlan`, then install
@@ -149,7 +149,7 @@ Codex also supports direct configuration:
 
 ```sh
 codex mcp add wlan --url https://wlan.iyanju.com/mcp
-codex mcp login wlan --scopes wlan:styles:read,wlan:drafts:read,wlan:drafts:write,wlan:requests:read,wlan:requests:write,user:org:read
+codex mcp login wlan --scopes wlan:styles:read,wlan:drafts:read,wlan:drafts:write,wlan:requests:read,wlan:requests:write
 ```
 
 Use the explicit scope list if Codex reports `invalid_scope` for `openid` or
@@ -179,7 +179,7 @@ npx @bolablg/skills install wlan --agent codex --scope user
 Installing only the skill does not register an MCP connection. Configure it in
 the host first. Wlan's resource metadata is public at
 [OAuth protected-resource discovery](https://wlan.iyanju.com/.well-known/oauth-protected-resource/mcp).
-The issuer is `https://clerk.wlan.iyanju.com`; let your host discover endpoints,
+The issuer is `https://clerk.iyanju.com`; let your host discover endpoints,
 PKCE and its supported CIMD or public dynamic registration flow. Do not paste
 credentials into JSON or chat. `offline_access` is optional for token refresh.
 
@@ -203,7 +203,7 @@ and [desktop-only package rules](https://learn.chatgpt.com/docs/enterprise/plugi
 
 For developers who explicitly choose private testing, ChatGPT's supported
 **Add custom MCP server** flow can register this same URL using OAuth. Retain
-the five `wlan:*` permissions and `user:org:read`. If optional OIDC is enabled,
+the five `wlan:*` permissions. If optional OIDC is enabled,
 limit its identity scopes to `openid`, `email` and `profile`; never request
 `public_metadata` or `private_metadata`. Follow the actual account UI and
 [official connection guide](https://developers.openai.com/plugins/deploy/connect-chatgpt).
@@ -246,7 +246,7 @@ Code's local plugin catalog. No local daemon is involved.
 
 The five Wlan permissions are `wlan:styles:read`, `wlan:drafts:read`,
 `wlan:drafts:write`, `wlan:requests:read`, and `wlan:requests:write`.
-`user:org:read` supports workspace context. Your token scopes and Wlan workspace
+Central iYANJU does not use `user:org:read`; Wlan verifies workspace membership. Your token scopes and Wlan workspace
 grant must both permit the requested operation. Private source articles,
 training corpora, evidence quotations, credentials, and administration are never
 part of this integration.

@@ -33,7 +33,7 @@ for (const file of files) {
   await emit(`plugins/wlan/codex/skills/wlan/${file}`, content);
 }
 const json = value => `${JSON.stringify(value, null, 2)}\n`;
-const scopes = ['wlan:styles:read', 'wlan:drafts:read', 'wlan:drafts:write', 'wlan:requests:read', 'wlan:requests:write', 'user:org:read'];
+const scopes = ['wlan:styles:read', 'wlan:drafts:read', 'wlan:drafts:write', 'wlan:requests:read', 'wlan:requests:write'];
 const metadata = {
   name: 'wlan', version: pkg.version,
   description: 'Wlan Studio connects your assistant to authorized writing styles, drafts, and bounded rewrite requests in Wlan, your collaborative writing studio.',

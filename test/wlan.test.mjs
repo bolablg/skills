@@ -7,7 +7,7 @@ import test from 'node:test';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const read = p => readFile(path.join(root, p), 'utf8');
 const json = async p => JSON.parse(await read(p));
-const scopes = ['wlan:styles:read', 'wlan:drafts:read', 'wlan:drafts:write', 'wlan:requests:read', 'wlan:requests:write', 'user:org:read'];
+const scopes = ['wlan:styles:read', 'wlan:drafts:read', 'wlan:drafts:write', 'wlan:requests:read', 'wlan:requests:write'];
 
 test('all native clients start with the same public read-only onboarding guide', async () => {
   const guide = 'https://wlan.iyanju.com/agent-onboarding.md';

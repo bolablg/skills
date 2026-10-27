@@ -18,8 +18,9 @@ All tools accept optional `orgId` for an already authorized team workspace.
 | `wlan_get_rewrite_request` | `id` | `wlan:requests:read` |
 | `wlan_submit_rewrite` | `id`, `text`, `revision` (integer 0–4), `semanticFidelity` | `wlan:requests:write` |
 
-`user:org:read` supports OAuth workspace selection. `offline_access` is optional
-for refresh. The host manages discovery, PKCE, client identity/registration,
+Central iYANJU uses the five Wlan scopes above. Do not request the legacy
+`user:org:read` scope; Wlan verifies its own workspace membership.
+`offline_access` is optional for refresh. The host manages discovery, PKCE, client identity/registration,
 tokens and refresh. Do not embed credentials or override the server's audience.
 
 Text inputs are nonempty, at most 100,000 characters, and contain no null bytes.

@@ -4,7 +4,7 @@
       "type": "http",
       "url": "https://wlan.iyanju.com/mcp",
       "oauth": {
-        "scopes": "wlan:styles:read wlan:drafts:read wlan:drafts:write wlan:requests:read wlan:requests:write user:org:read"
+        "scopes": "wlan:styles:read wlan:drafts:read wlan:drafts:write wlan:requests:read wlan:requests:write"
       }
     }
   }
