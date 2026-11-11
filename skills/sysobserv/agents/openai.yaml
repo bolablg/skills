@@ -1,0 +1,4 @@
+interface:
+  display_name: "System Observability"
+  short_description: "Implement and verify seven levels of system observability."
+  default_prompt: "Use $sysobserv to instrument a critical user journey, verify all seven levels, and run both independent reviews."
