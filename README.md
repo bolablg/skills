@@ -19,6 +19,7 @@ kept in a separate distribution root and are not exposed to other hosts.
 | [Luna Maxing](howto/luna-maxing.md) | Coordinate verified GPT-5.6 Luna Max work packets under a GPT-5.6 Sol aggregator. | Codex only |
 | [Wlan Studio](howto/wlan.md) | Discover styles, read authorized drafts, and check and submit rewrites through hosted MCP. | Available |
 | [Product Challenger](howto/product-challenger.md) | Challenge, research, validate, and sequence Africa-first product ideas. | Available |
+| [Sysobserv](howto/sysobserv.md) | Implement and verify seven levels of system observability with parallel reviews. | Available |
 
 Portable Skills belong in `skills/<skill-name>/`. Codex-only Skills belong in
 the shared hidden `.codex-plugin/plugins/iyanju-codex/skills/<skill-name>/`

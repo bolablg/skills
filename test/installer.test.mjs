@@ -18,6 +18,7 @@ test("lists only portable cross-agent skills", async () => {
   assert.deepEqual(await listSkills(repositoryRoot), [
     "job-hunter",
     "product-challenger",
+    "sysobserv",
     "wlan",
   ]);
 });
@@ -39,6 +40,32 @@ test("provides a user guide for every bundled skill", async () => {
   await Promise.all(
     skills.map((skillName) => access(path.join(repositoryRoot, "howto", `${skillName}.md`))),
   );
+});
+
+test("installs the complete Sysobserv workflow in each supported host's project directory", async (context) => {
+  const temporaryRoot = await mkdtemp(path.join(os.tmpdir(), "bolablg-sysobserv-test-"));
+  context.after(() => rm(temporaryRoot, { recursive: true, force: true }));
+
+  const skillName = "sysobserv";
+  const files = ["SKILL.md", "references/levels.md", "references/review.md"];
+  const source = path.join(repositoryRoot, "skills", skillName);
+  const expected = await Promise.all(files.map((file) => readFile(path.join(source, file))));
+  const hosts = [
+    ["codex", ".agents"],
+    ["claude-code", ".claude"],
+    ["gemini-cli", ".gemini"],
+    ["opencode", ".opencode"],
+    ["generic", ".agents"],
+  ];
+
+  await Promise.all(hosts.map(async ([agent, projectDirectory]) => {
+    const cwd = path.join(temporaryRoot, agent);
+    const destinationRoot = resolveInstallRoot({ agent, scope: "project", cwd });
+    const { target } = await installSkill({ sourceRoot: repositoryRoot, skillName, destinationRoot });
+    assert.equal(target, path.join(cwd, projectDirectory, "skills", skillName));
+    const installed = await Promise.all(files.map((file) => readFile(path.join(target, file))));
+    assert.deepEqual(installed, expected);
+  }));
 });
 
 test("keeps Iyanju Agentory marketplace metadata aligned across Claude Code and Codex", async () => {
