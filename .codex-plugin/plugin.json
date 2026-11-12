@@ -1,6 +1,6 @@
 {
   "name": "iyanju-agentory",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "description": "Iyanju Agentory is a portable, cross-agent collection of AI skills for research, career workflows, product discovery, development, automation, operations, and creative work.",
   "author": {
     "name": "Bolaji BALOGOUN",
@@ -33,7 +33,8 @@
     "websiteURL": "https://iyanju.com",
     "defaultPrompt": [
       "Use Product Challenger to capture and challenge a product idea for a specific country.",
-      "Use Job Hunter to build my candidate profile, research matching opportunities, and prepare a review queue before any application or recruiter outreach."
+      "Use Job Hunter to build my candidate profile, research matching opportunities, and prepare a review queue before any application or recruiter outreach.",
+      "Use Prostory to turn my technical project notes into a 90-second interview answer that explains what I owned and what changed."
     ],
     "screenshots": []
   }
