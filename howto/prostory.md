@@ -16,7 +16,7 @@ Use `--scope project` to install for the current project. The `generic` target u
 
 Ask for `prostory` by name or use your host’s skill invocation syntax. In Codex, use `$prostory`.
 
-Start with one project. Share who needed it, your role, a constraint or tradeoff, and whatever proof you have. Rough notes are fine. If you have a PR, demo, decision record, or before/after measurement, provide it and say what can be shared with the audience.
+Start with one project. Share the target industry and audience, who needed the work, your role, and a constraint or tradeoff. A job description or role rubric helps Prostory assess relevance. Rough notes, PRs, demos, decision records, and measurements help it check project facts. Say what can be shared with the audience.
 
 ```text
 Use prostory to turn these pipeline migration notes into a 90-second answer
@@ -25,4 +25,4 @@ it mattered to Finance. Keep the benchmark scoped to staging, and give me
 two likely follow-up questions with answers supported by my notes.
 ```
 
-You can reuse the same facts for a portfolio case study, a résumé bullet, a promotion review, or a stakeholder presentation. When impact has not been measured, expect the draft to explain what shipped or what a test demonstrated and to flag the most useful evidence to gather next.
+Prostory checks every version for industry relevance and factual accuracy against the sources you shared. Expect a brief note on how the story fits the audience and what supports its main claims. When evidence is incomplete, the draft describes what the sources actually show and flags what would need verification.
