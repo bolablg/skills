@@ -20,6 +20,7 @@ kept in a separate distribution root and are not exposed to other hosts.
 | [Wlan Studio](howto/wlan.md) | Discover styles, read authorized drafts, and check and submit rewrites through hosted MCP. | Available |
 | [Product Challenger](howto/product-challenger.md) | Challenge, research, validate, and sequence Africa-first product ideas. | Available |
 | [Sysobserv](howto/sysobserv.md) | Implement and verify seven levels of system observability with parallel reviews. | Available |
+| [Prostory](howto/prostory.md) | Turn technical project work into evidence-backed stories for interviews, portfolios, and reviews. | Available |
 
 Portable Skills belong in `skills/<skill-name>/`. Codex-only Skills belong in
 the shared hidden `.codex-plugin/plugins/iyanju-codex/skills/<skill-name>/`
