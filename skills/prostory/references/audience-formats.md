@@ -19,7 +19,9 @@ Illustrative facts: Finance needed a daily reconciliation report before 8 a.m. R
 
 **Résumé:** “Built partition-level reprocessing for Finance’s reconciliation pipeline, cutting median runtime from 95 to 22 minutes across comparable four-week windows.”
 
-The runtime comparison does not establish how often the report met its deadline. Ask for on-time delivery data before claiming the cutoff problem was eliminated.
+**Industry relevance.** For a senior data engineering role that owns scheduled Finance reporting, lead with the reporting deadline and the decision to replay only affected dates. That gives the panel a concrete example of designing for pipeline reliability.
+
+**Source accuracy.** The project notes support the ownership split and the batch design decision. The scheduler records support the 95-to-22-minute runtime comparison. On-time delivery and labor savings remain unverified, so the draft makes neither claim.
 
 ## Example: A prototype without a production result
 
