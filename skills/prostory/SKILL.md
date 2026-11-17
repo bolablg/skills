@@ -21,8 +21,8 @@ Use this spine as a guide, not a set of mandatory headings:
 
 1. **Stakes:** What was hard, broken, slow, or risky? Who felt it, and why did it matter then?
 2. **Ownership:** What did you personally take responsibility for? Where did others contribute?
-3. **Decision and action:** What did you choose or change, why did that approach fit the constraints, and how did it address the problem?
-4. **Outcome and evidence:** What changed for users, operators, or the organization? How do you know, and what is still unknown?
+3. **Decision and action:** What did you choose or change, why did it fit the constraints, and how did it address the problem? If a test result, failed approach, or other discovery changed the plan, show what you learned and what you did differently. Include that moment only when the shared sources support it and it helps the audience understand the decision.
+4. **Outcome and evidence:** What changed for users, operators, or the organization? Explain how your specific contribution helped produce the outcome to the extent the sources support that link. Credit collaborators and describe shared results as team outcomes. If the evidence shows what you delivered and a later result but cannot connect them, state the contribution and the observed result without claiming causation.
 
 If a lesson or next step shows judgment, add it after the result. Preserve the speaker's voice. For formats and before/after examples, read [Audience formats and examples](references/audience-formats.md).
 

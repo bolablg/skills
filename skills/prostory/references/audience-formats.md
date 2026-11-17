@@ -13,15 +13,15 @@ Keep the same underlying facts across versions. Change the order and depth to ma
 
 ## Example: A data pipeline change with measured impact
 
-Illustrative facts: Finance needed a daily reconciliation report before 8 a.m. Reprocessing the entire history after late files made it miss the cutoff. The speaker designed and built partition-level reprocessing, while a teammate handled alerting. They chose to retain the batch pipeline because source files arrived daily. Scheduler records show the median run fell from 95 to 22 minutes across two comparable four-week windows. No labor savings were measured.
+Illustrative facts: Finance needed a daily reconciliation report before 8 a.m. Reprocessing the entire history after late files made it miss the cutoff. The speaker initially planned to add workers. Run logs showed that most of the time went into reprocessing dates the late file did not affect, so the speaker designed and built partition-level reprocessing. A teammate handled alerting. Scheduler records show the median run fell from 95 to 22 minutes across two comparable four-week windows. No labor savings were measured.
 
-**Interview:** “Finance depended on a reconciliation report at 8 a.m., but a late file could force us to rerun the entire history and miss that cutoff. I designed and built a way to reprocess just the affected dates, and a teammate added alerts. I kept the existing batch pipeline because the source delivered files once a day; we needed a smaller replay, not faster ingestion. In comparable four-week windows, the scheduler logs showed that the median run went from 95 minutes to 22.”
+**Interview:** “Finance depended on an 8 a.m. reconciliation report, but a late file could force us to rerun the entire history and miss the cutoff. I planned to add workers until the run logs showed that we were spending most of the time reprocessing dates the late file hadn’t affected. I changed course and built a way to replay just the affected dates. A teammate added alerts. After the rollout, the scheduler logs showed that median runtime went from 95 to 22 minutes across comparable four-week windows.”
 
-**Résumé:** “Built partition-level reprocessing for Finance’s reconciliation pipeline, cutting median runtime from 95 to 22 minutes across comparable four-week windows.”
+**Résumé:** “Built partition-level reprocessing for Finance’s reconciliation pipeline so late files could be replayed by date. Median runtime fell from 95 to 22 minutes across comparable four-week windows.”
 
 **Industry relevance.** For a senior data engineering role that owns scheduled Finance reporting, lead with the reporting deadline and the decision to replay only affected dates. That gives the panel a concrete example of designing for pipeline reliability.
 
-**Source accuracy.** The project notes support the ownership split and the batch design decision. The scheduler records support the 95-to-22-minute runtime comparison. On-time delivery and labor savings remain unverified, so the draft makes neither claim.
+**Source accuracy.** The project notes document the original plan, the change in approach, and who did what. Run logs explain the switch to replaying affected dates. Scheduler records support the team’s before-and-after runtime result without isolating how much came from each contribution. On-time delivery and labor savings remain unverified.
 
 ## Example: A prototype without a production result
 

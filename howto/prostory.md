@@ -25,4 +25,4 @@ it mattered to Finance. Keep the benchmark scoped to staging, and give me
 two likely follow-up questions with answers supported by my notes.
 ```
 
-Prostory checks every version for industry relevance and factual accuracy against the sources you shared. Expect a brief note on how the story fits the audience and what supports its main claims. When evidence is incomplete, the draft describes what the sources actually show and flags what would need verification.
+Prostory connects your contribution to the outcome when the evidence supports the link. If the sources show that a discovery, test result, or setback changed the plan, the draft can explain what you learned and how you responded. Prostory checks every version for industry relevance and factual accuracy against the sources you shared. Expect a brief note on how the story fits the audience and what supports its main claims.
